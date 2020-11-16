@@ -5,16 +5,16 @@ import logo from "../assets/logotype.png";
 
 function BarraNav() {
   return (
-    <Navbar bg="info" variant="dark">
+    <Navbar collapseOnSelect expand="lg" bg="info" variant="dark" style={{ height: "80px" }} className="justify-content-center">
       <Navbar.Brand href="#home">
         <img
           alt=""
           src={logo}
-          width="30"
-          height="30"
+          width="50"
+          height="50"
           className="d-inline-block align-top"
         />{" "}
-        Blog de Noticias 1
+        Medio de Noticias 1
       </Navbar.Brand>
     </Navbar>
   );

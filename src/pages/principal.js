@@ -1,10 +1,12 @@
 import React from "react";
-import Noticia from '../component/Noticia';
+import Noticias from '../component/Noticias';
+import NotaPrincipal from '../component/NotaPrincipal'
 
 function Principal() {
   return (
     <section className="container">
-        <Noticia />
+        <NotaPrincipal />
+        <Noticias />
     </section>
   );
 }
