@@ -1,22 +1,9 @@
 import React from "react";
 import { Card } from "react-bootstrap";
 import { useFetch } from '../helpers/useFetch';
-
+import { imagenUrl } from '../helpers/imagenUrl';
 
 const url = "http://localhost:3012/api/noticias";
-const base_url =' http://localhost:3012/api';
-
-function imagenUrl(img) {
-  if (!img) {
-    return `${base_url}/upload/noticias/no-image`;
-  } else if (img.includes("https")) {
-    return img;
-  } else if (img) {
-    return `${base_url}/upload/noticias/${img}`;
-  } else {
-    return `${base_url}/upload/noticias/no-image`;
-  }
-};
 
 function Noticias() {
   
@@ -46,8 +33,6 @@ const BigList = React.memo(( {noticias} ) => {
 const SingleNoticia = (noticia) => {
   const img = noticia.imagen;
   const imagen = imagenUrl(img);
-
-  console.log(imagen);
 
   return (
     <Card className="product" >
