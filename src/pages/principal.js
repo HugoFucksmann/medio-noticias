@@ -2,11 +2,11 @@ import React from "react";
 import Noticias from '../component/Noticias';
 import NotaPrincipal from '../component/NotaPrincipal'
 
-function Principal() {
+function Principal(noticias) {
   return (
     <section className="container">
-        <NotaPrincipal />
-        <Noticias />
+      <NotaPrincipal {...noticias} />
+      <Noticias {...noticias} />
     </section>
   );
 }

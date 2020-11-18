@@ -1,33 +1,36 @@
 import React from "react";
-import { Col, Figure, Media, Row } from "react-bootstrap";
-import fott from "../assets/fa.jpg";
+import { Button, Col, Figure, Row } from "react-bootstrap";
+import { useParams, Link } from "react-router-dom";
+import {imagenUrl} from '../helpers/imagenUrl'
 
 import ListaNotas from "../component/ListaNotas";
 
-function Noticia() {
+function Noticia(noticias) {
+ 
+  const { id } = useParams();
+  const nota = noticias.noticias.find( (nota) => nota._id === id )
   return (
     <Row style={{ marginTop: "100px" }}>
       <Col sm={8}>
-       <Nota />
+        <Nota {...nota} />
       </Col>
-      <Col sm={4} style={{ marginTop: "200px" }}>
-        <ListaNotas />
+      <Col sm={4} style={{ marginTop: "150px" }}>
+        <ListaNotas {...noticias} />
       </Col>
     </Row>
   );
 }
 
-function Nota() {
+function Nota(nota) {
+  const img = nota.imagen;
+  const imagen = imagenUrl(img);
     return (
       <>
-        <h1>titulo</h1>
-        <h3>
-          afnosdfnsdo sdkgfnmsdokgns dkgn sdokg nsdokgn sdokgn sdog asf as as
-          fasfasfasfas asfas fa fs fas asf asfa sfasfasas{" "}
-        </h3>
+        <h1>{nota.titulo}</h1>
+        <h3>{nota.subtitulo}</h3>
         <br />
         <Figure>
-          <Figure.Image height={450} alt="171x180" src={fott} />
+          <Figure.Image height={450} alt="171x180" src={imagen} />
           <Figure.Caption>
             Nulla vitae elit libero, a pharetra augue mollis interdum.
           </Figure.Caption>
@@ -35,27 +38,12 @@ function Nota() {
         <br />
         <hr />
         <br />
-        <p>
-          snsdvonsdvjnsd jvnsd pjignsdji gnsdjignsdjig lorem ipsu set amet
-          nsdjig nsdijgnlorem ipsu set amet lorem ipsu set amet lorem ipsu set
-          amet snsdvonsdvjnsd jvnsd pjignsdji gnsdjignsdjig lorem ipsu set amet
-          nsdjig nsdijgnlorem ipsu set amet lorem ipsu set amet lorem ipsu set
-          amet snsdvonsdvjnsd jvnsd pjignsdji gnsdjignsdjig lorem ipsu set amet
-          nsdjig nsdijgnlorem ipsu set amet lorem ipsu set amet lorem ipsu set
-          amet snsdvonsdvjnsd jvnsd pjignsdji gnsdjignsdjig lorem ipsu set amet
-          nsdjig nsdijgnlorem ipsu set amet lorem ipsu set amet lorem ipsu set
-          amet snsdvonsdvjnsd jvnsd pjignsdji gnsdjignsdjig lorem ipsu set amet
-          nsdjig nsdijgnlorem ipsu set amet lorem ipsu set amet lorem ipsu set
-          amet snsdvonsdvjnsd jvnsd pjignsdji gnsdjignsdjig lorem ipsu set amet
-          nsdjig nsdijgnlorem ipsu set amet lorem ipsu set amet lorem ipsu set
-          amet snsdvonsdvjnsd jvnsd pjignsdji gnsdjignsdjig lorem ipsu set amet
-          nsdjig nsdijgnlorem ipsu set amet lorem ipsu set amet lorem ipsu set
-          amet
-        </p>
+        <p>{nota.texto}</p>
+        <Link to={'/'}>
+          <Button variant="outline-info">volver al inicio</Button>
+        </Link>
       </>
     );
 }
-
-
 
 export default Noticia;

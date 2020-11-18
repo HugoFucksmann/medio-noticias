@@ -4,22 +4,21 @@ import { Col, Figure, Media, Row } from "react-bootstrap";
 import {useFetch} from '../helpers/useFetch'
 import {imagenUrl} from '../helpers/imagenUrl'
 import fott from "../assets/fa.jpg";
+import { Link } from "react-router-dom";
 
-const url = "http://localhost:3012/api/noticias";
 
-function ListaNotas() {
-    const { noticias } = useFetch(url);
-    if (noticias.length === 0) {
-      return <div>loading...</div>;
-    }
+function ListaNotas(noticias) {
+    
   return (
-    <>
       <ul className="list-unstyled">
         {noticias.noticias.map((noticia) => {
-          return <Lii key={noticia._id} {...noticia} />;
+          return (
+            <Link to={`/noticia/${noticia._id}`} style={{ textDecoration: "none", color: "black" }} >
+              <Lii key={noticia._id} {...noticia} />
+            </Link>
+          );
         })}
       </ul>
-    </>
   );
 }
 

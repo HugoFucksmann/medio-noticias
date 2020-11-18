@@ -1,34 +1,27 @@
 import React from "react";
 import { Card } from "react-bootstrap";
-import { useFetch } from '../helpers/useFetch';
+import { Link } from "react-router-dom";
 import { imagenUrl } from '../helpers/imagenUrl';
 
-const url = "http://localhost:3012/api/noticias";
 
-function Noticias() {
-  
-  const { noticias } = useFetch(url);
-  
-  return (
-      <BigList noticias={noticias} />
-  );
+
+function Noticias(noticias) {
+  return <BigList {...noticias} />;
 }
 
-const BigList = React.memo(( {noticias} ) => {
-  
-  if (noticias.length === 0) {
-    return <div>loading...</div>;
-  }
+const BigList = (noticias) => {
   return (
     <section className="products">
       { noticias.noticias.map((noticia) => {
         return (
-          <SingleNoticia key={noticia._id} {...noticia} />
-        )})
+          <Link to={`/noticia/${noticia._id}`} style={{ textDecoration: 'none',  color: 'black' }} >
+            <SingleNoticia  key={noticia._id} {...noticia} />
+          </Link>
+        );})
       }
     </section>
   );
-});
+};
 
 const SingleNoticia = (noticia) => {
   const img = noticia.imagen;
