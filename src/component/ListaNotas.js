@@ -1,14 +1,12 @@
 import React from "react";
-import { Col, Figure, Media, Row } from "react-bootstrap";
+import { Media } from "react-bootstrap";
 
-import {useFetch} from '../helpers/useFetch'
 import {imagenUrl} from '../helpers/imagenUrl'
-import fott from "../assets/fa.jpg";
 import { Link } from "react-router-dom";
 
 
 function ListaNotas(noticias) {
-    
+  
   return (
       <ul className="list-unstyled">
         {noticias.noticias.map((noticia) => {

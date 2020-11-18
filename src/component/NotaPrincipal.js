@@ -1,27 +1,28 @@
 import React from 'react';
-import { Card } from "react-bootstrap";
-import { useFetch } from "../helpers/useFetch";
-import fotto from '../assets/fa.jpg'
+import { Card, Carousel } from "react-bootstrap";
+import { Link } from 'react-router-dom';
 
-const url = "http://localhost:3012/api/noticias";
+import {imagenUrl} from "../helpers/imagenUrl";
 
-
-function NotaPrincipal() {
-
+function NotaPrincipal(noticias) {
   return (
-    <section className="product" style={{marginTop: '20px'}}>
-      <Card className="bg-dark text-white">
-        <Card.Img src={fotto} alt="Card image" />
-        <Card.ImgOverlay>
-          <Card.Title>Card title</Card.Title>
-          <Card.Text>
-            This is a wider card with supporting text below as a natural lead-in
-            to additional content. This content is a little bit longer.
-          </Card.Text>
-          <Card.Text>Last updated 3 mins ago</Card.Text>
-        </Card.ImgOverlay>
-      </Card>
-    </section>
+    <>
+      <Carousel>
+        {noticias.noticias.map((noticia) => {
+          const img = noticia.imagen;
+          const imagen = imagenUrl(img);
+          return (
+            <Carousel.Item>
+              <img className="d-block w-100" style={{maxHeight: '400px', marginTop: '20px'}} src={imagen}  />
+              <Carousel.Caption style={{background: 'rgba(0,0,0,0.2)',color: 'GrayText'}}>
+                <h3>{noticia.titulo}</h3>
+                <p>{noticia.subtitulo}</p>
+              </Carousel.Caption>
+            </Carousel.Item>
+          );  
+        })}
+      </Carousel>
+    </>
   );
 }
 

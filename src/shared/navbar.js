@@ -1,19 +1,25 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Navbar} from 'react-bootstrap'
+import {Nav, Navbar} from 'react-bootstrap'
 import logo from "../assets/logotype.png";
 import { Link } from "react-router-dom";
 
+const f = new Date();
+const meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+const fecha = "fecha: " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
+const hora = "hora: " + f.getSeconds() + ":" + f.getMinutes() + ":" + f.getHours();
+
 function BarraNav() {
   return (
-    <Navbar collapseOnSelect expand="lg" bg="info" variant="dark" style={{ height: "80px" }} className="justify-content-center">
-      <Link to={'/'}>
+    <Navbar sticky="top" collapseOnSelect expand="lg" bg="info" height={70} className="justify-content-between">
       <Navbar.Brand >
-        <img alt="" src={logo} width="50" height="50" className="d-inline-block align-top" />
-        &nbsp;&nbsp;
-        Medio de Noticias 1
-      </Navbar.Brand>
+      <Link to={'/'}>
+        <img alt="" src={logo} width="100" height="70" className="d-inline-block align-top" />
       </Link>
+      </Navbar.Brand>
+      {fecha}
+      <br/>
+      {hora}
     </Navbar>
   );
 }

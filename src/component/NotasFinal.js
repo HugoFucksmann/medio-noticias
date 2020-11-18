@@ -4,16 +4,12 @@ import { Link } from "react-router-dom";
 
 import {imagenUrl} from '../helpers/imagenUrl'
 
-
-
 function NotasFinal(noticias) {
   return (
-    <CardDeck>
+    <CardDeck className="mr-auto">
       {noticias.noticias.map((noticia) => {
-        return (
-          
+        return (     
           <Cards key={noticia._id} {...noticia} />
-     
         );
       })}
     </CardDeck>
