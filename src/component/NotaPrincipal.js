@@ -1,6 +1,5 @@
 import React from 'react';
-import { Card, Carousel } from "react-bootstrap";
-import { Link } from 'react-router-dom';
+import { Carousel } from "react-bootstrap";
 
 import {imagenUrl} from "../helpers/imagenUrl";
 

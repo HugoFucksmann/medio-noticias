@@ -1,20 +1,27 @@
 import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import { Container } from 'react-bootstrap';
+import { Container, Spinner } from 'react-bootstrap';
 
 import BarraNav from "./shared/navbar";
 import Principal from './pages/principal'
 import Noticia from "./pages/noticia";
 import BarraTitulares from './component/BarraTitulares'
 import NotasFinal from './component/NotasFinal'
-
 import { useFetch } from "./helpers/useFetch";
-const url = "http://localhost:3012/api/noticias";
+
+const url = process.env.REACT_APP_URL;
 console.log(url);
 function App() {
+  
   const { noticias } = useFetch(url);
   if (noticias.length === 0) {
-    return <div>loading...</div>;
+    return (
+      <Container>
+        <Spinner variant="info" animation="border" role="status" style={{ margin: '20% 40%', fontSize: '400%',width: '100px', height: '100px' }}>
+          <span className="sr-only">Loading...</span>
+        </Spinner>
+      </Container>
+    );
   }
   return (
     <Router>
