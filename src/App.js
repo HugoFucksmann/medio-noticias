@@ -10,7 +10,7 @@ import NotasFinal from './component/NotasFinal'
 
 import { useFetch } from "./helpers/useFetch";
 const url = "http://localhost:3012/api/noticias";
-
+console.log(url);
 function App() {
   const { noticias } = useFetch(url);
   if (noticias.length === 0) {

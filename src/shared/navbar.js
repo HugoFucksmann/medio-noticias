@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 const f = new Date();
 const meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
 const fecha = "fecha: " + f.getDate() + " de " + meses[f.getMonth()] + " de " + f.getFullYear();
-const hora = "hora: " + f.getSeconds() + ":" + f.getMinutes() + ":" + f.getHours();
+const hora = "hora: " + f.getHours() + ":" + f.getMinutes() + ":" + f.getSeconds();
 
 function BarraNav() {
   return (
