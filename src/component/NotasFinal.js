@@ -3,14 +3,12 @@ import { CardDeck, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 
 import {imagenUrl} from '../helpers/imagenUrl'
-
+import "./styles.css";
 function NotasFinal(noticias) {
   return (
     <CardDeck >
       {noticias.noticias.map((noticia) => {
-        return (
-          <Cards key={noticia._id} {...noticia} />
-        );
+        return <Cards key={noticia._id} {...noticia}  />;
       })}
     </CardDeck>
   );
@@ -25,7 +23,7 @@ function Cards(noticia){
       style={{ textDecoration: "none", color: "black" }}
     >
       <Card
-        className="shadow margenAuto"
+        className="shadow margA"
         height={250}
         style={{ maxWidth: "250px" }}
       >

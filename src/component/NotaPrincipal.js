@@ -1,6 +1,6 @@
 import React from 'react';
 import { Carousel } from "react-bootstrap";
-
+import "./styles.css";
 import {imagenUrl} from "../helpers/imagenUrl";
 
 function NotaPrincipal(noticias) {
@@ -11,11 +11,10 @@ function NotaPrincipal(noticias) {
           const img = noticia.imagen;
           const imagen = imagenUrl(img);
           return (
-            <Carousel.Item>
-              <img className="d-block w-100" style={{maxHeight: '400px', marginTop: '20px'}} src={imagen}  />
-              <Carousel.Caption style={{background: 'rgba(255,255,255,0.4)',color: 'black'}}  >
-                <h3>{noticia.titulo}</h3>
-                
+            <Carousel.Item > 
+              <img className="d-block w-100" style={{maxHeight: '400px'}} src={imagen}  />
+              <Carousel.Caption style={{background: 'rgba(255,255,255,0.5)',color: 'black'}}  >
+                <h2 className="cardTxm">{noticia.titulo}</h2>
               </Carousel.Caption>
             </Carousel.Item>
           );  

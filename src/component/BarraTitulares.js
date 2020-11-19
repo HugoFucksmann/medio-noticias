@@ -16,7 +16,7 @@ function BarraTitulares(noticias) {
     <>
       <div
         className="container text-center"
-        style={{ fontSize: "1.3em", marginTop: "15px" }}
+        style={{ fontSize: "1.3em", marginTop: "30px", marginBottom: '20px' }}
       >
         <Badge variant="info">Temas de hoy: </Badge>
         {noticias.noticias.slice(0, 3).map((noticia) => {

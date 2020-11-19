@@ -67,4 +67,16 @@
         font-size: small;
     }
 
+    .cardTxm {
+        font-size: medium;
+    }
+    .cardTxs {
+        font-size: small;
+    }
+
+    .margA{
+        margin: auto;
+    }   
+
 }
+

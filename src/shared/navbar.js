@@ -11,16 +11,16 @@ const hora = f.getHours() + ":" + f.getMinutes() + ":" + f.getSeconds();
 
 function BarraNav() {
   return (
-    <Navbar sticky="top" collapseOnSelect expand="lg" bg="info" height={70} className="justify-content-between">
+    <Navbar sticky="top" collapseOnSelect expand="lg" bg="info" height={70} className="justify-content-between shadow">
       <Navbar.Brand >
       <Link to={'/'}>
         <img alt="" src={logo} width="100" height="70" className="d-inline-block align-top" />
       </Link>
       </Navbar.Brand>
       <div>
-      <Badge pill variant="light">{fecha}</Badge>
+      <Badge className="shadow" pill variant="light">{fecha}</Badge>
       <br/>
-      <Badge pill variant="light">{hora}</Badge>
+      <Badge className="shadow-sm" pill variant="light">{hora}</Badge>
       </div>
     </Navbar>
   );

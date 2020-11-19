@@ -8,12 +8,12 @@ import Noticia from "./pages/noticia";
 import BarraTitulares from './component/BarraTitulares'
 import NotasFinal from './component/NotasFinal'
 import CardCarousel from './component/CardCarousel';
+import ScrollToTop from "./helpers/scrollTop"; 
 import { useFetch } from "./helpers/useFetch";
 
 const url = process.env.REACT_APP_URL;
 console.log(url);
 function App() {
-  
   const { noticias } = useFetch(url);
   if (noticias.length === 0) {
     return (
@@ -26,6 +26,7 @@ function App() {
   }
   return (
     <Router>
+      <ScrollToTop />
       <BarraNav />
       <BarraTitulares {...noticias} />
       <Container fluid="lg">
