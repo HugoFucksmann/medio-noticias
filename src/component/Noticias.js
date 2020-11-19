@@ -32,7 +32,7 @@ const SingleNoticia = (noticia) => {
       <Card.Img variant="top" src={imagen} />
       <Card.Body>
         <Card.Title> {noticia.titulo} </Card.Title>
-        <Card.Text> {noticia.subtitulo} </Card.Text>
+        <Card.Text> {noticia.subtitulo.substr(0, 180)}...  <small> leer mas</small> </Card.Text>
       </Card.Body>
     </Card>
   );

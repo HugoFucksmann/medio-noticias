@@ -6,9 +6,9 @@ import {imagenUrl} from '../helpers/imagenUrl'
 
 function NotasFinal(noticias) {
   return (
-    <CardDeck className="mr-auto">
+    <CardDeck >
       {noticias.noticias.map((noticia) => {
-        return (     
+        return (
           <Cards key={noticia._id} {...noticia} />
         );
       })}
@@ -24,11 +24,15 @@ function Cards(noticia){
       to={`/noticia/${noticia._id}`}
       style={{ textDecoration: "none", color: "black" }}
     >
-      <Card className="shadow" height={250} style={{ maxWidth: "250px" }}>
+      <Card
+        className="shadow margenAuto"
+        height={250}
+        style={{ maxWidth: "250px" }}
+      >
         <Card.Img variant="top" src={imagen} />
         <Card.Body>
           <Card.Title>{noticia.titulo}</Card.Title>
-          <Card.Text>{noticia.subtitulo}</Card.Text>
+          <Card.Text>{noticia.subtitulo.substr(0, 145)}...  <small> leer mas</small></Card.Text>
         </Card.Body>
         <Card.Footer>
           <small className="text-muted">Last updated 3 mins ago</small>

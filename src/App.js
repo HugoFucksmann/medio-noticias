@@ -7,6 +7,7 @@ import Principal from './pages/principal'
 import Noticia from "./pages/noticia";
 import BarraTitulares from './component/BarraTitulares'
 import NotasFinal from './component/NotasFinal'
+import CardCarousel from './component/CardCarousel';
 import { useFetch } from "./helpers/useFetch";
 
 const url = process.env.REACT_APP_URL;
@@ -34,9 +35,10 @@ function App() {
           </Route>
           <Route path="/noticia/:id" children={<Noticia {...noticias} />} />
         </Switch>
+        <CardCarousel {...noticias} />
         <br />
         <hr />
-        <br />
+
         <NotasFinal {...noticias} />
       </Container>
     </Router>
