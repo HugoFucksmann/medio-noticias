@@ -4,6 +4,7 @@ import "./styles.css";
 import {imagenUrl} from "../helpers/imagenUrl";
 
 function NotaPrincipal(noticias) {
+
   return (
     <>
       <Carousel>

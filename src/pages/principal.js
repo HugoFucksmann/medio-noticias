@@ -1,13 +1,29 @@
-import React from "react";
-import Noticias from '../component/Noticias';
-import NotaPrincipal from '../component/NotaPrincipal'
+import React from 'react'
+import { Container } from "react-bootstrap";
+
+
+import BarraTitulares from "../component/BarraTitulares";
+import BarraNav from "../shared/navbar";
+import NotasFinal from "../component/NotasFinal";
+import CardCarousel from "../component/CardCarousel";
+import Home from '../pages/home'
+
+
 
 function Principal(noticias) {
+  
   return (
-    <section className="container">
-      <NotaPrincipal {...noticias} />
-      <Noticias {...noticias} />
-    </section>
+    <>
+      <BarraNav />
+      <BarraTitulares {...noticias} />
+      <Container fluid="lg">
+        
+          <Home {...noticias} />
+        
+        <CardCarousel {...noticias} />
+        <NotasFinal {...noticias} />
+      </Container>
+    </>
   );
 }
 

@@ -1,5 +1,6 @@
 
 const base_url = "https://medio-noticias.herokuapp.com/api";
+//const base_url = "http://localhost:3010//api";
 export const imagenUrl = (img) => {
     if (!img) {
       return `${base_url}/upload/noticias/no-image`;

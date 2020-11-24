@@ -8,7 +8,6 @@ function BarraTitulares(noticias) {
   
   const findNota = (id) => {
    setNotas((notas) => {
-     console.log(notas.noticias.filter((notas) => notas._id !== id));
      return notas.noticias.filter((notas) => notas._id !== id);
    }); 
   }
@@ -23,7 +22,7 @@ function BarraTitulares(noticias) {
           return (
             <Link to={`/noticia/${noticia._id}`}>
               <Badge key={noticia._id} pill variant="light">
-                {noticia.titulo.substr(0, 42)}..
+                {noticia.titulo.substr(0, 42)}
               </Badge>
             </Link>
           );

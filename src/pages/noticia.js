@@ -4,20 +4,30 @@ import { useParams, Link } from "react-router-dom";
 import {imagenUrl} from '../helpers/imagenUrl'
 
 import ListaNotas from "../component/ListaNotas";
+import BarraNav from "../shared/navbar";
+import BarraTitulares from "../component/BarraTitulares";
+import CardCarousel from "../component/CardCarousel";
+import NotasFinal from "../component/NotasFinal";
 
 function Noticia(noticias) {
  
   const { id } = useParams();
   const nota = noticias.noticias.find( (nota) => nota._id === id )
   return (
-    <Row style={{ marginTop: "100px" }}>
-      <Col sm={8}>
-        <Nota {...nota} />
-      </Col>
-      <Col sm={4} style={{ marginTop: "150px" }}>
-        <ListaNotas {...noticias} />
-      </Col>
-    </Row>
+    <>
+      <BarraNav />
+      <BarraTitulares {...noticias} />
+      <Row style={{ marginTop: "100px" }}>
+        <Col sm={8}>
+          <Nota {...nota} />
+        </Col>
+        <Col sm={4} style={{ marginTop: "150px" }}>
+          <ListaNotas {...noticias} />
+        </Col>
+      </Row>
+      <CardCarousel {...noticias} />
+      <NotasFinal {...noticias} />
+    </>
   );
 }
 

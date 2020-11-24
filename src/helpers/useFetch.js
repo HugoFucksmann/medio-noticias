@@ -1,3 +1,4 @@
+import Axios from "axios";
 import { useState, useEffect, useCallback } from "react";
 
 export const useFetch = (url) => {
@@ -5,11 +6,11 @@ export const useFetch = (url) => {
   const [noticias, setNoticias] = useState([]);
 
   const getNoticias = useCallback(async () => {
-    const response = await fetch(url);
+      const response = await fetch(url);
     const noticias = await response.json();
     setNoticias(noticias);
     setLoading(false);
-  }, [url]);
+  }, [url]); 
 
   useEffect(() => {
     getNoticias();

@@ -9,7 +9,7 @@ ReactDOM.render(
       <Helmet>
         <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1"/>
       </Helmet>
-        <App/>
+       <App/> 
     </main>
   </React.StrictMode>,
   document.getElementById("root")
