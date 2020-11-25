@@ -16,19 +16,19 @@ export default function Login(props) {
     return email.length > 0 && password.length > 0;
   }
 
-  console.log();
+  console.log(process.env.REACT_APP_URLB);
 
   async function handleSubmit(event) {
     event.preventDefault();
     try {
-      await axios.post('http://localhost:3012/api/login', {
+      await axios
+        .post(`${process.env.REACT_APP_URLB}/login`, {
           email,
           password,
         })
         .then((resp) => {
-          
           localStorage.setItem("token", resp.data.token);
-          auth.login( () => props.history.push('/form') );
+          auth.login(() => props.history.push("/form"));
           Swal.fire("Login correcto!", "", "success");
         })
         .catch((err) => {

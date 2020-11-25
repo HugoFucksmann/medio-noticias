@@ -6,7 +6,9 @@ import BarraTitulares from "../component/BarraTitulares";
 import BarraNav from "../shared/navbar";
 import NotasFinal from "../component/NotasFinal";
 import CardCarousel from "../component/CardCarousel";
-import Home from '../pages/home'
+import Ads from '../component/ads';
+import Noticias from "../component/Noticias";
+import NotaPrincipal from "../component/NotaPrincipal";
 
 
 
@@ -17,13 +19,21 @@ function Principal(noticias) {
       <BarraNav />
       <BarraTitulares {...noticias} />
       <Container fluid="lg">
-        
-          <Home {...noticias} />
-        
+    
+        <Home {...noticias} />
         <CardCarousel {...noticias} />
         <NotasFinal {...noticias} />
       </Container>
     </>
+  );
+}
+
+function Home(noticias) {
+  return (
+    <section>
+      <NotaPrincipal {...noticias} />
+      <Noticias {...noticias} />
+    </section>
   );
 }
 

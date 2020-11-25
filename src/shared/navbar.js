@@ -1,6 +1,6 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Badge, Nav, Navbar, NavDropdown } from "react-bootstrap";
+import { Badge, Button, Dropdown, Nav, Navbar, NavDropdown, DropdownButton } from "react-bootstrap";
 import logo from "../assets/logotype.png";
 import { Link } from "react-router-dom";
 
@@ -21,18 +21,18 @@ function BarraNav() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav  className="m-auto"  >
-            <Nav.Item >
-              <NavDropdown title="Politica">
-                <NavDropdown.Item >Santa Fe</NavDropdown.Item>
-                <NavDropdown.Item >Argentina</NavDropdown.Item>
-              </NavDropdown>
+          <Nav className="m-auto" >
+            <Nav.Item  >
+              <DropdownButton size="sm"  variant="outline-dark" title="Politica">
+                <Dropdown.Item >Santa Fe</Dropdown.Item>
+                <Dropdown.Item >Argentina</Dropdown.Item>
+              </DropdownButton>
             </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="link-1">Covid-19</Nav.Link>
+            <Nav.Item style={{marginLeft: '10px'}}>
+              <Button size="sm" variant="outline-dark" eventKey="link-1">Covid-19</Button>
             </Nav.Item>
-            <Nav.Item>
-              <Nav.Link eventKey="link-2">Deportes</Nav.Link>
+            <Nav.Item style={{marginLeft: '10px'}}>
+              <Button size="sm" variant="outline-dark" eventKey="link-2">Deportes</Button>
             </Nav.Item>
           </Nav>
           <div>

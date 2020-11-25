@@ -11,7 +11,7 @@ import ProtectedRoute from './helpers/protectedRoute'
 import Noticia from './pages/noticia';
 import Form from './pages/form'
 
-const url = process.env.REACT_APP_URL_PROD;
+const url = `${process.env.REACT_APP_URLB}/noticias`;
 export const NoticiasContext = React.createContext();
 
 function App() {

@@ -54,7 +54,7 @@ function Formulario(){
       }
     };
     
-    await Axios.post('http://localhost:3012/api/noticias',notaDB, config)
+    await Axios.post(`${process.env.REACT_APP_URLB}/noticias`,notaDB, config)
       .then( resp => console.log(resp))
       .catch( err => console.log(err.response));
   }
