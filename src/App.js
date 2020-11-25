@@ -12,10 +12,12 @@ import Noticia from './pages/noticia';
 import Form from './pages/form'
 
 const url = process.env.REACT_APP_URL_PROD;
-console.log(url);
+export const NoticiasContext = React.createContext();
+
 function App() {
+
   const  noticias = useFetch(url).noticias
-  console.log(noticias);
+  
   if (noticias.length === 0) {
     return (
         <Spinner variant="info" animation="border" role="status" style={{ margin: '20% 40%', fontSize: '400%',width: '100px', height: '100px' }}>
@@ -24,7 +26,7 @@ function App() {
     );
   }
   return (
-    <>
+    <NoticiasContext.Provider value={noticias} >
       <Router>
         <ScrollToTop />
         <Switch>
@@ -44,7 +46,7 @@ function App() {
           <Route path="*" component={Error404} />
         </Switch>
       </Router>
-    </>
+    </NoticiasContext.Provider>
   );
 }
 

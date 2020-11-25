@@ -16,7 +16,7 @@ export default function Login(props) {
     return email.length > 0 && password.length > 0;
   }
 
-  
+  console.log();
 
   async function handleSubmit(event) {
     event.preventDefault();
@@ -27,8 +27,8 @@ export default function Login(props) {
         })
         .then((resp) => {
           
-          auth.login( () => props.history.push('/form') );
           localStorage.setItem("token", resp.data.token);
+          auth.login( () => props.history.push('/form') );
           Swal.fire("Login correcto!", "", "success");
         })
         .catch((err) => {

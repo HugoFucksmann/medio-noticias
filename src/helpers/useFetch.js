@@ -1,4 +1,3 @@
-import Axios from "axios";
 import { useState, useEffect, useCallback } from "react";
 
 export const useFetch = (url) => {

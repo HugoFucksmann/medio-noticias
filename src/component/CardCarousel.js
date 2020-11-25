@@ -5,19 +5,6 @@ import "./styles.css";
  * https://letsbuildui.dev/articles/building-a-react-card-carousel-component
  */
 
-
-
-
-const noticias = [
-    
-  {
-    id: 1,
-    title: "Stacked Card Carousel",
-    copy:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus sit amet dui scelerisque, tempus dui non, blandit nulla. Etiam sed interdum est.",
-  }
-];
-
 function determineClasses(indexes, cardIndex) {
   if (indexes.currentIndex === cardIndex) {
     return "active";

@@ -1,12 +1,19 @@
 import React from 'react';
+import fondo from '../assets/error-404.webp'
 
 function Error404(props){
-    return(
-        <div>
-            <h2>Error 404 baby</h2>
-           
-        </div>
-    )
+    return (
+      <div
+        style={{
+          backgroundImage: "url(" + fondo + ")",
+          backgroundPosition: "center",
+          backgroundRepeat: "no-repeat",
+          height: "100vh"
+        }}
+      >
+        
+      </div>
+    );
 };
 
 
