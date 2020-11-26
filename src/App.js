@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {  Spinner } from 'react-bootstrap';
 
@@ -16,8 +16,7 @@ export const NoticiasContext = React.createContext();
 
 function App() {
 
-  const  noticias = useFetch(url).noticias
-  
+  const  {noticias} = useFetch(url)
   if (noticias.length === 0) {
     return (
         <Spinner variant="info" animation="border" role="status" style={{ margin: '20% 40%', fontSize: '400%',width: '100px', height: '100px' }}>
@@ -25,10 +24,15 @@ function App() {
         </Spinner>
     );
   }
+  delete noticias.ok;
+  
+  const noticiass = noticias.noticias.filter( noticias => console.log(noticias));
+  console.log(noticiass);
   return (
-    <NoticiasContext.Provider value={noticias} >
+    <NoticiasContext.Provider value={noticias}>
       <Router>
         <ScrollToTop />
+
         <Switch>
           <Route exact path="/">
             <Principal {...noticias} />
@@ -38,11 +42,8 @@ function App() {
             <Noticia {...noticias} />
           </Route>
 
-          <Route path="/logg" component={Login} />
-
-          
+          <Route exact path="/logg" component={Login} />
           <ProtectedRoute exact path="/form" component={Form} />
-
           <Route path="*" component={Error404} />
         </Switch>
       </Router>

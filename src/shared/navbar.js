@@ -1,6 +1,6 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Badge, Button, Dropdown, Nav, Navbar, NavDropdown, DropdownButton } from "react-bootstrap";
+import { Badge, Button, Dropdown, Nav, Navbar, DropdownButton } from "react-bootstrap";
 import logo from "../assets/logotype.png";
 import { Link } from "react-router-dom";
 
@@ -29,10 +29,10 @@ function BarraNav() {
               </DropdownButton>
             </Nav.Item>
             <Nav.Item style={{marginLeft: '10px'}}>
-              <Button size="sm" variant="outline-dark" eventKey="link-1">Covid-19</Button>
+              <Button size="sm" variant="outline-dark" eventkey="link-1">Covid-19</Button>
             </Nav.Item>
             <Nav.Item style={{marginLeft: '10px'}}>
-              <Button size="sm" variant="outline-dark" eventKey="link-2">Deportes</Button>
+              <Button size="sm" variant="outline-dark" eventkey="link-2">Deportes</Button>
             </Nav.Item>
           </Nav>
           <div>

@@ -11,8 +11,8 @@ function ListaNotas(noticias) {
       <ul className="list-unstyled">
         {noticias.noticias.map((noticia) => {
           return (
-            <Link to={`/noticia/${noticia._id}`} style={{ textDecoration: "none", color: "black" }} >
-              <Lii key={noticia._id} {...noticia} />
+            <Link key={noticia._id} to={`/noticia/${noticia._id}`} style={{ textDecoration: "none", color: "black" }} >
+              <Lii  {...noticia} />
             </Link>
           );
         })}

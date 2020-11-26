@@ -6,22 +6,18 @@ import { imagenUrl } from '../helpers/imagenUrl';
 
 
 function Noticias(noticias) {
-  return <BigList {...noticias} />;
-}
-
-const BigList = (noticias) => {
-  return (
-    <section className="products">
+  return(
+  <section className="products">
       { noticias.noticias.map((noticia) => {
         return (
-          <Link to={`/noticia/${noticia._id}`} style={{ textDecoration: 'none',  color: 'black' }} >
+          <Link key={noticia._id} to={`/noticia/${noticia._id}`} style={{ textDecoration: 'none',  color: 'black' }} >
             <SingleNoticia  key={noticia._id} {...noticia} />
           </Link>
-        );})
+        )})
       }
-    </section>
-  );
-};
+  </section>
+  )
+}
 
 const SingleNoticia = (noticia) => {
   const img = noticia.imagen;

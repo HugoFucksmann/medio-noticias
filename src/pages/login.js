@@ -16,7 +16,7 @@ export default function Login(props) {
     return email.length > 0 && password.length > 0;
   }
 
-  console.log(process.env.REACT_APP_URLB);
+  
 
   async function handleSubmit(event) {
     event.preventDefault();

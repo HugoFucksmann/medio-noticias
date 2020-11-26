@@ -1,10 +1,13 @@
-import React, { useState, useContext } from 'react';
-import { Button, Card, Col, Container, FormControl, InputGroup, Row, Table } from 'react-bootstrap';
+import React, { useState, useContext, useCallback } from 'react';
+import { Button, Card, Col, Container, FormControl, InputGroup, Row, Table, DropdownButton, Dropdown } from 'react-bootstrap';
 import { NoticiasContext } from '../App'
 import iconEliminar from '../assets/eliminar.svg';
 import iconEditar from '../assets/editar.svg'
 import { imagenUrl } from '../helpers/imagenUrl';
 import Axios from 'axios';
+import Swal from 'sweetalert2';
+
+
 function Form(){
     return (
       <Container className="mt-5">
@@ -33,7 +36,7 @@ function Formulario(){
   const [pieDeFoto, setPieDeFoto] = useState("");
   const [texto, setTexto] = useState("");
   const [tipo, setTipo] = useState("");
-
+  
   function validateForm() {
     return (
       titulo.length > 0 &&
@@ -55,8 +58,15 @@ function Formulario(){
     };
     
     await Axios.post(`${process.env.REACT_APP_URLB}/noticias`,notaDB, config)
-      .then( resp => console.log(resp))
-      .catch( err => console.log(err.response));
+      .then( resp => {
+       
+        Swal.fire("nota creada !", "", "success")
+      })
+      .catch( err => {
+        console.log(err.response);
+        Swal.fire("error al cargar la nota", "", "error");
+      });
+      
   }
 
   return (
@@ -64,9 +74,16 @@ function Formulario(){
       <Card.Header as="h5">Formulario Noticias</Card.Header>
       <Card.Body>
         <InputGroup className="mb-3">
-          <InputGroup.Prepend>
-            <InputGroup.Text>Tipo</InputGroup.Text>
-          </InputGroup.Prepend>
+          <DropdownButton
+            as={InputGroup.Prepend}
+            variant="outline-secondary"
+            title="Dropdown"
+            id="input-group-dropdown-1"
+          >
+            <Dropdown.Item href="#">Action</Dropdown.Item>
+            <Dropdown.Item href="#">Another action</Dropdown.Item>
+            <Dropdown.Item href="#">Something else here</Dropdown.Item>
+          </DropdownButton>
           <FormControl
             type="text"
             value={tipo}
@@ -134,26 +151,37 @@ function Formulario(){
 }
 
 function UploadFoto(){
-  const [selectedFile, setSelectedFile] = useState(null);
-
+  
+  
   function validateForm() {
-    return selectedFile !== null;
+    return preview !== undefined;
   }
 
   function handleUpload(){
-
+    
   }
 
+  const [preview, setPreviewImage] = useState();
+  const [imgSubida, setImgSubida] = useState();
+
+  const handleChange = useCallback(({ target }) => {
+    setImgSubida(target.files[0]);
+    const reader = new FileReader();
+    reader.addEventListener('load', (evt) => {
+      if (reader.result) {
+        setPreviewImage(reader.result);
+      }
+    });
+    reader.readAsDataURL(target.files[0]);
+  }, []);
+
+ 
   return (
     <Card bg="light" border="info" className="text-center shadow">
-      <Card.Header as="h5">Subir Imagen</Card.Header>
+      <Card.Header as="h5">Formulario Imagen</Card.Header>
       <Card.Body>
-        <input
-          type="file"
-          filename={selectedFile}
-          onChange={(e) => setSelectedFile(e.target.files[0])}
-        />
-        {selectedFile ? <img width={100} src={selectedFile} /> : ""}
+        <input type="file" filename={imgSubida} onChange={handleChange} />
+        {preview && <img width={300} src={preview} alt={preview} />}
         <Button
           className="mt-4"
           onClick={() => handleUpload()}
@@ -170,7 +198,6 @@ function UploadFoto(){
 
 function TablaNotas(){
   const {noticias} = useContext(NoticiasContext);
-
   return (
     <Card bg="light" border="info" className="mb-5 shadow">
       <Card.Header as="h5">Lista de Noticias</Card.Header>
@@ -188,11 +215,11 @@ function TablaNotas(){
               const imagen = imagenUrl(noticias.imagen);
               return (
                 <tr key={noticias._id} className="text-center">
-                  <td><img height={35} src={imagen} /></td>
+                  <td><img height={35} src={imagen} alt={imagen} /></td>
                   <td>{noticias.titulo.substr(0, 160)}</td>
                   <td>
-                    <img className="mr-3 puntero" height={18} src={iconEditar} />
-                    <img className="puntero" height={18} src={iconEliminar} />
+                    <img className="mr-3 puntero" height={18} src={iconEditar} alt='editar' />
+                    <img className="puntero" height={18} src={iconEliminar} alt='eliminar' />
                   </td>
                 </tr>
               );
