@@ -1,14 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Carousel } from "react-bootstrap";
 import "./styles.css";
 import {imagenUrl} from "../helpers/imagenUrl";
+import { NoticiasContext } from '../App';
 
-function NotaPrincipal(noticias) {
-
+function NotaPrincipal() {
+  const noticias = useContext(NoticiasContext);
   return (
     <>
       <Carousel>
-        {noticias.noticias.map((noticia) => {
+        {noticias.map((noticia) => {
           const img = noticia.imagen;
           const imagen = imagenUrl(img);
           return (

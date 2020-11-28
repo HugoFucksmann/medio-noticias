@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Button, Col, Figure, Row } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
 import {imagenUrl} from '../helpers/imagenUrl'
@@ -8,11 +8,12 @@ import BarraNav from "../shared/navbar";
 import BarraTitulares from "../component/BarraTitulares";
 import CardCarousel from "../component/CardCarousel";
 import NotasFinal from "../component/NotasFinal";
+import { NoticiasContext } from "../App";
 
-function Noticia(noticias) {
- 
+function Noticia() {
+  const noticias = useContext(NoticiasContext);
   const { id } = useParams();
-  const nota = noticias.noticias.find( (nota) => nota._id === id )
+  const nota = noticias.find((nota) => nota._id === id);
   return (
     <>
       <BarraNav />

@@ -6,33 +6,32 @@ import BarraTitulares from "../component/BarraTitulares";
 import BarraNav from "../shared/navbar";
 import NotasFinal from "../component/NotasFinal";
 import CardCarousel from "../component/CardCarousel";
-import Ads from '../component/ads';
 import Noticias from "../component/Noticias";
 import NotaPrincipal from "../component/NotaPrincipal";
 
 
 
-function Principal(noticias) {
+function Principal() {
   
   return (
     <>
       <BarraNav />
-      <BarraTitulares {...noticias} />
+      <BarraTitulares />
       <Container fluid="lg">
     
-        <Home {...noticias} />
-        <CardCarousel {...noticias} />
-        <NotasFinal {...noticias} />
+        <Home />
+        <CardCarousel />
+        <NotasFinal />
       </Container>
     </>
   );
 }
 
-function Home(noticias) {
+function Home() {
   return (
     <section>
-      <NotaPrincipal {...noticias} />
-      <Noticias {...noticias} />
+      <NotaPrincipal />
+      <Noticias />
     </section>
   );
 }

@@ -22,7 +22,7 @@ export default function Login(props) {
     event.preventDefault();
     try {
       await axios
-        .post(`${process.env.REACT_APP_URLB}/login`, {
+        .post(`${process.env.REACT_APP_URL_PROD}/login`, {
           email,
           password,
         })

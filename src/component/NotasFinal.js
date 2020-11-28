@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useContext } from "react";
 import { CardDeck, Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { NoticiasContext } from "../App";
 
 import {imagenUrl} from '../helpers/imagenUrl'
 import "./styles.css";
-function NotasFinal(noticias) {
+function NotasFinal() {
+  const noticias = useContext(NoticiasContext);
   return (
     <CardDeck >
-      {noticias.noticias.map((noticia) => {
+      {noticias.map((noticia) => {
         return <Cards key={noticia._id} {...noticia}  />;
       })}
     </CardDeck>

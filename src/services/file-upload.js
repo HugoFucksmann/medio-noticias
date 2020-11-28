@@ -1,11 +1,16 @@
+import Swal from "sweetalert2";
+
+const base_url = process.env.REACT_APP_URL_PROD;
 
 
-  export const actualizarFoto = async ( file, tipo='noticias', id ) => {
+export class FileUploadService {
+  
+  async actualizarFoto( archivo, tipo, id ) {
     try {
-      
-      const url = `${process.env.REACT_APP_URL_PROD}/upload/${tipo}/${id}`;
+      // pure js
+      const url = `${base_url}/upload/${tipo}/${id}`;
       const formData = new FormData();
-      formData.append("imagen", file); 
+      formData.append("imagen", archivo); //en caso de mas info agregar append
 
       const resp = await fetch(url, {
         method: "PUT",
@@ -28,4 +33,4 @@
       return false;
     }
   }
-
+}

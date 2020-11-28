@@ -1,14 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { NoticiasContext } from "../App";
 import { imagenUrl } from '../helpers/imagenUrl';
 
 
 
-function Noticias(noticias) {
+function Noticias() {
+  const noticias = useContext(NoticiasContext);
   return(
   <section className="products">
-      { noticias.noticias.map((noticia) => {
+      { noticias.map((noticia) => {
         return (
           <Link key={noticia._id} to={`/noticia/${noticia._id}`} style={{ textDecoration: 'none',  color: 'black' }} >
             <SingleNoticia  key={noticia._id} {...noticia} />

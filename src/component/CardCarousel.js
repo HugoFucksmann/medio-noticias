@@ -1,4 +1,5 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useEffect, useCallback, useState, useContext } from "react";
+import { NoticiasContext } from "../App";
 import "./styles.css";
 /*
  * Read the blog post here:
@@ -16,8 +17,8 @@ function determineClasses(indexes, cardIndex) {
   return "inactive";
 }
 
-const CardCarousel = (noticias) => {
-
+const CardCarousel = () => {
+  const noticias = useContext(NoticiasContext);
   const [indexes, setIndexes] = useState({
     previousIndex: 0,
     currentIndex: 0,
@@ -27,9 +28,9 @@ const CardCarousel = (noticias) => {
   const handleCardTransition = useCallback(() => {
     // If we've reached the end, start again from the first card,
     // but carry previous value over
-    if (indexes.currentIndex >= noticias.noticias.length - 1) {
+    if (indexes.currentIndex >= noticias.length - 1) {
       setIndexes({
-        previousIndex: noticias.noticias.length - 1,
+        previousIndex: noticias.length - 1,
         currentIndex: 0,
         nextIndex: 1,
       });
@@ -38,7 +39,7 @@ const CardCarousel = (noticias) => {
         previousIndex: prevState.currentIndex,
         currentIndex: prevState.currentIndex + 1,
         nextIndex:
-          prevState.currentIndex + 2 === noticias.noticias.length
+          prevState.currentIndex + 2 === noticias.length
             ? 0
             : prevState.currentIndex + 2,
       }));
@@ -56,7 +57,7 @@ const CardCarousel = (noticias) => {
   return (
     <div className="container">
       <ul className="cardd-carousel">
-        {noticias.noticias.map((nota, index) => (
+        {noticias.map((nota, index) => (
           <li
             key={nota._id}
             className={`cardd ${determineClasses(indexes, index)}`}

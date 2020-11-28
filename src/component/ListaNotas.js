@@ -1,15 +1,16 @@
-import React from "react";
+import React, { useContext } from "react";
 import { Media } from "react-bootstrap";
 
 import {imagenUrl} from '../helpers/imagenUrl'
 import { Link } from "react-router-dom";
+import { NoticiasContext } from "../App";
 
 
-function ListaNotas(noticias) {
-  
+function ListaNotas() {
+  const noticias = useContext(NoticiasContext);
   return (
       <ul className="list-unstyled">
-        {noticias.noticias.map((noticia) => {
+        {noticias.map((noticia) => {
           return (
             <Link key={noticia._id} to={`/noticia/${noticia._id}`} style={{ textDecoration: "none", color: "black" }} >
               <Lii  {...noticia} />

@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, {  } from 'react';
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import {  Spinner } from 'react-bootstrap';
 
@@ -11,7 +11,7 @@ import ProtectedRoute from './helpers/protectedRoute'
 import Noticia from './pages/noticia';
 import Form from './pages/form'
 
-const url = `${process.env.REACT_APP_URLB}/noticias`;
+const url = `${process.env.REACT_APP_URL_PROD}/noticias`;
 export const NoticiasContext = React.createContext();
 
 function App() {
@@ -24,22 +24,23 @@ function App() {
         </Spinner>
     );
   }
-  delete noticias.ok;
   
-  const noticiass = noticias.noticias.filter( noticias => console.log(noticias));
-  console.log(noticiass);
+  
+  const noticiass = noticias.noticias.filter( noticias => noticias._id).reverse();
+  
+  
   return (
-    <NoticiasContext.Provider value={noticias}>
+    <NoticiasContext.Provider value={noticiass}>
       <Router>
         <ScrollToTop />
 
         <Switch>
           <Route exact path="/">
-            <Principal {...noticias} />
+            <Principal />
           </Route>
 
           <Route exact path="/noticia/:id">
-            <Noticia {...noticias} />
+            <Noticia />
           </Route>
 
           <Route exact path="/logg" component={Login} />
