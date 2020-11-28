@@ -21,12 +21,11 @@
     "web-vitals": "^0.2.4"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
+    "start": "env-cmd -f .env.development react-scripts start",
+    "build": "env-cmd -f .env.production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
-    "homepage": "https://medio-noticias.herokuapp.com/",
-    "build:staging": "env-cmd -f .env.staging npm run build"
+    "homepage": "https://medio-noticias.herokuapp.com/"
   },
   "eslintConfig": {
     "extends": [

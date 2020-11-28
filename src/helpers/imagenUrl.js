@@ -1,4 +1,4 @@
-const base_url = process.env.REACT_APP_URL_PROD;
+const base_url = process.env.REACT_APP_URL;
 
 export const imagenUrl = (img) => {
     if (!img) {

@@ -21,7 +21,7 @@ class Auth {
   async login(email, password, props) {
     try {
       await axios
-        .post(`${process.env.REACT_APP_URL_PROD}/login`, {
+        .post(`${process.env.REACT_APP_URL}/login`, {
           email,
           password,
         })
@@ -47,7 +47,7 @@ class Auth {
   }
 
   validarToken() {
-    return axios.get(`${process.env.REACT_APP_URL_PROD}/login/renew`,this.headers)
+    return axios.get(`${process.env.REACT_APP_URL}/login/renew`,this.headers)
     .then( resp => console.log(resp));
   }
 

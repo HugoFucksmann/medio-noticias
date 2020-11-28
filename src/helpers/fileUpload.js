@@ -3,7 +3,7 @@
   export const actualizarFoto = async ( file, tipo='noticias', id ) => {
     try {
       
-      const url = `${process.env.REACT_APP_URL_PROD}/upload/${tipo}/${id}`;
+      const url = `${process.env.REACT_APP_URL}/upload/${tipo}/${id}`;
       const formData = new FormData();
       formData.append("imagen", file); 
 
