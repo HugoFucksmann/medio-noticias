@@ -12,7 +12,7 @@ function Noticia() {
   const noticias = useContext(NoticiasContext);
   const { id } = useParams();
   const nota = noticias.find((nota) => nota._id === id);
-  console.log("Noticia-15");
+  
   return (
     <>
       <BarraNav />
@@ -22,7 +22,7 @@ function Noticia() {
           <Col sm={8}>
             <Nota {...nota} />
           </Col>
-          <Col sm={4} style={{ marginTop: "150px" }}>
+          <Col sm={4} >
             <ListaNotas />
           </Col>
         </Row>
@@ -37,9 +37,9 @@ function Nota(nota) {
   const img = nota.imagen;
   const imagen = imagenUrl(img);
     return (
-      <>
+      <section style={{marginBottom: '80px'}}>
         <h1>{nota.titulo}</h1>
-        <h3>{nota.subtitulo}</h3>
+        <h5>{nota.subtitulo}</h5>
         <br />
         <Figure>
           <Figure.Image height={450} alt="171x180" src={imagen} />
@@ -51,15 +51,16 @@ function Nota(nota) {
         <hr />
         <br />
         <p>{nota.texto}</p>
-        <Link to={'/'}>
+        <Link to={"/"}>
           <Button variant="outline-info">volver al inicio</Button>
         </Link>
-      </>
+      </section>
     );
 }
 
 function ListaNotas() {
-   const noticias = useContext(NoticiasContext);
+   const noticiass = useContext(NoticiasContext);
+   const noticias = noticiass.slice(0,6);
   return (
     <ul className="list-unstyled">
       {noticias.map((noticia) => {
@@ -84,8 +85,8 @@ function Lii(noticia) {
     <>
       <Media as="li">
         <img
-          width={64}
-          height={64}
+          width={90}
+          height={90}
           className="mr-3"
           src={imagen}
           alt="Generic placeholder"

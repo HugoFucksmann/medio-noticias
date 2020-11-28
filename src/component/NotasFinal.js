@@ -8,7 +8,7 @@ import "./styles.css";
 function NotasFinal() {
   const noticias = useContext(NoticiasContext);
   return (
-    <CardDeck >
+    <CardDeck style={{marginTop: '200px'}}>
       {noticias.map((noticia) => {
         return <Cards key={noticia._id} {...noticia}  />;
       })}

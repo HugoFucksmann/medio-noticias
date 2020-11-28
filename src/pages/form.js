@@ -1,26 +1,22 @@
 import React, { useState, useContext, Suspense } from 'react';
 import { Button, Card, Col, Container, FormControl, InputGroup, Row, Table, Form } from 'react-bootstrap';
-import { NoticiasContext } from '../App'
-import iconEliminar from '../assets/eliminar.svg';
-import { imagenUrl } from '../helpers/imagenUrl';
-import {actualizarFoto} from "../helpers/fileUpload";
 import Axios from 'axios';
 import Swal from 'sweetalert2';
+import { NoticiasContext } from '../App'
+import { imagenUrl } from '../helpers/imagenUrl';
+import {actualizarFoto} from "../helpers/fileUpload";
 import Auth from '../helpers/auth'
-
-const token = localStorage.getItem("token");
-const config = {
-  headers: { "x-token": token },
-};
+import NoticiasService from '../helpers/noticiasService'
+import iconEliminar from '../assets/eliminar.svg';
 
 function Formm(props){
-    console.log('Formm 17');
+  
     return (
       <>
         <Button
           onClick={() => Auth.logout(props)}
           variant="outline-info"
-          style={{ float: "right", margin: "-50px 50px 0 0" }}
+          style={{ float: "right", margin: "-50px 50px 0 0",paddingTop: '18px' }}
         >
           Log Out
         </Button>
@@ -50,7 +46,7 @@ function Formulario(props){
   const [texto, setTexto] = useState("");
   const [tipo, setTipo] = useState("");
   const [fecha, setFecha] = useState(new Date().toISOString());
-  console.log('formulario 53');
+  
   const getFecha = () => {
    return new Date().toISOString();
   }
@@ -64,33 +60,36 @@ function Formulario(props){
     );
   }
  
-  async function handleSubmit(){
+  async function handleSubmit(props) {
     setFecha(getFecha());
-    
-   
     const notaDB = {
-      titulo, subtitulo, pieDeFoto, texto, tipo, fecha
-    }
-    
-    await Axios.post(`${process.env.REACT_APP_URL_PROD}/noticias`,notaDB, config)
-      .then( resp => {
+      titulo,
+      subtitulo,
+      pieDeFoto,
+      texto,
+      tipo,
+      fecha,
+    };
+
+    NoticiasService.crearNoticia(notaDB)
+      .then((resp) => {
         const id = resp.data.noticias._id;
-        const tipo = 'noticias';
+        const tipo = "noticias";
         Swal.fire({
+          allowOutsideClick: false,
           title: "subir imagen",
           input: "file",
           preConfirm: (file) => {
             actualizarFoto(file, tipo, id)
-            .then( () => {
-              console.log(props.history);
-              props.history.push("/form");
-              Swal.fire("nota cargada con exito", "", "success");
-            })
-            .catch( err => console.log(err));
+              .then(() => {
+                props.history.push("/form");
+                Swal.fire("nota cargada con exito", "", "success");
+              })
+              .catch((err) => console.log(err));
           },
         });
       })
-      .catch( err => {
+      .catch((err) => {
         console.log(err.response);
         Swal.fire("error al cargar la nota", "", "error");
       });
@@ -159,7 +158,7 @@ function Formulario(props){
         </InputGroup>
         <br />
         <Button
-          onClick={() => handleSubmit()}
+          onClick={() => handleSubmit(props)}
           variant="outline-info"
           block
           disabled={!validateForm()}
@@ -174,19 +173,14 @@ function Formulario(props){
 
 function TablaNotas() {
   const noticias = useContext(NoticiasContext);
-  console.log("tabbbb");
+
   function eliminarNota(_id) {
-    const url = `${process.env.REACT_APP_URL_PROD}/noticias/${_id}`;
     Swal.fire({
       title: "eliminar la nota ?",
       showCancelButton: true,
     }).then((result) => {
       if (result.isConfirmed) {
-        return Axios.delete(url, config)
-          .then(() => {
-            Swal.fire("Borrado", "", "success");
-          })
-          .catch((err) => console.log(err));
+        return NoticiasService.borrarNoticia(_id).catch((err) => console.log(err));
       };
     })
   }   

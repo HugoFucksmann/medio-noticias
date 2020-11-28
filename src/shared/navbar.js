@@ -22,17 +22,17 @@ function BarraNav() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="m-auto" >
-            <Nav.Item  >
-              <DropdownButton size="sm"  variant="outline-dark" title="Politica">
+            <Nav.Item style={{marginLeft: '10px'}}>
+              <DropdownButton  variant="outline-dark" title="Politica">
                 <Dropdown.Item >Santa Fe</Dropdown.Item>
                 <Dropdown.Item >Argentina</Dropdown.Item>
               </DropdownButton>
             </Nav.Item>
             <Nav.Item style={{marginLeft: '10px'}}>
-              <Button size="sm" variant="outline-dark" eventkey="link-1">Covid-19</Button>
+              <Button  variant="outline-dark" eventkey="link-1">Covid-19</Button>
             </Nav.Item>
             <Nav.Item style={{marginLeft: '10px'}}>
-              <Button size="sm" variant="outline-dark" eventkey="link-2">Deportes</Button>
+              <Button  variant="outline-dark" eventkey="link-2">Deportes</Button>
             </Nav.Item>
           </Nav>
           <div>

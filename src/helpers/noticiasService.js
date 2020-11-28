@@ -1,7 +1,7 @@
 import Axios from "axios";
 import Swal from "sweetalert2";
 
-export default class NoticiasService {
+class NoticiasService {
 
   get token() {
     return localStorage.getItem("token") || "";
@@ -15,6 +15,10 @@ export default class NoticiasService {
     };
   }
 
+  async crearNoticia(notaDB){
+    return await Axios.post(`${process.env.REACT_APP_URL_PROD}/noticias`,notaDB, this.headers)
+  }
+
   borrarNoticia( _id ){
       const url = `${process.env.REACT_APP_URL_PROD}/noticias/${_id}`;
       return Axios.delete(url, this.headers )
@@ -22,3 +26,5 @@ export default class NoticiasService {
         .catch( err => console.log(err));
   }
 }
+
+export default new NoticiasService();
