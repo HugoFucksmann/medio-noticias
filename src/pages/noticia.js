@@ -1,9 +1,7 @@
 import React, { useContext } from "react";
-import { Button, Col, Figure, Row } from "react-bootstrap";
+import { Button, Col, Container, Figure, Row, Media } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
 import {imagenUrl} from '../helpers/imagenUrl'
-
-import ListaNotas from "../component/ListaNotas";
 import BarraNav from "../shared/navbar";
 import BarraTitulares from "../component/BarraTitulares";
 import CardCarousel from "../component/CardCarousel";
@@ -14,20 +12,23 @@ function Noticia() {
   const noticias = useContext(NoticiasContext);
   const { id } = useParams();
   const nota = noticias.find((nota) => nota._id === id);
+  console.log("Noticia-15");
   return (
     <>
       <BarraNav />
-      <BarraTitulares {...noticias} />
-      <Row style={{ marginTop: "100px" }}>
-        <Col sm={8}>
-          <Nota {...nota} />
-        </Col>
-        <Col sm={4} style={{ marginTop: "150px" }}>
-          <ListaNotas {...noticias} />
-        </Col>
-      </Row>
-      <CardCarousel {...noticias} />
-      <NotasFinal {...noticias} />
+      <Container>
+        <BarraTitulares {...noticias} />
+        <Row style={{ marginTop: "100px" }}>
+          <Col sm={8}>
+            <Nota {...nota} />
+          </Col>
+          <Col sm={4} style={{ marginTop: "150px" }}>
+            <ListaNotas />
+          </Col>
+        </Row>
+        <CardCarousel {...noticias} />
+        <NotasFinal {...noticias} />
+      </Container>
     </>
   );
 }
@@ -55,6 +56,49 @@ function Nota(nota) {
         </Link>
       </>
     );
+}
+
+function ListaNotas() {
+   const noticias = useContext(NoticiasContext);
+  return (
+    <ul className="list-unstyled">
+      {noticias.map((noticia) => {
+        return (
+          <Link
+            key={noticia._id}
+            to={`/noticia/${noticia._id}`}
+            style={{ textDecoration: "none", color: "black" }}
+          >
+            <Lii {...noticia} />
+          </Link>
+        );
+      })}
+    </ul>
+  );
+}
+
+function Lii(noticia) {
+  const img = noticia.imagen;
+  const imagen = imagenUrl(img);
+  return (
+    <>
+      <Media as="li">
+        <img
+          width={64}
+          height={64}
+          className="mr-3"
+          src={imagen}
+          alt="Generic placeholder"
+        />
+        <Media.Body>
+          <h5>{noticia.titulo}</h5>
+        </Media.Body>
+      </Media>
+      <br />
+      <hr />
+      <br />
+    </>
+  );
 }
 
 export default Noticia;

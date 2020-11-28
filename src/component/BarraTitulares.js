@@ -1,18 +1,11 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext } from 'react';
 import { Badge } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import { NoticiasContext } from '../App';
 
 function BarraTitulares() {
   const noticias = useContext(NoticiasContext);
-  const [notas, setNotas] = useState(noticias);
-  
-  
-  const findNota = (id) => {
-   setNotas((notas) => {
-     return noticias.filter((notas) => notas._id !== id);
-   }); 
-  }
+    
   return (
     <>
       <div

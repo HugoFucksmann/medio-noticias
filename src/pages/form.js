@@ -1,60 +1,59 @@
-import React, { useState, useContext, useCallback, Suspense } from 'react';
-import { Button, Card, Col, Container, FormControl, InputGroup, Row, Table, DropdownButton, Dropdown } from 'react-bootstrap';
+import React, { useState, useContext, Suspense } from 'react';
+import { Button, Card, Col, Container, FormControl, InputGroup, Row, Table, Form } from 'react-bootstrap';
 import { NoticiasContext } from '../App'
 import iconEliminar from '../assets/eliminar.svg';
-import iconEditar from '../assets/editar.svg'
 import { imagenUrl } from '../helpers/imagenUrl';
 import {actualizarFoto} from "../helpers/fileUpload";
 import Axios from 'axios';
 import Swal from 'sweetalert2';
-import withReactContent from 'sweetalert2-react-content';
-const MySwal = withReactContent(Swal);
+import Auth from '../helpers/auth'
 
-function Form(){
-    
+const token = localStorage.getItem("token");
+const config = {
+  headers: { "x-token": token },
+};
+
+function Formm(props){
+    console.log('Formm 17');
     return (
-      <Container className="mt-5">
-        <Row className="mb-5">
-          <Col md={8}>
-            <Formulario />
-          </Col>
-          <Col md={4}>
-            <UploadFoto></UploadFoto>
-          </Col>
-        </Row>
+      <>
+        <Button
+          onClick={() => Auth.logout(props)}
+          variant="outline-info"
+          style={{ float: "right", margin: "-50px 50px 0 0" }}
+        >
+          Log Out
+        </Button>
+        <Container className="mt-5">
+          <Row className="mb-5">
+            <Col md={12}>
+              <Formulario {...props} />
+            </Col>
+            <Col md={4}></Col>
+          </Row>
 
-        <Row className="justify-content-md-center">
-          <Col>
-            <TablaNotas />
-          </Col>
-        </Row>
-      </Container>
+          <Row className="justify-content-md-center">
+            <Col>
+              <TablaNotas />
+            </Col>
+          </Row>
+        </Container>
+      </>
     );
 
 }
 
-function Formulario(){
+function Formulario(props){
   const [titulo, setTitulo] = useState("");
   const [subtitulo, setSubtitulo] = useState("");
   const [pieDeFoto, setPieDeFoto] = useState("");
   const [texto, setTexto] = useState("");
   const [tipo, setTipo] = useState("");
-  const [fecha, setFecha] = useState("");
-  const [preview, setPreviewImage] = useState();
-  const [imgSubida, setImgSubida] = useState();
-  
+  const [fecha, setFecha] = useState(new Date().toISOString());
+  console.log('formulario 53');
   const getFecha = () => {
-    let fecha = Date.now();
-    return new Intl.DateTimeFormat("en-US", {
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit",
-    }).format(fecha);
-  } 
- 
+   return new Date().toISOString();
+  }
   function validateForm() {
     return (
       titulo.length > 0 &&
@@ -64,74 +63,57 @@ function Formulario(){
       tipo.length > 0
     );
   }
-   
+ 
   async function handleSubmit(){
     setFecha(getFecha());
+    
+   
     const notaDB = {
       titulo, subtitulo, pieDeFoto, texto, tipo, fecha
     }
-    const token = localStorage.getItem('token');
-    const config = {
-      headers: { "x-token": token },
-    };
+    
     await Axios.post(`${process.env.REACT_APP_URL_PROD}/noticias`,notaDB, config)
       .then( resp => {
         const id = resp.data.noticias._id;
         const tipo = 'noticias';
-        /* const tipo = 'noticias';
-        const url = `${process.env.REACT_APP_URL_PROD}/upload/${tipo}/${id}`;
-        const token = localStorage.getItem("token");
-        const config = {
-          headers: { "x-token": token},
-        }; */
-
         Swal.fire({
           title: "subir imagen",
           input: "file",
           preConfirm: (file) => {
-            actualizarFoto(file, tipo, id);
-            /* const formData = new FormData();
-            formData.append("imagen", file);
-            Axios.put(url,formData,config)
-            .then( resp => {
-              console.log(resp);
-              Swal.fire("noticia creada !", "", "success");
+            actualizarFoto(file, tipo, id)
+            .then( () => {
+              console.log(props.history);
+              props.history.push("/form");
+              Swal.fire("nota cargada con exito", "", "success");
             })
-            .catch( err => console.log(err)); */
-            Swal.fire("nota cargada con exito", "", "success");
+            .catch( err => console.log(err));
           },
         });
       })
       .catch( err => {
         console.log(err.response);
-        MySwal.fire("error al cargar la nota", "", "error");
+        Swal.fire("error al cargar la nota", "", "error");
       });
   }
-  
 
   return (
     <Card bg="light" border="info" className="text-center shadow">
       <Card.Header as="h5">Formulario Noticias</Card.Header>
       <Card.Body>
-        <InputGroup className="mb-3">
-          <DropdownButton
-            as={InputGroup.Prepend}
-            variant="outline-secondary"
-            title="Dropdown"
-            id="input-group-dropdown-1"
-          >
-            <Dropdown.Item href="#">Action</Dropdown.Item>
-            <Dropdown.Item href="#">Another action</Dropdown.Item>
-            <Dropdown.Item href="#">Something else here</Dropdown.Item>
-          </DropdownButton>
-          <FormControl
-            type="text"
+        <Form.Group key="tipo" as={Col} controlId="formGridState">
+          <Form.Control
+            as="select"
             value={tipo}
             onChange={(e) => setTipo(e.target.value)}
-          />
-        </InputGroup>
+          >
+            <option>Tipo</option>
+            <option>politica</option>
+            <option>covid</option>
+            <option>otra cosa</option>
+          </Form.Control>
+        </Form.Group>
 
-        <InputGroup className="mb-3">
+        <InputGroup key="tit" className="mb-3">
           <InputGroup.Prepend>
             <InputGroup.Text>Titulo</InputGroup.Text>
           </InputGroup.Prepend>
@@ -142,7 +124,7 @@ function Formulario(){
           />
         </InputGroup>
 
-        <InputGroup className="mb-3">
+        <InputGroup key="sub" className="mb-3">
           <InputGroup.Prepend>
             <InputGroup.Text id="subtitulo">Subtitulo</InputGroup.Text>
           </InputGroup.Prepend>
@@ -153,7 +135,7 @@ function Formulario(){
           />
         </InputGroup>
 
-        <InputGroup className="mb-3">
+        <InputGroup key="pdf" className="mb-3">
           <InputGroup.Prepend>
             <InputGroup.Text id="pieDeFoto">Pie de foto</InputGroup.Text>
           </InputGroup.Prepend>
@@ -164,13 +146,12 @@ function Formulario(){
           />
         </InputGroup>
 
-        <InputGroup>
+        <InputGroup key="texto">
           <InputGroup.Prepend>
             <InputGroup.Text>Texto</InputGroup.Text>
           </InputGroup.Prepend>
           <FormControl
             as="textarea"
-            s
             rows={5}
             value={texto}
             onChange={(e) => setTexto(e.target.value)}
@@ -190,57 +171,26 @@ function Formulario(){
   );
 }
 
-function UploadFoto(){
-  const [preview, setPreviewImage] = useState();
-  const [imgSubida, setImgSubida] = useState();
-  
-  function validateForm() {
-    return preview !== undefined;
-  }
-
-  function handleUpload(){
-    
-  }
-
-  const handleChange = useCallback(({ target }) => {
-    
-    setImgSubida(target.files[0]);
-    const reader = new FileReader();
-    reader.addEventListener('load', (evt) => {
-      if (reader.result) {
-        setPreviewImage(reader.result);
-      }
-    });
-    reader.readAsDataURL(target.files[0]);
-  }, []);
-
- 
-  return (
-    <Card bg="light" border="info" className="text-center shadow">
-      <Card.Header as="h5">Formulario Imagen</Card.Header>
-      <Card.Body>
-        <input type="file" filename={'imgSubida'} onChange={handleChange} />
-        {preview && <img width={300} src={preview} alt={'preview'} style={{marginTop: '20px'}} />}
-        <Button
-          className="mt-4"
-          onClick={() => handleUpload()}
-          variant="outline-info"
-          block
-          disabled={!validateForm()}
-        >
-          subir foto
-        </Button>
-      </Card.Body>
-    </Card>
-  );
-}
 
 function TablaNotas() {
   const noticias = useContext(NoticiasContext);
-  
-  
-
-  
+  console.log("tabbbb");
+  function eliminarNota(_id) {
+    const url = `${process.env.REACT_APP_URL_PROD}/noticias/${_id}`;
+    Swal.fire({
+      title: "eliminar la nota ?",
+      showCancelButton: true,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        return Axios.delete(url, config)
+          .then(() => {
+            Swal.fire("Borrado", "", "success");
+          })
+          .catch((err) => console.log(err));
+      };
+    })
+  }   
+    
   return (
     <Suspense fallback={<h1>Loading profile...</h1>}>
       <Card bg="light" border="info" className="mb-5 shadow">
@@ -252,13 +202,12 @@ function TablaNotas() {
                 <th>Foto</th>
                 <th>Tipo</th>
                 <th>Titulo Nota</th>
-                <th>Accion</th>
+                <th>Eliminar</th>
               </tr>
             </thead>
             <tbody>
               {noticias.map((noticias) => {
-                const imagen = imagenUrl(noticias.imagen);
-               
+                const imagen = imagenUrl(noticias.imagen);            
                 return (
                   <tr key={noticias._id}>
                     <td>
@@ -268,16 +217,11 @@ function TablaNotas() {
                     <td>{noticias.titulo.substr(0, 160)}</td>
                     <td>
                       <img
-                        className="mr-3 puntero"
-                        height={18}
-                        src={iconEditar}
-                        alt="editar"
-                      />
-                      <img
                         className="puntero"
                         height={18}
                         src={iconEliminar}
                         alt="eliminar"
+                        onClick={() => eliminarNota(noticias._id)}
                       />
                     </td>
                   </tr>
@@ -291,4 +235,4 @@ function TablaNotas() {
   );
 }
 
-export default Form
+export default Formm

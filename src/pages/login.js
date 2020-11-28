@@ -1,12 +1,9 @@
 import React, { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Button from "react-bootstrap/Button";
-import { Redirect } from "react-router-dom";
 import "./login.css";
-import  axios from "axios";
-
 import auth from "../helpers/auth";
-import Swal from "sweetalert2";
+
 
 export default function Login(props) {
   const [email, setEmail] = useState("");
@@ -16,31 +13,11 @@ export default function Login(props) {
     return email.length > 0 && password.length > 0;
   }
 
-  
-
   async function handleSubmit(event) {
     event.preventDefault();
-    try {
-      await axios
-        .post(`${process.env.REACT_APP_URL_PROD}/login`, {
-          email,
-          password,
-        })
-        .then((resp) => {
-          localStorage.setItem("token", resp.data.token);
-          auth.login(() => props.history.push("/form"));
-          Swal.fire("Login correcto!", "", "success");
-        })
-        .catch((err) => {
-          console.log(err);
-          Swal.fire("error al loguearse", "", "error");
-        });
-        
-    } catch (e) {
-      alert(e.message);
-    }
+    auth.login(email, password, props)
   }
-
+  console.log("login-20");
   return (
     <div className="Login">
       <Form onSubmit={handleSubmit}>

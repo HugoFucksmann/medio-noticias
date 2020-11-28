@@ -16,7 +16,8 @@ export const NoticiasContext = React.createContext();
 
 function App() {
 
-  const  {noticias} = useFetch(url)
+  const {noticias} = useFetch(url);
+  console.log('app-20');
   if (noticias.length === 0) {
     return (
         <Spinner variant="info" animation="border" role="status" style={{ margin: '20% 40%', fontSize: '400%',width: '100px', height: '100px' }}>
@@ -25,10 +26,8 @@ function App() {
     );
   }
   
-  
   const noticiass = noticias.noticias.filter( noticias => noticias._id).reverse();
-  
-  
+  console.log("app-30");
   return (
     <NoticiasContext.Provider value={noticiass}>
       <Router>
