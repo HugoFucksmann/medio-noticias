@@ -2,22 +2,15 @@ import React, { useContext } from "react";
 import { Button, Col, Container, Figure, Row, Media } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
 import {imagenUrl} from '../helpers/imagenUrl'
-import BarraNav from "../shared/navbar";
-import BarraTitulares from "../component/BarraTitulares";
-import CardCarousel from "../component/CardCarousel";
-import NotasFinal from "../component/NotasFinal";
 import { NoticiasContext } from "../App";
 
 function Noticia() {
   const noticias = useContext(NoticiasContext);
   const { id } = useParams();
   const nota = noticias.find((nota) => nota._id === id);
-  
+ 
   return (
     <>
-      <BarraNav />
-      <Container>
-        <BarraTitulares {...noticias} />
         <Row style={{ marginTop: "100px" }}>
           <Col sm={8}>
             <Nota {...nota} />
@@ -26,9 +19,6 @@ function Noticia() {
             <ListaNotas />
           </Col>
         </Row>
-        <CardCarousel {...noticias} />
-        <NotasFinal {...noticias} />
-      </Container>
     </>
   );
 }
@@ -37,21 +27,21 @@ function Nota(nota) {
   const img = nota.imagen;
   const imagen = imagenUrl(img);
     return (
-      <section style={{marginBottom: '80px'}}>
+      <section style={{ marginBottom: "80px" }}>
         <h1>{nota.titulo}</h1>
         <h5>{nota.subtitulo}</h5>
         <br />
         <Figure>
           <Figure.Image height={450} alt="171x180" src={imagen} />
           <Figure.Caption>
-            Nulla vitae elit libero, a pharetra augue mollis interdum.
+            <p>{nota.pieDeFotod}</p>
           </Figure.Caption>
         </Figure>
         <br />
         <hr />
         <br />
         <p>{nota.texto}</p>
-        <Link to={"/"}>
+        <Link to={"/home"}>
           <Button variant="outline-info">volver al inicio</Button>
         </Link>
       </section>
@@ -59,15 +49,15 @@ function Nota(nota) {
 }
 
 function ListaNotas() {
-   const noticiass = useContext(NoticiasContext);
-   const noticias = noticiass.slice(0,6);
+   const noticias = useContext(NoticiasContext);
+   const noticiass = noticias.slice(0,6);
   return (
     <ul className="list-unstyled">
-      {noticias.map((noticia) => {
+      {noticiass.map((noticia) => {
         return (
           <Link
             key={noticia._id}
-            to={`/noticia/${noticia._id}`}
+            to={`/home/noticia/${noticia._id}`}
             style={{ textDecoration: "none", color: "black" }}
           >
             <Lii {...noticia} />

@@ -15,7 +15,7 @@ function BarraTitulares() {
         <Badge key="temahoy" variant="info">Temas de hoy: </Badge>
         {noticias.slice(0, 3).map((noticia) => {
           return (
-            <Link key={noticia._id} to={`/noticia/${noticia._id}`}>
+            <Link key={noticia._id} to={`/home/noticia/${noticia._id}`}>
               <Badge pill variant="light">
                 {noticia.titulo.substr(0, 42)}
               </Badge>

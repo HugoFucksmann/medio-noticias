@@ -61,7 +61,8 @@ function Formulario(props){
   }
  
   async function handleSubmit(props) {
-    setFecha(getFecha());
+    await setFecha(getFecha());
+    console.log(fecha);
     const notaDB = {
       titulo,
       subtitulo,

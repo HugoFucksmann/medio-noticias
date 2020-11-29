@@ -21,7 +21,7 @@ function Cards(noticia){
   const imagen = imagenUrl(img);
   return (
     <Link
-      to={`/noticia/${noticia._id}`}
+      to={`/home/noticia/${noticia._id}`}
       style={{ textDecoration: "none", color: "black" }}
     >
       <Card

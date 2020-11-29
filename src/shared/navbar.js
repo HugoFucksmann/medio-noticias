@@ -1,7 +1,7 @@
 import React from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Badge, Button, Dropdown, Nav, Navbar, DropdownButton } from "react-bootstrap";
-import logo from "../assets/logotype.png";
+import logo from "../assets/logo_large.png";
 import { Link } from "react-router-dom";
 
 const f = new Date();
@@ -15,24 +15,24 @@ function BarraNav() {
       <Navbar sticky="top" collapseOnSelect expand="lg" bg="info" height={70}
         className="justify-content-between mr-auto shadow">
         <Navbar.Brand>
-          <Link to={"/"}>
-            <img alt="" src={logo} width="100" height="70" className="d-inline-block align-top" />
+          <Link to={"/home"}>
+            <img alt="" src={logo} width="245" height="60" className="d-inline-block align-top" />
           </Link>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="m-auto" >
             <Nav.Item style={{marginLeft: '10px'}}>
-              <DropdownButton  variant="outline-dark" title="Politica">
+              <DropdownButton className="shadow-sm"  variant="outline-dark" title="Politica">
                 <Dropdown.Item >Santa Fe</Dropdown.Item>
                 <Dropdown.Item >Argentina</Dropdown.Item>
               </DropdownButton>
             </Nav.Item>
             <Nav.Item style={{marginLeft: '10px'}}>
-              <Button  variant="outline-dark" eventkey="link-1">Covid-19</Button>
+              <Button className="shadow-sm"  variant="outline-dark" eventkey="link-1">Covid-19</Button>
             </Nav.Item>
             <Nav.Item style={{marginLeft: '10px'}}>
-              <Button  variant="outline-dark" eventkey="link-2">Deportes</Button>
+              <Button className="shadow-sm"  variant="outline-dark" eventkey="link-2">Cotizaciones</Button>
             </Nav.Item>
           </Nav>
           <div>

@@ -12,7 +12,7 @@ function Noticias() {
   <section className="products">
       { noticias.map((noticia) => {
         return (
-          <Link key={noticia._id} to={`/noticia/${noticia._id}`} style={{ textDecoration: 'none',  color: 'black' }} >
+          <Link key={noticia._id} to={`/home/noticia/${noticia._id}`} style={{ textDecoration: 'none',  color: 'black' }} >
             <SingleNoticia  key={noticia._id} {...noticia} />
           </Link>
         )})
