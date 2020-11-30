@@ -11,11 +11,11 @@ import ProtectedRoute from './helpers/protectedRoute'
 import Form from './pages/form'
 
 const url = `${process.env.REACT_APP_URL}/noticias`;
-export const NoticiasContext = React.createContext();
 
+export const NoticiasContext = React.createContext();
 function App() {
-  const {noticias} = useFetch(url);
   
+  const { noticias } = useFetch(url);
   if (noticias.length === 0) {
     
     return (

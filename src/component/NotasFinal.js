@@ -5,6 +5,7 @@ import { NoticiasContext } from "../App";
 
 import {imagenUrl} from '../helpers/imagenUrl'
 import "./styles.css";
+
 function NotasFinal() {
   const noticias = useContext(NoticiasContext);
   return (
@@ -32,10 +33,10 @@ function Cards(noticia){
         <Card.Img variant="top" src={imagen} />
         <Card.Body>
           <Card.Title>{noticia.titulo}</Card.Title>
-          <Card.Text>{noticia.subtitulo.substr(0, 145)}...  <small> leer mas</small></Card.Text>
+          <Card.Text>{noticia.subtitulo.substr(0, 130)}...  <small> leer mas</small></Card.Text>
         </Card.Body>
-        <Card.Footer>
-          <small className="text-muted">Last updated 3 mins ago</small>
+        <Card.Footer >
+         <small className="text-muted">{noticia.fecha.slice(0,10)}</small>
         </Card.Footer>
       </Card>
     </Link>

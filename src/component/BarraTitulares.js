@@ -1,9 +1,18 @@
+import Axios from 'axios';
 import React, { useContext } from 'react';
 import { Badge } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import { NoticiasContext } from '../App';
 
+
+
+
+
+
 function BarraTitulares() {
+
+
+
   const noticias = useContext(NoticiasContext);
     
   return (
@@ -17,7 +26,7 @@ function BarraTitulares() {
           return (
             <Link key={noticia._id} to={`/home/noticia/${noticia._id}`}>
               <Badge pill variant="light">
-                {noticia.titulo.substr(0, 42)}
+                {noticia.titulo.substr(0, 40)}...
               </Badge>
             </Link>
           );
@@ -28,3 +37,4 @@ function BarraTitulares() {
 }
 
 export default BarraTitulares;
+

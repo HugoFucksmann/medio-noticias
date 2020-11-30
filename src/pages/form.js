@@ -1,6 +1,5 @@
-import React, { useState, useContext, Suspense } from 'react';
+import React, { useState, useContext, Suspense, useEffect } from 'react';
 import { Button, Card, Col, Container, FormControl, InputGroup, Row, Table, Form } from 'react-bootstrap';
-import Axios from 'axios';
 import Swal from 'sweetalert2';
 import { NoticiasContext } from '../App'
 import { imagenUrl } from '../helpers/imagenUrl';
@@ -8,8 +7,9 @@ import {actualizarFoto} from "../helpers/fileUpload";
 import Auth from '../helpers/auth'
 import NoticiasService from '../helpers/noticiasService'
 import iconEliminar from '../assets/eliminar.svg';
+import getTime from '../helpers/getTime'
 
-function Formm(props){
+const Formm = (props) => {
   
     return (
       <>
@@ -39,17 +39,15 @@ function Formm(props){
 
 }
 
-function Formulario(props){
+const Formulario = (props) => {
+  console.log("Formulario");
   const [titulo, setTitulo] = useState("");
   const [subtitulo, setSubtitulo] = useState("");
   const [pieDeFoto, setPieDeFoto] = useState("");
   const [texto, setTexto] = useState("");
   const [tipo, setTipo] = useState("");
   const [fecha, setFecha] = useState(new Date().toISOString());
-  
-  const getFecha = () => {
-   return new Date().toISOString();
-  }
+
   function validateForm() {
     return (
       titulo.length > 0 &&
@@ -59,10 +57,9 @@ function Formulario(props){
       tipo.length > 0
     );
   }
- 
+  
   async function handleSubmit(props) {
-    await setFecha(getFecha());
-    console.log(fecha);
+    
     const notaDB = {
       titulo,
       subtitulo,
@@ -71,7 +68,7 @@ function Formulario(props){
       tipo,
       fecha,
     };
-
+    
     NoticiasService.crearNoticia(notaDB)
       .then((resp) => {
         const id = resp.data.noticias._id;

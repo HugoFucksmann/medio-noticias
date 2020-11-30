@@ -9,7 +9,7 @@ function NotaPrincipal() {
   const noticias = useContext(NoticiasContext);
   return (
     <>
-      <Carousel>
+      <Carousel className="full-width" >
         {noticias.map((noticia) => {
           const img = noticia.imagen;
           const imagen = imagenUrl(img);
