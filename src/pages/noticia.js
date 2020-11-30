@@ -11,7 +11,7 @@ function Noticia() {
  
   return (
     <>
-        <Row style={{ marginTop: "100px" }}>
+        <Row style={{ marginTop: "75px" }}>
           <Col sm={8}>
             <Nota {...nota} />
           </Col>
@@ -28,11 +28,11 @@ function Nota(nota) {
   const imagen = imagenUrl(img);
     return (
       <section>
-        <h6 className="text-info">MEDIOS REGION | {nota.tipo.toUpperCase()}</h6>
+        <h6 className="text-info ">MEDIOS REGION | {nota.tipo.toUpperCase()}</h6>
         <p>
           <b>{nota.fecha.slice(0, 10)}</b>
         </p>
-        <h1>{nota.titulo}</h1>
+        <h2 className="cel-txt">{nota.titulo}</h2>
         <br />
         <Figure>
           <Figure.Image height={450} alt="171x180" src={imagen} />
@@ -53,16 +53,26 @@ function Nota(nota) {
         <br />
         {/** TWETTER **/}
         <Button variant="light">
-          <a href="https://twitter.com/share?ref_src=twsrc%5Etfw" class="twitter-share-button" data-size="large" data-show-count="false">Tweet</a>
-          <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+          <a
+            href="https://twitter.com/share?ref_src=twsrc%5Etfw"
+            class="twitter-share-button"
+            data-size="large"
+            data-show-count="false"
+          >
+            Tweet
+          </a>
+          <script
+            async
+            src="https://platform.twitter.com/widgets.js"
+            charset="utf-8"
+          ></script>
         </Button>
-        
-        <Button >
-         <a href="whatsapp://send?text=texto%20con%20URL">whatsapp</a> 
-        </Button>
-        <br /><br />
-        
 
+        <Button>
+          <a href="whatsapp://send?text=texto%20con%20URL">whatsapp</a>
+        </Button>
+        <br />
+        <br />
       </section>
     );
 }

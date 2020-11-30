@@ -25,11 +25,7 @@ code {
   gap: 2rem;
 }
 
-@media screen and (min-width: 576px) {
-  .products {
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  }
-}
+
 
 .product {
   background: var(--clr-white);
@@ -71,6 +67,16 @@ code {
 }
 
 
+@media screen and (min-width: 576px) {
+  .products {
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  }
+  .cardFinal{
+    max-width: 250px;
+    margin: auto;
+  }
+}
+
 @media screen and (max-width: 576px) {
   .full-width {
     width: 100vw;
@@ -79,5 +85,13 @@ code {
     right: 50%;
     margin-left: -50vw;
     margin-right: -50vw;
+  }
+
+  .cel-cotizacion{
+    font-size: 0.8em;
+    margin-left: -45px;
+  }
+  .cel-txt{
+    font-size: 1.3em;
   }
 }

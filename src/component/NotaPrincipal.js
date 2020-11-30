@@ -17,8 +17,8 @@ function NotaPrincipal() {
             <Carousel.Item key={noticia._id}> 
             <Link to={`/home/noticia/${noticia._id}`}>
               <img className="d-block w-100" style={{maxHeight: '400px'}} src={imagen}  />
-              <Carousel.Caption style={{background: 'rgba(255,255,255,0.5)',color: 'black'}}  >
-                <h2 className="cardTxm">{noticia.titulo}</h2>
+              <Carousel.Caption style={{background: 'rgba(255,255,255,0.6)',color: 'black'}}  >
+                <h2 className="cel-txt">{noticia.titulo}</h2>
               </Carousel.Caption>
             </Link>
               

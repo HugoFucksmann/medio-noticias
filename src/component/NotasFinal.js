@@ -26,9 +26,9 @@ function Cards(noticia){
       style={{ textDecoration: "none", color: "black" }}
     >
       <Card
-        className="shadow margA"
+        className="shadow cardFinal"
         height={250}
-        style={{ maxWidth: "250px" }}
+        
       >
         <Card.Img variant="top" src={imagen} />
         <Card.Body>
