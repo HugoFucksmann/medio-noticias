@@ -5,7 +5,6 @@ import logo from "../assets/logo_large.png";
 import { Link } from "react-router-dom";
 import getTime from '../helpers/getTime'
 import {useFetch} from '../helpers/useFetch'
-import Axios from "axios";
 
   const fecha = getTime.fecha();
   const hora = getTime.hora();
@@ -94,9 +93,9 @@ const Cotizacion = () => {
         activeKey="/home"
       >
         {data.noticias.slice(0, 6).map(({ casa }) => {
-        
+          
           return (
-            <Nav.Item className="ml-5">
+            <Nav.Item key={casa.nombre} className="ml-5">
               <h6>
                 {casa.nombre} Veta:{" "}
                 <span style={{ color: "green" }}>{casa.venta}</span>

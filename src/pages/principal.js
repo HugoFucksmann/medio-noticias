@@ -34,10 +34,10 @@ function Principal() {
 
 function Home() {
   return (
-    <section>
+    <div data-aos="fade-down">
       <NotaPrincipal />
       <Noticias />
-    </section>
+    </div>
   );
 }
 

@@ -1,23 +1,25 @@
-import React, {  } from 'react';
+import React, { } from 'react';
 import { BrowserRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 import {  Spinner } from 'react-bootstrap';
-
 import Principal from './pages/principal'
 import ScrollToTop from "./helpers/scrollTop"; 
 import Login from './pages/login';
 import { useFetch } from "./helpers/useFetch";
 import Error404 from './pages/404';
-import ProtectedRoute from './helpers/protectedRoute'
-import Form from './pages/form'
+import ProtectedRoute from './helpers/protectedRoute';
+import Form from './pages/form';
+
 
 const url = `${process.env.REACT_APP_URL}/noticias`;
-
 export const NoticiasContext = React.createContext();
+
 function App() {
-  
+
+ 
+ 
   const { noticias } = useFetch(url);
+ 
   if (noticias.length === 0) {
-    
     return (
         <Spinner variant="info" animation="border" role="status" style={{ margin: '20% 40%', fontSize: '400%',width: '100px', height: '100px' }}>
           <span className="sr-only">Loading...</span>
