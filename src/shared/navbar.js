@@ -36,7 +36,7 @@ function BarraNav() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="m-auto">
-            <Nav.Item style={{ marginLeft: "10px" }}>
+            <Nav.Item className="mb-2 ml-2">
               <DropdownButton
                 className="shadow-sm"
                 variant="outline-dark"
@@ -46,7 +46,7 @@ function BarraNav() {
                 <Dropdown.Item>Argentina</Dropdown.Item>
               </DropdownButton>
             </Nav.Item>
-            <Nav.Item style={{ marginLeft: "10px" }}>
+            <Nav.Item className="mb-2 ml-2">
               <Button
                 className="shadow-sm"
                 variant="outline-dark"
@@ -55,7 +55,7 @@ function BarraNav() {
                 Covid-19
               </Button>
             </Nav.Item>
-            <Nav.Item style={{ marginLeft: "10px" }}>
+            <Nav.Item className="mb-2 ml-2">
               <Button
                 className="shadow-sm"
                 variant="outline-dark"

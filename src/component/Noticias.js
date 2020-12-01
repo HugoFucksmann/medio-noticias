@@ -27,12 +27,11 @@ const SingleNoticia = (noticia) => {
 
   return (
     <Card className="product">
-      <Card.Img variant="top" src={imagen} />
+      <Card.Img variant="top" src={imagen}  />
       <Card.Body>
         <b className="text-info">{noticia.tipo}</b>
-        <Card.Title> {noticia.titulo} </Card.Title>
+        <Card.Title style={{fontSize: '1.1em'}}> {noticia.titulo} </Card.Title>
         <Card.Text>
-          {" "}
           {noticia.subtitulo.substr(0, 180)}... <small> leer mas</small>{" "}
         </Card.Text>
       </Card.Body>

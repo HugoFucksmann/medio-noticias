@@ -4,6 +4,14 @@ import { useParams, Link } from "react-router-dom";
 import {imagenUrl} from '../helpers/imagenUrl'
 import { NoticiasContext } from "../App";
 import ListaNotas from '../component/ListaNotas'
+import {
+  TwitterShareButton,
+  FacebookShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  WhatsappIcon,
+  TwitterIcon,
+} from "react-share";
 
 function Noticia() {
   const noticias = useContext(NoticiasContext);
@@ -29,7 +37,9 @@ function Nota(nota) {
   const imagen = imagenUrl(img);
     return (
       <section>
-        <h6 className="text-info ">MEDIOS REGION | {nota.tipo.toUpperCase()}</h6>
+        <h6 className="text-info ">
+          MEDIOS REGION | {nota.tipo.toUpperCase()}
+        </h6>
         <p>
           <b>{nota.fecha.slice(0, 10)}</b>
         </p>
@@ -41,41 +51,29 @@ function Nota(nota) {
             <p>{nota.pieDeFoto}</p>
           </Figure.Caption>
         </Figure>
-        <h6 className="textoNota">{nota.subtitulo}</h6>
+        <h6 className="textoNota ">{nota.subtitulo}</h6>
         <hr />
-        <br />
         <p className="textoNota">{nota.texto}</p>
-        <Link to={"/home"}>
+        <Link to={"/home"} className="mb-2 float-left">
           <Button variant="outline-info">volver al inicio</Button>
         </Link>
-        <br />
-        <br />
-        <div class="sharethis-inline-share-buttons"></div>
-        <br />
-        {/** TWETTER **/}
-        <Button variant="light">
-          <a
-            href="https://twitter.com/share?ref_src=twsrc%5Etfw"
-            class="twitter-share-button"
-            data-size="large"
-            data-show-count="false"
-          >
-            Tweet
-          </a>
-          <script
-            async
-            src="https://platform.twitter.com/widgets.js"
-            charset="utf-8"
-          ></script>
-        </Button>
 
-        <Button>
-          <a href="whatsapp://send?text=texto%20con%20URL">whatsapp</a>
-        </Button>
-        <br />
-        <br />
+        <div className="float-right">
+          <FacebookShareButton url={window.location.href} title={nota.titulo}>
+            <FacebookIcon size={40} round={true} className="ml-3" />
+          </FacebookShareButton>
+
+          <TwitterShareButton url={window.location.href} title={nota.titulo}>
+            <TwitterIcon size={40} round={true} className="ml-3" />
+          </TwitterShareButton>
+
+          <WhatsappShareButton url={window.location.href} title={nota.titulo}>
+            <WhatsappIcon size={40} round={true} className="ml-3" />
+          </WhatsappShareButton>
+        </div>
       </section>
     );
 }
 
 export default Noticia;
+
