@@ -9,7 +9,7 @@ import "./styles.css";
 function NotasFinal() {
   const noticias = useContext(NoticiasContext);
   return (
-    <CardDeck style={{marginTop: '200px'}}>
+    <CardDeck style={{marginTop: '150px'}}>
       {noticias.map((noticia) => {
         return <Cards key={noticia._id} {...noticia}  />;
       })}
@@ -25,18 +25,17 @@ function Cards(noticia){
       to={`/home/noticia/${noticia._id}`}
       style={{ textDecoration: "none", color: "black" }}
     >
-      <Card
-        className="shadow cardFinal"
-        height={250}
-        
-      >
+      <Card className="shadow cardFinal" height={250}>
         <Card.Img variant="top" src={imagen} />
         <Card.Body>
           <Card.Title>{noticia.titulo}</Card.Title>
-          <Card.Text>{noticia.subtitulo.substr(0, 130)}...  <small> leer mas</small></Card.Text>
+          <Card.Text>
+            {noticia.subtitulo.substr(0, 130)}... <small> leer mas</small>
+          </Card.Text>
         </Card.Body>
-        <Card.Footer >
-         <small className="text-muted">{noticia.fecha.slice(0,10)}</small>
+        <Card.Footer>
+          <small className="text-muted">{noticia.fecha.slice(0, 10)}</small>
+          <small className="text-info" style={{float: 'right'}}>{noticia.tipo}</small>
         </Card.Footer>
       </Card>
     </Link>

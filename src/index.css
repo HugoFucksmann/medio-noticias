@@ -66,6 +66,16 @@ code {
   font-size: 1.1em;
 }
 
+.ads1{
+  height: 100px;
+  width: 1000px;
+  margin: 30px auto 0px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+      
+}
+
 
 @media screen and (min-width: 576px) {
   .products {
@@ -93,5 +103,10 @@ code {
   }
   .cel-txt{
     font-size: 1.3em;
+  }
+
+  .ads1{
+    height: 80px;
+    width: 330px;
   }
 }

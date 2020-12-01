@@ -12,15 +12,15 @@ function BarraTitulares() {
     <>
       <div
         className="container text-center"
-        style={{ fontSize: "1.3em", marginTop: "30px", marginBottom: "20px" }}
+        style={{ fontSize: "1.3em", marginTop: "20px", marginBottom: "40px" }}
       >
         <Badge key="temahoy" variant="info" className="mr-2">
-          Temas de hoy:{"  "}
+          Temas de hoy:
         </Badge>
         {noticias.slice(0, 3).map((noticia) => {
           return (
             <Link key={noticia._id} to={`/home/noticia/${noticia._id}`}>
-              <Badge pill variant="light" className="ml-2">
+              <Badge pill variant="light" className="ml-1">
                 {noticia.titulo.substr(0, 40)}...
               </Badge>
             </Link>

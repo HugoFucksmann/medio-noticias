@@ -1,5 +1,5 @@
 import React from 'react'
-import { Container, Fade } from "react-bootstrap";
+import { Col, Container, Row } from "react-bootstrap";
 
 
 import BarraTitulares from "../component/BarraTitulares";
@@ -10,7 +10,8 @@ import Noticias from "../component/Noticias";
 import NotaPrincipal from "../component/NotaPrincipal";
 import { useRouteMatch, Route } from 'react-router-dom';
 import Noticia from './noticia';
-
+import ListaNotas from '../component/ListaNotas';
+import Ads from '../component/ads'
 
 
 function Principal() {
@@ -18,26 +19,36 @@ function Principal() {
   
   return (
     <>
-     
-        <BarraNav />
-        <BarraTitulares />
-        <Container fluid="lg">
-          <Route path={path} component={Home} exact />
-          <Route path={`${path}/noticia/:id`} component={Noticia} exact />
-          <CardCarousel />
-          <NotasFinal />
-        </Container>
-      
+      <BarraNav />
+      <BarraTitulares />
+      <Container fluid="lg">
+        <Route path={path} component={Home} exact />
+        <Route path={`${path}/noticia/:id`} component={Noticia} exact />
+        <Ads />
+        <CardCarousel />
+        
+        <NotasFinal />
+      </Container>
     </>
   );
 }
 
 function Home() {
   return (
-    <div data-aos="fade-down">
-      <NotaPrincipal />
-      <Noticias />
-    </div>
+    <>
+      <Row>
+        <Col sm={8}>
+          <NotaPrincipal />
+        </Col>
+        <Col sm={4} >
+          <ListaNotas/>
+        </Col>
+        <Ads />
+        <Col sm={12}>
+          <Noticias />
+        </Col>
+      </Row>
+    </>
   );
 }
 

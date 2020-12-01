@@ -1,12 +1,17 @@
 import React from 'react'
-
+import publi1 from '../assets/banner-argentinanosnecesita.jpg'
 
 function Ads(){
     return (
-        <div style={{height: '100px',width: '1000px',textAlign: 'center', border: '2px solid', margin: '30px auto', }}>
-            ads
-        </div>
-    )
+      <section
+        className="ads1"
+        style={{
+          backgroundImage: `url(${publi1})`,
+        }}
+      />
+    );
+      
+    
 }
 
 export default Ads;
