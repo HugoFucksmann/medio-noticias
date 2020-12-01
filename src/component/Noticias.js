@@ -26,13 +26,15 @@ const SingleNoticia = (noticia) => {
   const imagen = imagenUrl(img);
 
   return (
-    <Card className="product">
-      <Card.Img variant="top" src={imagen}  />
+    <Card className="product shadow cel-txt">
+      <Card.Img variant="top" src={imagen} className="borderR" />
       <Card.Body>
         <b className="text-info">{noticia.tipo}</b>
-        <Card.Title style={{fontSize: '1.1em'}}> {noticia.titulo} </Card.Title>
+        <Card.Title>
+          <p className="cel-txt">{noticia.titulo}</p>
+        </Card.Title>
         <Card.Text>
-          {noticia.subtitulo.substr(0, 180)}... <small> leer mas</small>{" "}
+          {noticia.subtitulo.substr(0, 180)}... <small> leer mas</small>
         </Card.Text>
       </Card.Body>
     </Card>

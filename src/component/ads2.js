@@ -1,12 +1,15 @@
 import React from 'react'
-
+import publi2 from "../assets/logo-provincia-de-santa-fe.jpg";
 
 function Ads2(){
     return (
-        <div style={{height: '200px',width: '50%',textAlign: 'center', border: '2px solid', margin: '30px auto',float: 'left' }}>
-            ads
-        </div>
-    )
+      <div
+        className="ads2"
+         style={{
+          backgroundImage: `url(${publi2})`,
+        }}
+      ></div>
+    );
 }
 
 export default Ads2;

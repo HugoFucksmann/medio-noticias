@@ -25,17 +25,21 @@ function Cards(noticia){
       to={`/home/noticia/${noticia._id}`}
       style={{ textDecoration: "none", color: "black" }}
     >
-      <Card className="shadow cardFinal" height={250}>
+      <Card className="shadow cardFinal cel-txt effectUp" height={250}>
         <Card.Img variant="top" src={imagen} />
         <Card.Body>
-          <Card.Title>{noticia.titulo}</Card.Title>
+          <Card.Title>
+            <p className="cel-txt">{noticia.titulo}</p>
+          </Card.Title>
           <Card.Text>
             {noticia.subtitulo.substr(0, 130)}... <small> leer mas</small>
           </Card.Text>
         </Card.Body>
         <Card.Footer>
           <small className="text-muted">{noticia.fecha.slice(0, 10)}</small>
-          <small className="text-info" style={{float: 'right'}}>{noticia.tipo}</small>
+          <small className="text-info" style={{ float: "right" }}>
+            {noticia.tipo}
+          </small>
         </Card.Footer>
       </Card>
     </Link>

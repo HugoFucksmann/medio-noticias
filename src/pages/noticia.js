@@ -4,6 +4,8 @@ import { useParams, Link } from "react-router-dom";
 import {imagenUrl} from '../helpers/imagenUrl'
 import { NoticiasContext } from "../App";
 import ListaNotas from '../component/ListaNotas'
+import Ads from "../component/ads";
+import Ads2 from "../component/ads2";
 import {
   TwitterShareButton,
   FacebookShareButton,
@@ -13,6 +15,7 @@ import {
   TwitterIcon,
 } from "react-share";
 
+
 function Noticia() {
   const noticias = useContext(NoticiasContext);
   const { id } = useParams();
@@ -20,15 +23,35 @@ function Noticia() {
  
   return (
     <>
-        <Row style={{ marginTop: "60px" }}>
-          <Col sm={8}>
-            <Nota {...nota} />
-          </Col>
-          <Col sm={4} >
-            <ListaNotas />
-          </Col>
-        </Row>
+      <Ads />
+      <Row>
+        <Col>
+          <NotaCabezal {...nota} />
+        </Col>
+      </Row>
+      <Row style={{ marginTop: "30px" }}>
+        <Col sm={8}>
+          <Nota {...nota} />
+        </Col>
+        <Col sm={4}>
+          <ListaNotas />
+          <Ads2 />
+          
+        </Col>
+      </Row>
     </>
+  );
+}
+
+function NotaCabezal(nota){
+  return (
+    <section>
+      <h6 className="text-info ">MEDIOS REGION | {nota.tipo.toUpperCase()}</h6>
+      <p>
+        <b>{nota.fecha.slice(0, 10)}</b>
+      </p>
+      <h2 className="cel-txt">{nota.titulo}</h2>
+    </section>
   );
 }
 
@@ -37,14 +60,6 @@ function Nota(nota) {
   const imagen = imagenUrl(img);
     return (
       <section>
-        <h6 className="text-info ">
-          MEDIOS REGION | {nota.tipo.toUpperCase()}
-        </h6>
-        <p>
-          <b>{nota.fecha.slice(0, 10)}</b>
-        </p>
-        <h2 className="cel-txt">{nota.titulo}</h2>
-        <br />
         <Figure>
           <Figure.Image height={450} alt="171x180" src={imagen} />
           <Figure.Caption>

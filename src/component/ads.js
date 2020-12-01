@@ -7,6 +7,7 @@ function Ads(){
         className="ads1"
         style={{
           backgroundImage: `url(${publi1})`,
+          margin: '20px auto'
         }}
       />
     );

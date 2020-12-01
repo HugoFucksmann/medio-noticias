@@ -13,8 +13,8 @@ ReactDOM.render(
             name="viewport"
             content="width=device-width, user-scalable=no, initial-scale=1"
           />
-          <title>sss</title>
-          <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=5fc49987e3acfa0012ca6b69&product=inline-share-buttons" async="async"></script>
+          <link rel="preconnect" href="https://fonts.gstatic.com" />
+           <link href="https://fonts.googleapis.com/css2?family=Comfortaa:wght@500&family=Roboto+Slab&display=swap" rel="stylesheet" />
         </Helmet>
         <App />
       </main>

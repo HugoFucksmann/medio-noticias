@@ -18,9 +18,9 @@ function BarraNav() {
         sticky="top"
         collapseOnSelect
         expand="lg"
-        bg="info"
+        bg="light"
         height={70}
-        className="justify-content-between mr-auto shadow"
+        className="justify-content-between mr-auto"
       >
         <Navbar.Brand>
           <Link to={"/home"}>
@@ -89,7 +89,7 @@ const Cotizacion = () => {
   return (
     <>
       <Nav
-        className="justify-content-center bg-light pt-3 pb-2 shadow"
+        className="justify-content-center bg-light pt-2 pb-2 shadow"
         activeKey="/home"
       >
         <Nav.Item>
