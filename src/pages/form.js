@@ -3,7 +3,7 @@ import { Button, Card, Col, Container, FormControl, InputGroup, Row, Table, Form
 import Swal from 'sweetalert2';
 import { NoticiasContext } from '../App'
 import { imagenUrl } from '../helpers/imagenUrl';
-import {actualizarFoto} from "../helpers/fileUpload";
+import {actualizarArchivo} from "../helpers/fileUpload";
 import Auth from '../helpers/auth'
 import NoticiasService from '../helpers/noticiasService'
 import iconEliminar from '../assets/eliminar.svg';
@@ -40,13 +40,14 @@ const Formm = (props) => {
 }
 
 const Formulario = (props) => {
-  console.log("Formulario");
+
   const [titulo, setTitulo] = useState("");
   const [subtitulo, setSubtitulo] = useState("");
   const [pieDeFoto, setPieDeFoto] = useState("");
   const [texto, setTexto] = useState("");
-  const [tipo, setTipo] = useState("");
+  const [tema, setTema] = useState("");
   const [fecha, setFecha] = useState(new Date().toISOString());
+  const [isFile, setIsFile] = useState(false);
 
   function validateForm() {
     return (
@@ -54,38 +55,49 @@ const Formulario = (props) => {
       subtitulo.length > 0 &&
       pieDeFoto.length > 0 &&
       texto.length > 0 &&
-      tipo.length > 0
+      tema.length > 0
     );
   }
   
-  async function handleSubmit(props) {
+  async function handleSubmit() {
     
     const notaDB = {
       titulo,
       subtitulo,
       pieDeFoto,
       texto,
-      tipo,
-      fecha,
+      tema,
+      fecha
     };
     
-    NoticiasService.crearNoticia(notaDB)
-      .then((resp) => {
+    await NoticiasService.crearNoticia(notaDB)
+      .then( async (resp) => {
         const id = resp.data.noticias._id;
-        const tipo = "noticias";
-        Swal.fire({
-          allowOutsideClick: false,
-          title: "subir imagen",
-          input: "file",
-          preConfirm: (file) => {
-            actualizarFoto(file, tipo, id)
-              .then(() => {
-                props.history.push("/form");
-                Swal.fire("nota cargada con exito", "", "success");
-              })
-              .catch((err) => console.log(err));
-          },
-        });
+         await Swal.fire({
+           allowOutsideClick: false,
+           title: "Imagen Principal",
+           input: "file",
+           preConfirm: (file) => {
+              actualizarArchivo(file, "noticias", id)
+           },
+         });
+        if (isFile) {
+          
+          await Swal.fire({
+            allowOutsideClick: false,
+            title: "Archivo de audio video o img",
+            input: "file",
+            preConfirm: (file) => {
+              actualizarArchivo(file, 'files', id)
+                .then(() =>
+                  Swal.fire("nota cargada con exito", "", "success")
+                )
+                .catch((err) => console.log(err));
+            },
+          });
+        } else {
+          Swal.fire("nota cargada con exito", "", "success");
+        }        
       })
       .catch((err) => {
         console.log(err.response);
@@ -97,17 +109,27 @@ const Formulario = (props) => {
     <Card bg="light" border="info" className="text-center shadow">
       <Card.Header as="h5">Formulario Noticias</Card.Header>
       <Card.Body>
-        <Form.Group key="tipo" as={Col} controlId="formGridState">
-          <Form.Control
-            as="select"
-            value={tipo}
-            onChange={(e) => setTipo(e.target.value)}
-          >
-            <option>Tipo</option>
-            <option>politica</option>
-            <option>covid</option>
-            <option>otra cosa</option>
-          </Form.Control>
+        <Form.Group key="Tema" as={Row} controlId="formGridState">
+          <Col sm="8">
+            <Form.Control
+              as="select"
+              value={tema}
+              onChange={(e) => setTema(e.target.value)}
+            >
+              <option>Tema</option>
+              <option>politica</option>
+              <option>covid</option>
+              <option>otra cosa</option>
+            </Form.Control>
+          </Col>
+          <Col>
+            <Form.Check
+              onChange={(e) => setIsFile(e.target.checked)}
+              type="checkbox"
+              label="archivo extra"
+              inline
+            />
+          </Col>
         </Form.Group>
 
         <InputGroup key="tit" className="mb-3">
@@ -192,7 +214,7 @@ function TablaNotas() {
             <thead>
               <tr>
                 <th>Foto</th>
-                <th>Tipo</th>
+                <th>Tema</th>
                 <th>Titulo Nota</th>
                 <th>Eliminar</th>
               </tr>
@@ -205,7 +227,7 @@ function TablaNotas() {
                     <td>
                       <img height={35} src={imagen} alt={imagen} />
                     </td>
-                    <td style={{ width: "100px" }}>{noticias.tipo}</td>
+                    <td style={{ width: "100px" }}>{noticias.tema}</td>
                     <td>{noticias.titulo.substr(0, 160)}</td>
                     <td>
                       <img
@@ -228,3 +250,10 @@ function TablaNotas() {
 }
 
 export default Formm
+
+
+/*
+
+
+
+*/

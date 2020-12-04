@@ -11,3 +11,13 @@ export const imagenUrl = (img) => {
       return `${base_url}/upload/noticias/no-image`;
     }
 }
+
+export const fileUrl = (file) => {
+  if(!file){
+    return '';
+  }else if (file.includes('https')){
+    return file;
+  }else{
+    return `${base_url}/upload/files/${file}`;
+  }
+}

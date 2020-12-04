@@ -1,11 +1,19 @@
 
 
-  export const actualizarFoto = async ( file, tipo='noticias', id ) => {
+  export const actualizarArchivo = async ( file, tipo, id ) => {
     try {
       
       const url = `${process.env.REACT_APP_URL}/upload/${tipo}/${id}`;
       const formData = new FormData();
-      formData.append("imagen", file); 
+      if( tipo === 'noticias'){
+        formData.append("imagen", file);
+      }else if ( tipo === 'files'){
+        formData.append("file", file);
+      }else{
+        return false
+      }
+
+      
 
       const resp = await fetch(url, {
         method: "PUT",

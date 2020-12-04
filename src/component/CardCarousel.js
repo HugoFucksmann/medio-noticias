@@ -19,6 +19,7 @@ function determineClasses(indexes, cardIndex) {
 
 const CardCarousel = () => {
   const noticias = useContext(NoticiasContext);
+  
   const [indexes, setIndexes] = useState({
     previousIndex: 0,
     currentIndex: 0,
@@ -58,10 +59,12 @@ const CardCarousel = () => {
     <div className="container">
       <ul className="cardd-carousel">
         {noticias.map((nota, index) => (
+          
           <li
             key={nota._id}
             className={`cardd ${determineClasses(indexes, index)}`}
           >
+            <img src=''  />
             <h2>{nota.titulo.substr(0, 75)}</h2>
             <p>{nota.subtitulo}</p>
           </li>

@@ -1,7 +1,7 @@
 import React, { useContext } from "react";
 import { Button, Col, Row, Figure } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
-import {imagenUrl} from '../helpers/imagenUrl'
+import { imagenUrl, fileUrl } from "../helpers/imagenUrl";
 import { NoticiasContext } from "../App";
 import ListaNotas from '../component/ListaNotas'
 import Ads from "../component/ads";
@@ -44,20 +44,26 @@ function Noticia() {
 }
 
 function NotaCabezal(nota){
+ 
   return (
     <section>
-      <h6 className="text-info ">MEDIOS REGION | {nota.tipo.toUpperCase()}</h6>
+      <h6 className="text-info ">MEDIOS REGION | {nota.tema.toUpperCase()}</h6>
       <p>
         <b>{nota.fecha.slice(0, 10)}</b>
       </p>
-      <h2 className="cel-txt">{nota.titulo}</h2>
+      <h2 className=" cel-txt text-black ">{nota.titulo}</h2>
     </section>
   );
 }
 
 function Nota(nota) {
-  const img = nota.imagen;
-  const imagen = imagenUrl(img);
+  const imagen = imagenUrl(nota.imagen);
+  let file,ext;
+  if( nota.file ){
+    file = fileUrl(nota.file);
+    ext = file.slice(((file.lastIndexOf(".") - 1) >>> 0) + 2);
+  }
+  console.log(nota);
     return (
       <section>
         <Figure>
@@ -66,13 +72,33 @@ function Nota(nota) {
             <p>{nota.pieDeFoto}</p>
           </Figure.Caption>
         </Figure>
-        <h6 className="textoNota ">{nota.subtitulo}</h6>
+        <h6 className="textoNota text-black ">{nota.subtitulo}</h6>
         <hr />
-        <p className="textoNota">{nota.texto}</p>
+
+        {file && ext === "mp4" && (
+          <div style={{ textAlign: "center" }}>
+            <video width="90%" controls className="shadow">
+              <source src={file} type="video/mp4" />
+            </video>
+          </div>
+        )}
+        {file && ext === "mp3" && (
+          <div style={{ textAlign: "center" }}>
+            <audio controls>
+              <source src={file} type="audio/mp3" />
+            </audio>
+          </div>
+        )}
+        {file && ext === "jpg" || ext === "png" && (
+          <div style={{ textAlign: "center" }}>
+            <img width="90%" src={file} alt={file} />
+          </div>
+        )}
+        <p className="textoNota text-black ">{nota.texto}</p>
+
         <Link to={"/home"} className="mb-2 float-left">
           <Button variant="outline-info">volver al inicio</Button>
         </Link>
-
         <div className="float-right">
           <FacebookShareButton url={window.location.href} title={nota.titulo}>
             <FacebookIcon size={40} round={true} className="ml-3" />

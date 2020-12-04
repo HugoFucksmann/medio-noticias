@@ -27,7 +27,7 @@ const SingleNoticia = (noticia) => {
 
   return (
     <Card className="product shadow cel-txt">
-      <Card.Img variant="top" src={imagen} className="borderR" />
+      <Card.Img variant="top" src={imagen} className="borderR shadow-sm" />
       <Card.Body>
         <b className="text-info">{noticia.tipo}</b>
         <Card.Title>

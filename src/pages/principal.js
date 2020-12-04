@@ -5,7 +5,7 @@ import { Col, Container, Row } from "react-bootstrap";
 import BarraTitulares from "../component/BarraTitulares";
 import BarraNav from "../shared/navbar";
 import NotasFinal from "../component/NotasFinal";
-import CardCarousel from "../component/CardCarousel";
+import NotaBySection from "../component/NotasBySection";
 import Noticias from "../component/Noticias";
 import NotaPrincipal from "../component/NotaPrincipal";
 import { useRouteMatch, Route } from 'react-router-dom';
@@ -25,8 +25,8 @@ function Principal() {
         <Route path={path} component={Home} exact />
         <Route path={`${path}/noticia/:id`} component={Noticia} exact />
         <Ads />
-        <CardCarousel />
-        
+        <NotaBySection />
+
         <NotasFinal />
       </Container>
     </>

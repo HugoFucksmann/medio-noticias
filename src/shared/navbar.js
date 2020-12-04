@@ -94,17 +94,17 @@ const Cotizacion = () => {
       >
         <Nav.Item>
           <h6 className="textoNota text-info">
-            <b>Cotizacion del dia </b>
+            <p><b>Cotizacion del dia</b></p>
           </h6>
         </Nav.Item>
         {data.noticias.slice(0, 2).map(({ casa }) => {
           return (
             <Nav.Item key={casa.nombre} className="ml-5">
-              <h6 className="textoNota cel-cotizacion" >
-                {casa.nombre}&nbsp; compra:{" "}
-                <span style={{ color: "red" }}>{casa.compra}</span>&nbsp; venta:{" "}
+              <p className="textoNota text-black cel-cotizacion">
+                {casa.nombre}&nbsp; compra:&nbsp;
+                <span style={{ color: "red" }}>{casa.compra}</span>&nbsp; venta:&nbsp;
                 <span style={{ color: "green" }}>{casa.venta}</span>
-              </h6>
+              </p>
             </Nav.Item>
           );
         })}

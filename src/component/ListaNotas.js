@@ -8,7 +8,7 @@ function ListaNotas() {
   const noticias = useContext(NoticiasContext);
   const noticiass = noticias.slice(0, 3);
   return (
-    <ul className="list-unstyled mt-4">
+    <ul className="list-unstyled ">
       {noticiass.map((noticia) => {
         return (
           <Link
@@ -44,7 +44,7 @@ function Lii(noticia) {
       </Media>
      
       <hr />
-    
+      <br />
     </>
   );
 }
