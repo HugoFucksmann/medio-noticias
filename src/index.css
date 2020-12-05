@@ -90,8 +90,10 @@ code {
   
 }
 
-.borderR{
- border-radius: 0px 0px 20px 20px; 
+.noticiasCardImg{
+ width: 92%;
+ margin: -15px auto 0;
+ border-radius: 20px;
 }
 
 .effectUp:hover{
@@ -132,5 +134,9 @@ code {
   .ads1{
     height: 80px;
     width: 330px;
+  }
+
+  .ads2{
+    height: 200px;
   }
 }

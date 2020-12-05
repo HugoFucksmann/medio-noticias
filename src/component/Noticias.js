@@ -3,11 +3,11 @@ import { Card } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { NoticiasContext } from "../App";
 import { imagenUrl } from '../helpers/imagenUrl';
-
+import SingleNoticia from "../component/singleNoticia";
 
 
 function Noticias() {
-  const noticias = useContext(NoticiasContext);
+  const noticias = useContext(NoticiasContext).slice(3,12);
   return(
   <section className="products">
       { noticias.map((noticia) => {
@@ -21,25 +21,7 @@ function Noticias() {
   )
 }
 
-const SingleNoticia = (noticia) => {
-  const img = noticia.imagen;
-  const imagen = imagenUrl(img);
 
-  return (
-    <Card className="product shadow cel-txt">
-      <Card.Img variant="top" src={imagen} className="borderR shadow-sm" />
-      <Card.Body>
-        <b className="text-info">{noticia.tipo}</b>
-        <Card.Title>
-          <p className="cel-txt">{noticia.titulo}</p>
-        </Card.Title>
-        <Card.Text>
-          {noticia.subtitulo.substr(0, 180)}... <small> leer mas</small>
-        </Card.Text>
-      </Card.Body>
-    </Card>
-  );
-}
 
 
 export default Noticias;

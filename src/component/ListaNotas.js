@@ -4,24 +4,18 @@ import { Media } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { imagenUrl } from "../helpers/imagenUrl";
 
-function ListaNotas() {
-  const noticias = useContext(NoticiasContext);
-  const noticiass = noticias.slice(0, 3);
-  return (
-    <ul className="list-unstyled ">
-      {noticiass.map((noticia) => {
-        return (
-          <Link
-            key={noticia._id}
-            to={`/home/noticia/${noticia._id}`}
-            style={{ textDecoration: "none", color: "black" }}
-          >
-            <Lii {...noticia} />
-          </Link>
-        );
-      })}
-    </ul>
-  );
+
+function ListaNotas(data) {
+  
+   const noticias = useContext(NoticiasContext);
+   const noticiass = noticias.slice(data[0], data[1]);
+   return (
+     <ul className="list-unstyled ">
+       {noticiass.map((noticia) => {
+         return <Lii key={noticia._id} {...noticia} />;
+       })}
+     </ul>
+   );
 }
 
 
@@ -29,23 +23,27 @@ function Lii(noticia) {
   const img = noticia.imagen;
   const imagen = imagenUrl(img);
   return (
-    <>
+    <Link
+      to={`/home/noticia/${noticia._id}`}
+      style={{ textDecoration: "none", color: "black" }}
+    >
       <Media as="li">
         <img
-          width={120}
-          height={75}
+          width={130}
+          height={85}
           className="mr-3"
           src={imagen}
           alt="Generic placeholder"
         />
         <Media.Body>
-          <p><b className="text-info" >{noticia.tipo}  </b> {noticia.titulo.slice(0,6070)}</p>
+          <p>
+            <b className="text-info">{noticia.tipo} </b>{" "}
+            {noticia.titulo.slice(0, 100)} ...
+          </p>
         </Media.Body>
       </Media>
-     
       <hr />
-      <br />
-    </>
+    </Link>
   );
 }
 
