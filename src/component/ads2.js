@@ -4,7 +4,7 @@ import publi2 from "../assets/logo-provincia-de-santa-fe.jpg";
 function Ads2(){
     return (
       <div
-        className="ads2"
+        className="ads2 shadow"
          style={{
           backgroundImage: `url(${publi2})`,
         }}

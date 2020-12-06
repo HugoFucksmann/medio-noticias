@@ -63,7 +63,7 @@ function Nota(nota) {
     file = fileUrl(nota.file);
     ext = file.slice(((file.lastIndexOf(".") - 1) >>> 0) + 2);
   }
-  console.log(nota);
+
     return (
       <section>
         <Figure>

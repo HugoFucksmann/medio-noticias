@@ -1,7 +1,7 @@
 import React, {} from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Badge, Button, Dropdown, Nav, Navbar, DropdownButton } from "react-bootstrap";
-import logo from "../assets/logo_large.png";
+import { Badge, Nav, Navbar } from "react-bootstrap";
+import logo from "../assets/icon/logo.svg";
 import { Link } from "react-router-dom";
 import getTime from '../helpers/getTime'
 import {useFetch} from '../helpers/useFetch'
@@ -25,10 +25,9 @@ function BarraNav() {
         <Navbar.Brand>
           <Link to={"/home"}>
             <img
-              alt=""
+              alt="logo"
               src={logo}
-              width="245"
-              height="60"
+              width={250}
               className="d-inline-block align-top"
             />
           </Link>
@@ -36,41 +35,24 @@ function BarraNav() {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="m-auto">
-            <Nav.Item className="mb-2 ml-2">
-              <DropdownButton
-                className="shadow-sm"
-                variant="outline-dark"
-                title="Politica"
-              >
-                <Dropdown.Item>Santa Fe</Dropdown.Item>
-                <Dropdown.Item>Argentina</Dropdown.Item>
-              </DropdownButton>
-            </Nav.Item>
-            <Nav.Item className="mb-2 ml-2">
-              <Button
-                className="shadow-sm"
-                variant="outline-dark"
-                eventkey="link-1"
-              >
-                Covid-19
-              </Button>
-            </Nav.Item>
-            <Nav.Item className="mb-2 ml-2">
-              <Button
-                className="shadow-sm"
-                variant="outline-dark"
-                eventkey="link-2"
-              >
-                Cotizaciones
-              </Button>
-            </Nav.Item>
+          
           </Nav>
           <div>
-            <Badge className="shadow" pill variant="light">
+            <Badge
+              className="shadow"
+              pill
+              variant="light"
+              style={{ fontSize: "0.8em" }}
+            >
               {fecha}
             </Badge>
             <br />
-            <Badge className="shadow-sm" pill variant="light">
+            <Badge
+              className="shadow-sm"
+              pill
+              variant="light"
+              style={{ fontSize: "0.7em" }}
+            >
               {hora}
             </Badge>
           </div>
@@ -114,3 +96,33 @@ const Cotizacion = () => {
 }
 
 export default BarraNav;
+
+
+/*   <Nav.Item className="mb-2 ml-2">
+              <DropdownButton
+                className="shadow-sm"
+                variant="outline-dark"
+                title="Politica"
+              >
+                <Dropdown.Item>Santa Fe</Dropdown.Item>
+                <Dropdown.Item>Argentina</Dropdown.Item>
+              </DropdownButton>
+            </Nav.Item>
+            <Nav.Item className="mb-2 ml-2">
+              <Button
+                className="shadow-sm"
+                variant="outline-dark"
+                eventkey="link-1"
+              >
+                Covid-19
+              </Button>
+            </Nav.Item>
+            <Nav.Item className="mb-2 ml-2">
+              <Button
+                className="shadow-sm"
+                variant="outline-dark"
+                eventkey="link-2"
+              >
+                Otra cosa
+              </Button>
+            </Nav.Item>  */

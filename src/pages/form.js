@@ -215,6 +215,7 @@ function TablaNotas() {
               <tr>
                 <th>Foto</th>
                 <th>Tema</th>
+                <th>Fecha</th>
                 <th>Titulo Nota</th>
                 <th>Eliminar</th>
               </tr>
@@ -225,9 +226,10 @@ function TablaNotas() {
                 return (
                   <tr key={noticias._id}>
                     <td>
-                      <img height={35} src={imagen} alt={imagen} />
+                      <img height={50} src={imagen} alt={imagen} />
                     </td>
-                    <td style={{ width: "100px" }}>{noticias.tema}</td>
+                    <td style={{ width: "70px" }}>{noticias.tema}</td>
+                    <td style={{ width: "120px" }}>{noticias.fecha.slice(0,10)}</td>
                     <td>{noticias.titulo.substr(0, 160)}</td>
                     <td>
                       <img

@@ -4,7 +4,7 @@ import publi1 from '../assets/banner-argentinanosnecesita.jpg'
 function Ads(){
     return (
       <section
-        className="ads1"
+        className="ads1 shadow"
         style={{
           backgroundImage: `url(${publi1})`,
           margin: '20px auto'

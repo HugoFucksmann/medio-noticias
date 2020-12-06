@@ -17,7 +17,7 @@ const NotaBySection = (props) => {
     return (
       <section>
         <Row>
-          <Col sm={8}>
+          <Col sm={12}>
             <Alert
               style={{
                 border: "1px solid grey",
@@ -33,19 +33,18 @@ const NotaBySection = (props) => {
             </Alert>
           </Col>
         </Row>
+
         <Row>
-          <Col sm={4}>
+          <Col sm={6}>
             <SingleNoticia key={temas[0]._id} {...temas[0]} />
           </Col>
-          <Col sm={4}>
+          <Col sm={6}>
             {temas.slice(1, 5).map((nota) => {
               return <ListSeccNota key={nota._id} {...nota} />;
             })}
           </Col>
-          <Col sm={4}>
-            <Ads2/>
-          </Col>
         </Row>
+
       </section>
     );
 }
@@ -57,9 +56,10 @@ const ListSeccNota = (nota) => {
     <Link
       to={`/home/noticia/${nota._id}`}
       style={{ textDecoration: "none", color: "black" }}
+      
     >
       <Media
-        className="mb-2 p-2 border shadow"
+        className="mb-3 p-2 border shadow"
         style={{ backgroundColor: "#f5f5f5" }}
       >
         <img

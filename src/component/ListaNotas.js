@@ -31,7 +31,7 @@ function Lii(noticia) {
         <img
           width={130}
           height={85}
-          className="mr-3"
+          className="mr-4 shadow"
           src={imagen}
           alt="Generic placeholder"
         />

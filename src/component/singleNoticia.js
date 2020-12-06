@@ -8,7 +8,7 @@ function SingleNoticia(noticia) {
 
   return (
     <Card
-      className="product shadow cel-txt "
+      className="product shadow cel-txt"
       style={{ backgroundColor: "#f5f5f5" }}
     >
       <Card.Img

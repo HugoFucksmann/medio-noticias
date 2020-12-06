@@ -9,7 +9,7 @@ import "./styles.css";
 function NotasFinal() {
   const noticias = useContext(NoticiasContext);
   return (
-    <CardDeck style={{marginTop: '150px'}}>
+    <CardDeck style={{marginTop: '50px'}}>
       {noticias.map((noticia) => {
         return <Cards key={noticia._id} {...noticia}  />;
       })}
