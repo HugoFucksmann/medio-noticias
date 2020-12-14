@@ -26,7 +26,7 @@ const NotaBySection = (props) => {
                 backgroundColor: "#f5f5f5",
                 
               }}
-              className="shadow"
+              className="realShadow"
             >
               <img alt="icono" height={20} src={icono} style={{float: 'left', marginTop: '5px', marginRight: '5px'}} />
               <h5 className="text-info"><b>{temaTitulo}</b></h5>
@@ -67,7 +67,7 @@ const ListSeccNota = (nota) => {
           src={imagen}
           height={90}
           width={120}
-          className="shadow-sm"
+          className="shadow"
           style={{
             marginLeft: "-20px",
             marginRight: "10px",

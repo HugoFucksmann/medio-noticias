@@ -34,7 +34,7 @@ function Noticia() {
           <Nota {...nota} />
         </Col>
         <Col sm={4}>
-          <ListaNotas />
+          <ListaNotas data={[0,6]} />
           <Ads2 />
           
         </Col>
@@ -69,7 +69,31 @@ function Nota(nota) {
         <Figure>
           <Figure.Image height={450} alt="171x180" src={imagen} />
           <Figure.Caption>
-            <p>{nota.pieDeFoto}</p>
+            <p>
+              <i>{nota.pieDeFoto}</i>
+            </p>
+            <div className="float-right mb-3 mt-3">
+              <FacebookShareButton
+                url={window.location.href}
+                title={nota.titulo}
+              >
+                <FacebookIcon size={40} round={true} className="ml-3" />
+              </FacebookShareButton>
+
+              <TwitterShareButton
+                url={window.location.href}
+                title={nota.titulo}
+              >
+                <TwitterIcon size={40} round={true} className="ml-3" />
+              </TwitterShareButton>
+
+              <WhatsappShareButton
+                url={window.location.href}
+                title={nota.titulo}
+              >
+                <WhatsappIcon size={40} round={true} className="ml-3" />
+              </WhatsappShareButton>
+            </div>
           </Figure.Caption>
         </Figure>
         <h6 className="textoNota text-black ">{nota.subtitulo}</h6>
@@ -89,14 +113,15 @@ function Nota(nota) {
             </audio>
           </div>
         )}
-        {file && ext === "jpg" || ext === "png" && (
-          <div style={{ textAlign: "center" }}>
-            <img width="90%" src={file} alt={file} />
-          </div>
-        )}
-        <p className="textoNota text-black ">{nota.texto}</p>
+        {(file && ext === "jpg") ||
+          (ext === "png" && (
+            <div style={{ textAlign: "center" }}>
+              <img width="90%" src={file} alt={file} />
+            </div>
+          ))}
+        <p className="textoNota text-black">{nota.texto}</p>
 
-        <Link to={"/home"} className="mb-2 float-left">
+        <Link to={"/home"} className="mb-3 float-left">
           <Button variant="outline-info">volver al inicio</Button>
         </Link>
         <div className="float-right">
@@ -112,6 +137,7 @@ function Nota(nota) {
             <WhatsappIcon size={40} round={true} className="ml-3" />
           </WhatsappShareButton>
         </div>
+       
       </section>
     );
 }

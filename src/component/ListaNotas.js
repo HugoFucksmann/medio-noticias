@@ -5,8 +5,8 @@ import { Link } from "react-router-dom";
 import { imagenUrl } from "../helpers/imagenUrl";
 
 
-function ListaNotas(data) {
-  
+function ListaNotas({data}) {
+    
    const noticias = useContext(NoticiasContext);
    const noticiass = noticias.slice(data[0], data[1]);
    return (
@@ -31,7 +31,7 @@ function Lii(noticia) {
         <img
           width={130}
           height={85}
-          className="mr-4 shadow"
+          className="mr-4 realShadow"
           src={imagen}
           alt="Generic placeholder"
         />

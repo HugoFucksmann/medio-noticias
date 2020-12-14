@@ -1,6 +1,5 @@
-import Axios from 'axios';
 import React, { useContext } from 'react';
-import { Badge, Button } from "react-bootstrap";
+import { Badge } from "react-bootstrap";
 import { Link } from 'react-router-dom';
 import { NoticiasContext } from '../App';
 
@@ -11,17 +10,17 @@ function BarraTitulares() {
   return (
     <>
       <div
-        className="container text-center"
+        className="container text-center "
         style={{ fontSize: "1.3em", marginTop: "20px", marginBottom: "40px" }}
       >
-        <Badge key="temahoy" variant="info" className="mr-2">
-          Temas de hoy:
+        <Badge key="temahoy" variant="dark" className="mr-2 shadow">
+        Temas de hoy:
         </Badge>
         {noticias.slice(0, 3).map((noticia) => {
           return (
             <Link key={noticia._id} to={`/home/noticia/${noticia._id}`}>
-              <Badge pill variant="light" className="ml-1">
-                {noticia.titulo.substr(0, 40)}...
+              <Badge pill variant="info" className="ml-1 shadow">
+                {noticia.titulo.substr(0, 38)}...
               </Badge>
             </Link>
           );

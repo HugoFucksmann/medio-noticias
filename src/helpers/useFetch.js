@@ -2,19 +2,18 @@ import { useState, useEffect, useCallback } from "react";
 
 export const useFetch = (url) => {
   const [loading, setLoading] = useState(true);
-  const [noticias, setNoticias] = useState([]);
+  const [data, setData] = useState([]);
 
-  const getNoticias = useCallback(async () => {
+  const getData = useCallback(async () => {
     const response = await fetch(url);
 
-    const noticias = await response.json();
-    setNoticias(noticias);
+    const data = await response.json();
+    setData(data);
     setLoading(false);
   }, [url]);
 
   useEffect(() => {
-    
-    getNoticias();
-  }, [url, getNoticias]);
-  return { loading, noticias };
+    getData();
+  }, [url, getData]);
+  return { loading, data };
 };

@@ -1,29 +1,25 @@
 
-class getTime {
 
-    constructor(){
-        this.f = new Date();
-        this.meses = new Array ("Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre");
+export const getHora = () => {
+    const fecha = new Date();
+    let hora = ''
+    if (fecha.getMinutes() < 10) {
+        hora = fecha.getHours() + ":0" + fecha.getMinutes(); // + ":" + this.f.getSeconds();
+    }else{
+        hora = fecha.getHours() + ":" + fecha.getMinutes(); // + ":" + this.f.getSeconds();
     }
 
-    fecha(){
-        this.fecha = this.f.getDate() + " de " + this.meses[this.f.getMonth()] + " de " + this.f.getFullYear();
-        return this.fecha
-    }
-    
-    hora(){
-         if (this.f.getMinutes() < 10) {
-            this.hora = this.f.getHours() + ":0" + this.f.getMinutes() // + ":" + this.f.getSeconds();
-         }else{
-             this.hora = this.f.getHours() + ":" + this.f.getMinutes() // + ":" + this.f.getSeconds();
-         }
-        
-        return this.hora
-    }
-    
-    
-    
+    return hora;
+}
+
+export const getFecha = () => { 
+    return new Date().toLocaleDateString("es-ES", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    });   
 }
 
 
-export default new getTime;
+//export default new getTime;

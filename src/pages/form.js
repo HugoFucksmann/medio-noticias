@@ -1,4 +1,4 @@
-import React, { useState, useContext, Suspense, useEffect } from 'react';
+import React, { useState, useContext, Suspense } from 'react';
 import { Button, Card, Col, Container, FormControl, InputGroup, Row, Table, Form } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { NoticiasContext } from '../App'
@@ -7,10 +7,10 @@ import {actualizarArchivo} from "../helpers/fileUpload";
 import Auth from '../helpers/auth'
 import NoticiasService from '../helpers/noticiasService'
 import iconEliminar from '../assets/eliminar.svg';
-import getTime from '../helpers/getTime'
+import {getFecha} from '../helpers/getTime'
 
 const Formm = (props) => {
-  
+   
     return (
       <>
         <Button
@@ -46,8 +46,18 @@ const Formulario = (props) => {
   const [pieDeFoto, setPieDeFoto] = useState("");
   const [texto, setTexto] = useState("");
   const [tema, setTema] = useState("");
-  const [fecha, setFecha] = useState(new Date().toISOString());
+  const [fecha, setFecha] = useState(getFecha());
   const [isFile, setIsFile] = useState(false);
+  
+  
+ /*  const [formu, setFormu] = useState({
+    titulo: "",
+    subtitulo: "",
+    pieDeFoto: "",
+    texto: "",
+    tema: "",
+    fecha: new Date().toISOString(),
+  }); */
 
   function validateForm() {
     return (
@@ -192,7 +202,9 @@ const Formulario = (props) => {
 
 
 function TablaNotas() {
-  const noticias = useContext(NoticiasContext);
+  const [noticias, seNoticias] = useState(useContext(NoticiasContext));
+
+  
 
   function eliminarNota(_id) {
     Swal.fire({

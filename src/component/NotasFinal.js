@@ -9,8 +9,8 @@ import "./styles.css";
 function NotasFinal() {
   const noticias = useContext(NoticiasContext);
   return (
-    <CardDeck style={{marginTop: '50px'}}>
-      {noticias.map((noticia) => {
+    <CardDeck className="mt-3">
+      {noticias.slice(0,8).map((noticia) => {
         return <Cards key={noticia._id} {...noticia}  />;
       })}
     </CardDeck>
@@ -25,11 +25,11 @@ function Cards(noticia){
       to={`/home/noticia/${noticia._id}`}
       style={{ textDecoration: "none", color: "black" }}
     >
-      <Card className="shadow cardFinal cel-txt effectUp" height={250}>
+      <Card className="shadow cardFinal cel-txt mb-3" style={{ minHeight: "400px" }}>
         <Card.Img variant="top" src={imagen} />
         <Card.Body>
           <Card.Title>
-            <p className="cel-txt">{noticia.titulo}</p>
+            <small className="cel-txt">{noticia.titulo.substr(0,77)}...</small>
           </Card.Title>
           <Card.Text>
             {noticia.subtitulo.substr(0, 130)}... <small> leer mas</small>
@@ -38,7 +38,7 @@ function Cards(noticia){
         <Card.Footer>
           <small className="text-muted">{noticia.fecha.slice(0, 10)}</small>
           <small className="text-info" style={{ float: "right" }}>
-            {noticia.tipo}
+            {noticia.tema}
           </small>
         </Card.Footer>
       </Card>

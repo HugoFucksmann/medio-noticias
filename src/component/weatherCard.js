@@ -22,6 +22,11 @@ function WeatherCard(){
       </section>
     );
 }
-// http://api.openweathermap.org/data/2.5/weather?lat=-31.6333&lon=-60.7&appid=a1cad7375df343ae073262a6ba4db56f&lang=es
+// http://api.openweathermap.org/data/2.5/weather?lat=-31.6333&lon=-60.7&appid=a1cad7375df343ae073262a6ba4db56f&lang=es&units=metric
 
 export default WeatherCard;
+
+
+/**
+ * <div id="weatherapi-weather-widget-3"></div><script type='text/javascript' src='https://www.weatherapi.com/weather/widget.ashx?loc=111278&wid=3&tu=2&div=weatherapi-weather-widget-3' async></script><noscript><a href="https://www.weatherapi.com/weather/q/santa-fe-santa-fe-argentina-111278" alt="Hour by hour Santa Fe, Santa Fe, Argentina weather">10 day hour by hour Santa Fe, Santa Fe, Argentina weather</a></noscript>
+ */

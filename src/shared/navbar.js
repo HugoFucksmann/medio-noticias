@@ -1,17 +1,21 @@
-import React, {} from "react";
+import React, { } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import { Badge, Nav, Navbar } from "react-bootstrap";
 import logo from "../assets/icon/logo.svg";
 import { Link } from "react-router-dom";
-import getTime from '../helpers/getTime'
+import {getFecha, getHora} from '../helpers/getTime'
 import {useFetch} from '../helpers/useFetch'
 
-  const fecha = getTime.fecha();
-  const hora = getTime.hora();
- 
-  
-function BarraNav() {
+  const fecha = getFecha();
+  const hora = getHora();
 
+  const url =
+    "http://api.openweathermap.org/data/2.5/weather?lat=-31.6333&lon=-60.7&appid=a1cad7375df343ae073262a6ba4db56f&lang=es&units=metric";
+ 
+ 
+function BarraNav() {
+   const  clima  = useFetch(url);
+   
   return (
     <>
       <Navbar
@@ -34,27 +38,27 @@ function BarraNav() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="m-auto">
-          
-          </Nav>
+          <Nav className="m-auto"></Nav>
           <div>
             <Badge
               className="shadow"
               pill
               variant="light"
-              style={{ fontSize: "0.8em" }}
+              style={{ fontSize: "0.9em" }}
             >
               {fecha}
             </Badge>
             <br />
-            <Badge
-              className="shadow-sm"
-              pill
-              variant="light"
-              style={{ fontSize: "0.7em" }}
-            >
-              {hora}
-            </Badge>
+            {!clima.loading && (
+              <Badge
+                className="shadow"
+                pill
+                variant="light"
+                style={{ fontSize: "0.8em" }}
+              >
+               Temperatura: {clima.data.main.temp}ºC
+              </Badge>
+            )}
           </div>
         </Navbar.Collapse>
       </Navbar>
@@ -76,15 +80,18 @@ const Cotizacion = () => {
       >
         <Nav.Item>
           <h6 className="textoNota text-info">
-            <p><b>Cotizacion del dia</b></p>
+            <p>
+              <b>Cotización del dia:</b>
+            </p>
           </h6>
         </Nav.Item>
-        {data.noticias.slice(0, 2).map(({ casa }) => {
+        {data.data.slice(0, 2).map(({ casa }) => {
           return (
             <Nav.Item key={casa.nombre} className="ml-5">
               <p className="textoNota text-black cel-cotizacion">
                 {casa.nombre}&nbsp; compra:&nbsp;
-                <span style={{ color: "red" }}>{casa.compra}</span>&nbsp; venta:&nbsp;
+                <span style={{ color: "red" }}>{casa.compra}</span>&nbsp;
+                venta:&nbsp;
                 <span style={{ color: "green" }}>{casa.venta}</span>
               </p>
             </Nav.Item>
@@ -96,33 +103,3 @@ const Cotizacion = () => {
 }
 
 export default BarraNav;
-
-
-/*   <Nav.Item className="mb-2 ml-2">
-              <DropdownButton
-                className="shadow-sm"
-                variant="outline-dark"
-                title="Politica"
-              >
-                <Dropdown.Item>Santa Fe</Dropdown.Item>
-                <Dropdown.Item>Argentina</Dropdown.Item>
-              </DropdownButton>
-            </Nav.Item>
-            <Nav.Item className="mb-2 ml-2">
-              <Button
-                className="shadow-sm"
-                variant="outline-dark"
-                eventkey="link-1"
-              >
-                Covid-19
-              </Button>
-            </Nav.Item>
-            <Nav.Item className="mb-2 ml-2">
-              <Button
-                className="shadow-sm"
-                variant="outline-dark"
-                eventkey="link-2"
-              >
-                Otra cosa
-              </Button>
-            </Nav.Item>  */

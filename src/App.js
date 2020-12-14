@@ -11,17 +11,16 @@ import Form from './pages/form';
 
 
 // "#f5f5f5 fondo tarjetas
+// box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
 
 const url = `${process.env.REACT_APP_URL}/noticias`;
 export const NoticiasContext = React.createContext();
 
 function App() {
 
-
- 
-  const { noticias } = useFetch(url);
- 
-  if (noticias.length === 0) {
+  const { data } = useFetch(url);
+  
+  if (data.length === 0) {
     return (
         <Spinner variant="info" animation="border" role="status" style={{ margin: '20% 40%', fontSize: '400%',width: '100px', height: '100px' }}>
           <span className="sr-only">Loading...</span>
@@ -29,10 +28,10 @@ function App() {
     );
   }
   
-  const noticiass = noticias.noticias.filter( noticias => noticias._id).reverse();
-
+  const dataa = data.noticias.filter( noticias => noticias._id).reverse();
+  
   return (
-    <NoticiasContext.Provider value={noticiass}>
+    <NoticiasContext.Provider value={dataa}>
       <Router>
         <ScrollToTop />
         <Switch>

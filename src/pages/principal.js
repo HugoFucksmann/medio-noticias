@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { } from 'react'
 import { Col, Container, Row } from "react-bootstrap";
 import logo2 from '../assets/icon/logo2.svg'
 
@@ -8,12 +8,11 @@ import NotasFinal from "../component/NotasFinal";
 import NotaBySection from "../component/NotasBySection";
 import Noticias from "../component/Noticias";
 import NotaPrincipal from "../component/NotaPrincipal";
-import { useRouteMatch, Route } from 'react-router-dom';
+import { useRouteMatch, Route, Link } from 'react-router-dom';
 import Noticia from './noticia';
 import ListaNotas from '../component/ListaNotas';
 import Ads from '../component/ads'
 import Ads2 from "../component/ads2";
-import { NoticiasContext } from "../App";
 import WeatherCard from '../component/weatherCard';
 
 function Principal() {
@@ -22,7 +21,7 @@ function Principal() {
     <>
       <BarraNav />
       <BarraTitulares />
-
+      
       <Container fluid="lg">
         <Route path={path} component={Home} exact />
         <Route path={`${path}/noticia/:id`} component={Noticia} exact />
@@ -40,14 +39,13 @@ function Principal() {
         </Row>
         <Ads />
         <NotasFinal />
+        <Footer />
       </Container>
-      <Footer />
     </>
   );
 }
 
 function Home() {
-  const data = [0,3];
   return (
     <>
       <Row>
@@ -55,7 +53,7 @@ function Home() {
           <NotaPrincipal />
         </Col>
         <Col sm={4}>
-          <ListaNotas {...data} />
+          <ListaNotas data={[0,3]} />
         </Col>
         <Ads />
         <Col sm={12}>
@@ -68,10 +66,23 @@ function Home() {
 
 function Footer(){
   return (
-    <footer style={{ width: "100%", border: '1px solid' }}>
-      <img style={{margin: '10px 40%'}} src={logo2} alt="logo2" />
+    <footer
+      style={{
+        width: "100%",
+        height: "100px",
+        marginTop: "50px",
+        backgroundColor: "#ebe8e8",
+        boxShadow: "0px -5px 17px 0px rgba(50, 50, 50, 0.75)",
+        padding: '15px'
+      }}
+    >
+      <Link>
+        <img className="mx-auto d-block" src={logo2} alt="logo2" />
+      </Link>
     </footer>
   );
 }
+
+
 
 export default Principal;

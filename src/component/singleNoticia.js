@@ -14,7 +14,7 @@ function SingleNoticia(noticia) {
       <Card.Img
         variant="top"
         src={imagen}
-        className=" shadow"
+        className=" realShadow"
         style={{ width: "92%", margin: "-15px auto 0", borderRadius: "20px" }}
       />
       <Card.Body>
