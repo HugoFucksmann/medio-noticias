@@ -17,7 +17,7 @@ export default function Login(props) {
     event.preventDefault();
     auth.login(email, password, props)
   }
-  console.log("login-20");
+  
   return (
     <div className="Login">
       <Form onSubmit={handleSubmit}>

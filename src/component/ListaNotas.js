@@ -5,12 +5,13 @@ import { Link } from "react-router-dom";
 import { imagenUrl } from "../helpers/imagenUrl";
 
 
-function ListaNotas({data}) {
+function ListaNotas() {
     
    const noticias = useContext(NoticiasContext);
-   const noticiass = noticias.slice(data[0], data[1]);
+   const noticiass = noticias.filter((noticia) => noticia.important);
+
    return (
-     <ul className="list-unstyled ">
+     <ul className="list-unstyled">
        {noticiass.map((noticia) => {
          return <Lii key={noticia._id} {...noticia} />;
        })}
@@ -37,12 +38,10 @@ function Lii(noticia) {
         />
         <Media.Body>
           <p>
-            <b className="text-info">{noticia.tipo} </b>{" "}
-            {noticia.titulo.slice(0, 100)} ...
-          </p>
+            <b className="text-info">{noticia.tipo}</b> {noticia.titulo.slice(0, 100)} ...</p>
+          <hr />
         </Media.Body>
       </Media>
-      <hr />
     </Link>
   );
 }

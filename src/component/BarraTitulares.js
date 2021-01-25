@@ -4,8 +4,6 @@ import { Link } from 'react-router-dom';
 import { NoticiasContext } from '../App';
 
 function BarraTitulares() {
-
-  const noticias = useContext(NoticiasContext);
     
   return (
     <>
@@ -13,18 +11,35 @@ function BarraTitulares() {
         className="container text-center "
         style={{ fontSize: "1.3em", marginTop: "20px", marginBottom: "40px" }}
       >
-        <Badge key="temahoy" variant="dark" className="mr-2 shadow">
-        Temas de hoy:
+        <Badge key="temahoy" variant="dark" className="mr-3 shadow">
+          Temas de hoy:
         </Badge>
-        {noticias.slice(0, 3).map((noticia) => {
-          return (
-            <Link key={noticia._id} to={`/home/noticia/${noticia._id}`}>
-              <Badge pill variant="info" className="ml-1 shadow">
-                {noticia.titulo.substr(0, 38)}...
-              </Badge>
-            </Link>
-          );
-        })}
+
+        <Link to={`/home/tipo/deportes`}>
+          <Badge pill variant="info" className="ml-3 shadow">
+            Deportes
+          </Badge>
+        </Link>
+        <Link to={`/home/tipo/regionales`}>
+          <Badge pill variant="info" className="ml-3 shadow">
+            Noticias Regionales
+          </Badge>
+        </Link>
+        <Link to={`/home/tipo/provinciales`}>
+          <Badge pill variant="info" className="ml-3 shadow">
+            Noticias Provinciales
+          </Badge>
+        </Link>
+        <Link to={`/home/tipo/politica`}>
+          <Badge pill variant="info" className="ml-3 shadow">
+            Politica
+          </Badge>
+        </Link>
+        <Link to={`/home/tipo/cultura`}>
+          <Badge pill variant="info" className="ml-3 shadow">
+            Cultura
+          </Badge>
+        </Link>
       </div>
     </>
   );

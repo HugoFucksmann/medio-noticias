@@ -5,5 +5,5 @@ export const getUltimaNota = (noticias) => {
 }
 
 export const getSeccion = (noticias, tema) => {
-   return noticias.filter((noticia) => noticia.tema === tema);
+   return noticias.filter((noticia) => noticia.tema === tema );
 }

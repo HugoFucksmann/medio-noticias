@@ -3,8 +3,7 @@ import Swal from "sweetalert2";
 
 class Auth {
   constructor() {
-    this.authenticated = false;
-    
+    this.authenticated = false;   
   }
 
   get token() {
@@ -52,6 +51,7 @@ class Auth {
   }
 
   isAuthenticated() {
+    
     if (this.token.length === 172) {
       return true
     }else{

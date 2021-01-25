@@ -5,12 +5,13 @@ import {imagenUrl} from "../helpers/imagenUrl";
 import { NoticiasContext } from '../App';
 import { Link } from 'react-router-dom';
 
-function NotaPrincipal() {
+function NotaPrincipal({data}) {
   const noticias = useContext(NoticiasContext);
+  const noticiass = noticias.slice(data[0], data[1]);
   return (
     <>
       <Carousel className="full-width shadow" >
-        {noticias.map((noticia) => {
+        {noticiass.map((noticia) => {
           const img = noticia.imagen;
           const imagen = imagenUrl(img);
           return (

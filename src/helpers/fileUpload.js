@@ -12,9 +12,6 @@
       }else{
         return false
       }
-
-      
-
       const resp = await fetch(url, {
         method: "PUT",
         headers: {
@@ -35,5 +32,18 @@
       console.log(error);
       return false;
     }
+  }
+
+  export const mostrarImagen = async (file) => {
+    let result
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+
+    reader.onloadend = () => {
+      
+      result = reader.result
+    };
+    console.log(result);
+    return result
   }
 

@@ -14,6 +14,7 @@ import ListaNotas from '../component/ListaNotas';
 import Ads from '../component/ads'
 import Ads2 from "../component/ads2";
 import WeatherCard from '../component/weatherCard';
+import ByTema from '../component/byTema';
 
 function Principal() {
   const { path } = useRouteMatch();
@@ -21,10 +22,11 @@ function Principal() {
     <>
       <BarraNav />
       <BarraTitulares />
-      
+
       <Container fluid="lg">
         <Route path={path} component={Home} exact />
         <Route path={`${path}/noticia/:id`} component={Noticia} exact />
+        <Route path={`${path}/tipo/:tema`} component={ByTema} exact />
         <Ads />
         <Row>
           <Col sm={8}>
@@ -50,10 +52,10 @@ function Home() {
     <>
       <Row>
         <Col sm={8}>
-          <NotaPrincipal />
+          <NotaPrincipal data={[0, 6]} />
         </Col>
         <Col sm={4}>
-          <ListaNotas data={[0,3]} />
+          <ListaNotas />
         </Col>
         <Ads />
         <Col sm={12}>
