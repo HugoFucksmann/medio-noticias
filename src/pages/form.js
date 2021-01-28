@@ -1,16 +1,16 @@
 import React, { useState, useContext, Suspense, useEffect } from 'react';
-import { Button, Card, Col, Container, FormControl, InputGroup, Row, Table, Form } from 'react-bootstrap';
+import { Button, Card, Col, Container, FormControl, InputGroup, Row, Table, Form, Modal } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { NoticiasContext } from '../App'
 import { imagenUrl } from '../helpers/imagenUrl';
 import {actualizarArchivo} from "../helpers/fileUpload";
 import Auth from '../helpers/auth'
 import NoticiasService from '../helpers/noticiasService'
-import iconEliminar from '../assets/eliminar.svg';
+import iconEliminar from '../assets/iconos/eliminar.svg';
+import iconEditar from "../assets/iconos/editar.png";
 import defaultImage from '../assets/default-image.png'
 import {getFecha} from '../helpers/getTime'
-import { useFetch } from "../helpers/useFetch";
-import Axios from 'axios'
+import { useFetch } from '../helpers/useFetch';
 
 
 
@@ -21,7 +21,11 @@ const Formm = (props) => {
         <Button
           onClick={() => Auth.logout(props)}
           variant="outline-info"
-          style={{ float: "right", margin: "-50px 50px 0 0",paddingTop: '18px' }}
+          style={{
+            float: "right",
+            margin: "-50px 50px 0 0",
+            paddingTop: "18px",
+          }}
         >
           Log Out
         </Button>
@@ -29,7 +33,7 @@ const Formm = (props) => {
         <Container className="mt-5">
           <Row className="mb-5">
             <Col md={12}>
-              <Formulario  />
+              <Formulario />
             </Col>
             <Col md={4}></Col>
           </Row>
@@ -216,7 +220,7 @@ const Formulario = () => {
           block
           disabled={!validateForm()}
         >
-          {isFile ? <span>Al terminar, cargar archivo</span> : <span>Listo!</span>}
+          {isFile ? <span>Al terminar, cargar archivo extra</span> : <span>Listo!</span>}
         </Button>
       </Card.Body>
     </Card>
@@ -227,7 +231,8 @@ const Formulario = () => {
 const TablaNotas = () => {
   const [count, setCount] = useState(0)
   const [noticias, setNoticias] = useState(useContext(NoticiasContext));
-
+  const [nota, setNota] = useState()
+  const [modalShow, setModalShow] = useState(false);
   useEffect(() => {
     (async () => {
       await NoticiasService.importantLimit().then((count) => setCount(count));
@@ -247,14 +252,26 @@ const TablaNotas = () => {
     })
   }   
 
+  function editarNota(noticia){
+    setNota(noticia)
+    setModalShow(true)
+  }
+
   async function setImportant(cheked, noticia){
     const newNota = { ...noticia, important: cheked };
     return await NoticiasService.actualizarNoticia(noticia._id, newNota)
     .then( async () => setNoticias( await NoticiasService.getNoticias()))
   }
- 
+  
   return (
     <Suspense fallback={<h1>Loading profile...</h1>}>
+      {nota && (
+        <ModalEdit
+          show={modalShow}
+          onHide={() => setModalShow(false)}
+          nota={nota}
+        />
+      )}
       <Card bg="light" border="info" className="mb-5 shadow">
         <Card.Header as="h5">Lista de Noticias</Card.Header>
         <Card.Body>
@@ -265,13 +282,13 @@ const TablaNotas = () => {
                 <th>Tema</th>
                 <th>Fecha</th>
                 <th>Titulo Nota</th>
-                <th>Eliminar</th>
-                <th>Fijar nota {`[${count}/5]`}  </th>
+                <th>Eliminar editar</th>
+                <th>Fijar nota {`[${count}/3]`} </th>
               </tr>
             </thead>
             <tbody>
               {noticias.map((noticia) => {
-                const imagen = imagenUrl(noticia.imagen);            
+                const imagen = imagenUrl(noticia.imagen);
                 return (
                   <tr key={noticia._id}>
                     <td>
@@ -280,13 +297,21 @@ const TablaNotas = () => {
                     <td style={{ width: "70px" }}>{noticia.tema}</td>
                     <td>{noticia.fecha.slice(0, 10)}</td>
                     <td>{noticia.titulo.substr(0, 70)}</td>
-                    <td>
+                    <td style={{ width: "50px" }}>
                       <img
                         className="puntero"
                         height={18}
                         src={iconEliminar}
                         alt="eliminar"
                         onClick={() => eliminarNota(noticia._id)}
+                      />
+                      &nbsp;&nbsp;&nbsp;&nbsp;
+                      <img
+                        className="puntero"
+                        height={18}
+                        src={iconEditar}
+                        alt="editar"
+                        onClick={() => editarNota(noticia)}
                       />
                     </td>
                     <td style={{ width: "100px" }}>
@@ -320,6 +345,112 @@ const TablaNotas = () => {
     </Suspense>
   );
 }
+
+function ModalEdit(props) {
+  const [nota, setNota] = useState(props.nota);
+  useEffect(() => {
+    setNota(props.nota)
+  },[props])
+  
+  function handleSubmit(){
+    NoticiasService.actualizarNoticia(nota._id, nota)
+    .then(({data}) => {
+      console.log(data);
+      if(data.ok) Swal.fire('nota editada con exito','','success');
+      else Swal.fire("error al actualizar la nota", "", "error");
+    })
+    .catch( err => {
+      console.log(err);
+      Swal.fire("error al actualizar la nota", "", "error");
+    });
+  };
+  
+  return (
+    <Modal
+      {...props}
+      size="lg"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+    >
+      <Card bg="light" border="info" className="text-center shadow">
+        <Card.Header as="h5">Editar Noticia</Card.Header>
+        <Card.Body>
+          <Form.Group key="Tema" as={Row} controlId="formGridState">
+            <Col sm="8">
+              <InputGroup key="njjnj" className="mb-4">
+                <Form.Control
+                  as="select"
+                  value={nota.tema || ''}
+                  onChange={(e) => setNota({ ...nota, tema: e.target.value })}
+                >
+                  <option>politica</option>
+                  <option>covid</option>
+                  <option>otra cosa</option>
+                </Form.Control>
+              </InputGroup>
+              <InputGroup key="tit" className="mb-4">
+                <InputGroup.Prepend>
+                  <InputGroup.Text>Titulo</InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl
+                  type="text"
+                  value={nota.titulo}
+                  onChange={(e) => setNota({ ...nota, titulo: e.target.value })}
+                />
+              </InputGroup>
+
+              <InputGroup key="sub" className="mb-4">
+                <InputGroup.Prepend>
+                  <InputGroup.Text id="subtitulo">Subtitulo</InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl
+                  type="text"
+                  value={nota.subtitulo}
+                  onChange={(e) =>
+                    setNota({ ...nota, subtitulo: e.target.value })
+                  }
+                />
+              </InputGroup>
+
+              <InputGroup key="pdf" className="mb-4">
+                <InputGroup.Prepend>
+                  <InputGroup.Text id="pieDeFoto">Pie de foto</InputGroup.Text>
+                </InputGroup.Prepend>
+                <FormControl
+                  type="text"
+                  value={nota.pieDeFoto}
+                  onChange={(e) =>
+                    setNota({ ...nota, pieDeFoto: e.target.value })
+                  }
+                />
+              </InputGroup>
+            </Col>
+          </Form.Group>
+
+          <InputGroup key="texto">
+            <InputGroup.Prepend>
+              <InputGroup.Text>Texto</InputGroup.Text>
+            </InputGroup.Prepend>
+            <FormControl
+              as="textarea"
+              rows={5}
+              value={nota.texto}
+              onChange={(e) => setNota({ ...nota, texto: e.target.value })}
+            />
+          </InputGroup>
+          <br />
+
+          <Button onClick={() => handleSubmit()} variant="outline-info" block>
+            Editar Nota !
+          </Button>
+        </Card.Body>
+      </Card>
+    </Modal>
+  );
+}
+
+
+
 
 export default Formm
 

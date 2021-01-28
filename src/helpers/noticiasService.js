@@ -54,6 +54,13 @@ class NoticiasService {
 
     return count;
   }
+
+  async getNoticiaById(id){
+    console.log(id);
+    return await Axios.get(
+      `${process.env.REACT_APP_URL}/noticias/${id}`
+    ).catch( e => console.log(e))
+  }
 }
 
 export default new NoticiasService();

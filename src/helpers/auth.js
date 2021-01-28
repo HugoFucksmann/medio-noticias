@@ -3,8 +3,12 @@ import Swal from "sweetalert2";
 
 class Auth {
   constructor() {
-    this.authenticated = false;   
+    this.authenticated = axios
+    .post(`${process.env.REACT_APP_URL}/login/verify`, { token: this.token })
+    .then(({ data }) => this.authenticated = data.verify)
+    .catch((e) => console.log(e));
   }
+  
 
   get token() {
     return localStorage.getItem("token") || "";
@@ -51,14 +55,11 @@ class Auth {
   }
 
   isAuthenticated() {
-    
-    if (this.token.length === 172) {
-      return true
-    }else{
-      return false;
-    }
-    //return this.authenticated;
+    console.log(this.authenticated);
+    return this.authenticated
   }
 }
+
+
 
 export default new Auth();
