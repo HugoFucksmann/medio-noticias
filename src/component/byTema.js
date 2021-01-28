@@ -3,6 +3,7 @@ import { Card, CardColumns, Col, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom';
 import { NoticiasContext } from "../App";
 import { imagenUrl } from '../helpers/imagenUrl';
+import SingleNoticia from './singleNoticia';
 
 const ByTema = () => {
     const noticias = useContext(NoticiasContext);
@@ -10,30 +11,48 @@ const ByTema = () => {
     const notas = noticias.filter((nota) => nota.tema === tema).reverse();
     
     return (
-      <section>
-        <h3 className="text-info text-center">{tema.toUpperCase()}</h3>
-        <hr />
-        <CardColumns>
-          {notas.map((noticia) => {
-            return <CardTema key={noticia._id} nota={noticia} />;
+      <>
+        <section>
+          <h3 className="text-info text-center">{tema.toUpperCase()}</h3>
+          <hr />
+          <Row className="mb-4">
+            <Col sm={8}>
+              <NotaCabecera {...notas[0]} />
+            </Col>
+            <Col sm={4}>
+              <NotaCabecera {...notas[1]} />
+            </Col>
+          </Row>
+          <Row>
+            <Col sm={4}></Col>
+            <Col sm={4}></Col>
+            <Col sm={4}></Col>
+          </Row>
+        </section>
+        <section className="products">
+          {notas.slice(2).map((noticia) => {
+            return <SingleNoticia key={noticia._id} {...noticia} />;
           })}
-        </CardColumns>
-      </section>
+        </section>
+      </>
     );
 }
 
-const CardTema = ({nota}) => {
+const NotaCabecera = (nota) => {
   const img = nota.imagen;
   const imagen = imagenUrl(img);
     return (
-      <Card className="m-2 p-2" >
-        <Card.Img variant="top" src={imagen} />
-        <Card.Body>
-          <Card.Title>{nota.titulo.substr(0, 30)}</Card.Title>
-          <Card.Text>{nota.texto.substr(0, 160)}</Card.Text>
+      <Card className="shadow">
+        <Card.Img variant="top" src={imagen} style={{ height: "300px" }} />
+        <Card.Body style={{height: "110px"}}>
+          <b>{nota.titulo}</b>
         </Card.Body>
       </Card>
     );
 }
+
+
+
+
 
 export default ByTema;

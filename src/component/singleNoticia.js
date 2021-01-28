@@ -5,7 +5,7 @@ import {imagenUrl} from '../helpers/imagenUrl'
 function SingleNoticia(noticia) {
   const img = noticia.imagen;
   const imagen = imagenUrl(img);
-
+  console.log(noticia);
   return (
     <Card
       className="product shadow cel-txt"
