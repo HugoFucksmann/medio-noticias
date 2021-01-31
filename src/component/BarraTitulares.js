@@ -1,7 +1,6 @@
-import React, { useContext } from 'react';
+import React, { } from 'react';
 import { Badge } from "react-bootstrap";
 import { Link } from 'react-router-dom';
-import { NoticiasContext } from '../App';
 
 function BarraTitulares() {
     

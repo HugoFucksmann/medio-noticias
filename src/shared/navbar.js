@@ -15,7 +15,7 @@ import {useFetch} from '../helpers/useFetch'
  
 function BarraNav() {
    const  clima  = useFetch(url);
-   
+  
   return (
     <>
       <Navbar
@@ -100,6 +100,20 @@ const Cotizacion = () => {
       </Nav>
     </>
   );
+}
+
+const CotizacionBN = async () => {
+
+  const data = await fetch("https://api.estadisticasbcra.com/base", {
+    headers: {
+      Authorization:
+        "Bearer eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NDM2NTI5NzgsInR5cGUiOiJleHRlcm5hbCIsInVzZXIiOiJodWdvZmZ1a3NtYW5uQGdtYWlsLmNvbSJ9.8KSfOgjnXz9W73LJo9JG7i2-7QXPgqjnDBSLi3Fgj9uDcumkl-zBGfCjlacliYJrOn-qreGBd98e1ylHCpSIpA",
+    },
+  }).catch((e) => console.log(e));
+ 
+  console.log(data);
+  return data
+
 }
 
 export default BarraNav;

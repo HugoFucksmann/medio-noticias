@@ -7,7 +7,8 @@ import {imagenUrl} from '../helpers/imagenUrl'
 import "./styles.css";
 
 function NotasFinal() {
-  const noticias = useContext(NoticiasContext);
+  const {noticias} = useContext(NoticiasContext);
+  
   return (
     <CardDeck className="mt-3">
       {noticias.slice(0,8).map((noticia) => {
@@ -18,6 +19,7 @@ function NotasFinal() {
 }
 
 function Cards(noticia){
+  
   const img = noticia.imagen;
   const imagen = imagenUrl(img);
   return (

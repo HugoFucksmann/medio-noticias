@@ -4,13 +4,12 @@ import { NoticiasContext } from "../App";
 import { getSeccion } from "../services/getNoticia";
 import SingleNoticia from "../component/singleNoticia";
 import {imagenUrl} from '../helpers/imagenUrl'
-import Ads2 from '../component/ads2'
 import icono from '../assets/icon/icc2.svg'
 import { Link } from 'react-router-dom';
 
 const NotaBySection = (props) => {
 
-    const noticias = useContext(NoticiasContext);
+    const {noticias} = useContext(NoticiasContext);
     
     const temas = getSeccion(noticias, props.tema);
     const temaTitulo = temas[0].tema

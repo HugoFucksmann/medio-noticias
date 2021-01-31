@@ -11,10 +11,12 @@ import NotaPrincipal from "../component/NotaPrincipal";
 import { useRouteMatch, Route, Link } from 'react-router-dom';
 import Noticia from './noticia';
 import ListaNotas from '../component/ListaNotas';
-import Ads from '../component/ads'
-import Ads2 from "../component/ads2";
 import WeatherCard from '../component/weatherCard';
 import ByTema from '../component/byTema';
+import AdsHorizontal2 from '../component/adsHorizontal2';
+import AdsHorizontal from "../component/adsHorizontal";
+import AdsVertical from "../component/adsVertical";
+import AdsVertical2 from "../component/adsVertical2";
 
 function Principal() {
   const { path } = useRouteMatch();
@@ -27,19 +29,36 @@ function Principal() {
         <Route path={path} component={Home} exact />
         <Route path={`${path}/noticia/:id`} component={Noticia} exact />
         <Route path={`${path}/tipo/:tema`} component={ByTema} exact />
-        <Ads />
+
         <Row>
           <Col sm={8}>
             <NotaBySection tema="politica" />
+            <AdsHorizontal />
             <NotaBySection tema="covid" />
+            <AdsHorizontal2 />
             <NotaBySection tema="otra cosa" />
           </Col>
           <Col sm={4}>
             <WeatherCard />
-            <Ads2 />
+            <AdsVertical />
+            <div
+              style={{ height: "500px", border: "1px solid", marginTop: 20 }}
+            >
+              <br />
+              <b className="text-danger">
+                elegir algun contenido para este bloque o colocar mas notas
+              </b>
+            </div>
+            <AdsVertical2 />
           </Col>
         </Row>
-        <Ads />
+        <AdsHorizontal />
+        <div style={{ marginTop: 40 }}>
+          <b className="text-danger">
+            sugerir cantidad total de notas a mostar y cada cuanto intercalar
+            una publicidad
+          </b>
+        </div>
         <NotasFinal />
         <Footer />
       </Container>
@@ -52,15 +71,22 @@ function Home() {
     <>
       <Row>
         <Col sm={8}>
-          <NotaPrincipal data={[0, 6]} />
+          <NotaPrincipal data={[0, 5]} />
         </Col>
         <Col sm={4}>
           <ListaNotas />
         </Col>
-        <Ads />
+        <AdsHorizontal2 />
         <Col sm={12}>
+          <div style={{ marginTop: 40, marginBottom: -40 }}>
+            <b className="text-danger">
+              sugerir cantidad total de notas a mostar y cada cuantas filas de 3
+              notas quieren una publicidad
+            </b>
+          </div>
           <Noticias />
         </Col>
+        <AdsHorizontal />
       </Row>
     </>
   );

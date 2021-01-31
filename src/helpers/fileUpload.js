@@ -9,6 +9,8 @@
         formData.append("imagen", file);
       }else if ( tipo === 'files'){
         formData.append("file", file);
+      }else if ( tipo === 'publi'){
+        formData.append("publi", file);
       }else{
         return false
       }

@@ -7,7 +7,7 @@ import { imagenUrl } from "../helpers/imagenUrl";
 
 function ListaNotas() {
     
-   const noticias = useContext(NoticiasContext);
+   const {noticias} = useContext(NoticiasContext);
    const noticiass = noticias.filter((noticia) => noticia.important);
 
    return (

@@ -64,9 +64,9 @@ code {
   font-size: 1.0em;
 }
 
-.ads1{
+.adsHorizontal{
   height: 100px;
-  width: 1000px;
+  width: 90%;
   margin: 30px auto 0px;
   background-size: cover;
   background-position: center;
@@ -74,9 +74,9 @@ code {
       
 }
 
-.ads2{
-  height: 400px;
-  width: 90%;
+.adsVertical{
+  height: 300px;
+  width: 100%;
   margin: 30px auto 0px;
   background-size: cover;
   background-position: center;

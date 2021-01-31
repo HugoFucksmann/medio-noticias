@@ -21,3 +21,15 @@ export const fileUrl = (file) => {
     return `${base_url}/upload/files/${file}`;
   }
 }
+
+export const publiUrl = (img) => {
+  if (!img) {
+    return `${base_url}/upload/publi/no-image`;
+  } else if (img.includes("https")) {
+    return img;
+  } else if (img) {
+    return `${base_url}/upload/publi/${img}`;
+  } else {
+    return `${base_url}/upload/no-image`;
+  }
+};

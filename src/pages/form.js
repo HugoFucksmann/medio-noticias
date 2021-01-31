@@ -10,9 +10,9 @@ import iconEliminar from '../assets/iconos/eliminar.svg';
 import iconEditar from "../assets/iconos/editar.png";
 import defaultImage from '../assets/default-image.png'
 import {getFecha} from '../helpers/getTime'
-import { useFetch } from '../helpers/useFetch';
+import Accordion from "react-bootstrap/Accordion";
 
-
+import iconoAccordion from "../assets/icon/iconoAccordion.png";
 
 const Formm = (props) => {
    
@@ -31,13 +31,17 @@ const Formm = (props) => {
         </Button>
 
         <Container className="mt-5">
-          <Row className="mb-5">
+          <Row className="mb-2">
             <Col md={12}>
               <Formulario />
             </Col>
             <Col md={4}></Col>
           </Row>
-
+          <Row>
+            <Col>
+              <PublicidadForm />
+            </Col>
+          </Row>
           <Row className="justify-content-md-center">
             <Col>
               <TablaNotas />
@@ -220,17 +224,20 @@ const Formulario = () => {
           block
           disabled={!validateForm()}
         >
-          {isFile ? <span>Al terminar, cargar archivo extra</span> : <span>Listo!</span>}
+          {isFile ? (
+            <span>Al terminar, cargar archivo extra</span>
+          ) : (
+            <span>Listo!</span>
+          )}
         </Button>
       </Card.Body>
     </Card>
-    
   );
 }
 
 const TablaNotas = () => {
   const [count, setCount] = useState(0)
-  const [noticias, setNoticias] = useState(useContext(NoticiasContext));
+  const [noticias, setNoticias] = useState(useContext(NoticiasContext).noticias);
   const [nota, setNota] = useState()
   const [modalShow, setModalShow] = useState(false);
   useEffect(() => {
@@ -446,6 +453,95 @@ function ModalEdit(props) {
         </Card.Body>
       </Card>
     </Modal>
+  );
+}
+
+const PublicidadForm = () => {
+
+  return (
+    <Accordion defaultActiveKey="1" style={{ marginBlock: "20px" }}>
+      <Card className="shadow puntero">
+        <Accordion.Toggle as={Card.Header} eventKey="0">
+          <b>Carga de Publicidad</b>
+          <img
+            alt="iconoAccordion"
+            height={20}
+            src={iconoAccordion}
+            style={{ float: "left", marginTop: "5px", marginRight: "5px" }}
+          />
+        </Accordion.Toggle>
+        <Accordion.Collapse eventKey="0">
+          <Card.Body >
+            <Row>
+              <ImageModal publi={"vertical uno"} id={"601447116e96f8e5457170e2"} />
+              <ImageModal publi={"vertical dos"} id={"601447546e96f8e5457170e3"} />
+              <ImageModal publi={"horizontal uno"} id={"601447646e96f8e5457170e4"} />
+              <ImageModal publi={"horizontal dos"} id={"601447796e96f8e5457170e5"} />
+            </Row>
+          </Card.Body>
+        </Accordion.Collapse>
+      </Card>
+    </Accordion>
+  );
+}
+
+const ImageModal = ({publi, id}) => {
+  const [file, setFile] = useState();
+  const [imagenn, setImagenn] = useState();
+
+  function mostrarImagen(file) {
+    setFile(file);
+    let reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onloadend = (e) => {
+      setImagenn(reader.result);
+    };
+  }
+
+  function handleSubmit(){
+   actualizarArchivo(file, 'publi', id)
+    .then((res) => {
+      console.log(res);
+      Swal.fire("nota cargada con exito", "", "success");
+    })
+    .catch((err) => {console.log(err); Swal.fire("error al cargar la publicidad", "", "error");});
+  }
+
+  return (
+    <Col sm={3}>
+      <Form.File
+      
+        custom
+        data-browse=""
+        id="exampleFormControlFile1"
+        label={publi}
+        onChange={(e) => {
+          mostrarImagen(e.target.files[0]);
+        }}
+      />
+      {imagenn ? (
+        <img
+          className="shadow mt-3"
+          style={{ height: "150px", width: "240px" }}
+          src={imagenn}
+        />
+      ) : (
+        <img
+          className="shadow mt-3"
+          style={{ height: "150px", width: "240px" }}
+          src={defaultImage}
+        />
+      )}
+      <Button
+        variant="outline-info"
+        block
+        size="sm"
+        className="mt-3"
+        onClick={(e) => handleSubmit(publi)}
+      >
+        cargar
+      </Button>
+    </Col>
   );
 }
 

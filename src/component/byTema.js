@@ -1,12 +1,13 @@
 import React, { useContext } from 'react'
-import { Card, CardColumns, Col, Row } from 'react-bootstrap'
+import { Card, Col, Row } from 'react-bootstrap'
 import { useParams } from 'react-router-dom';
 import { NoticiasContext } from "../App";
 import { imagenUrl } from '../helpers/imagenUrl';
 import SingleNoticia from './singleNoticia';
+import AdsHorizontal from "../component/adsHorizontal";
 
 const ByTema = () => {
-    const noticias = useContext(NoticiasContext);
+    const {noticias} = useContext(NoticiasContext);
     const { tema } = useParams();
     const notas = noticias.filter((nota) => nota.tema === tema).reverse();
     
@@ -22,6 +23,7 @@ const ByTema = () => {
             <Col sm={4}>
               <NotaCabecera {...notas[1]} />
             </Col>
+            <AdsHorizontal />
           </Row>
           <Row>
             <Col sm={4}></Col>
