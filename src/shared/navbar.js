@@ -1,23 +1,27 @@
-import React, { } from "react";
+import React, { useState } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css'
-import { Badge, Nav, Navbar } from "react-bootstrap";
+import { Badge, Nav, Navbar, Button, Modal } from "react-bootstrap";
 import logo from "../assets/icon/logo.svg";
 import { Link } from "react-router-dom";
 import {getFecha, getHora} from '../helpers/getTime'
 import {useFetch} from '../helpers/useFetch'
+import FormFooter from '../component/formFooter'
+const fecha = getFecha();
+//const hora = getHora();
 
-  const fecha = getFecha();
-  const hora = getHora();
+const url =
+  "https://api.openweathermap.org/data/2.5/weather?lat=-31.6333&lon=-60.7&appid=a1cad7375df343ae073262a6ba4db56f&lang=es&units=metric";
 
-  const url =
-    "https://api.openweathermap.org/data/2.5/weather?lat=-31.6333&lon=-60.7&appid=a1cad7375df343ae073262a6ba4db56f&lang=es&units=metric";
- 
  
 function BarraNav() {
-   const  clima  = useFetch(url);
-  
+   const clima = useFetch(url);
+  const [show, setModalShow] = useState(false); 
+ 
   return (
     <>
+      <Modal show={show} onHide={() => setModalShow(false)}>
+        <ModalForm />
+      </Modal>
       <Navbar
         sticky="top"
         collapseOnSelect
@@ -38,13 +42,21 @@ function BarraNav() {
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="m-auto"></Nav>
+          <Nav className="m-auto" />
+          <Button
+            onClick={() => setModalShow(true)}
+            size="sm"
+            className="text-secondary mr-3 shadow-sm "
+            variant="light"
+          >
+            Contactanos
+          </Button>
           <div>
             <Badge
               className="shadow"
               pill
               variant="light"
-              style={{ fontSize: "0.9em" }}
+              style={{ fontSize: "0.8em" }}
             >
               {fecha}
             </Badge>
@@ -54,9 +66,9 @@ function BarraNav() {
                 className="shadow"
                 pill
                 variant="light"
-                style={{ fontSize: "0.8em" }}
+                style={{ fontSize: "0.7em" }}
               >
-               Temperatura: {clima.data.main.temp}ºC
+                Temperatura: {clima.data.main.temp}ºC
               </Badge>
             )}
           </div>
@@ -114,6 +126,22 @@ const CotizacionBN = async () => {
   console.log(data);
   return data
 
+}
+
+const ModalForm = () => {
+
+  return (<>
+   
+      <Modal.Header closeButton>
+        <Modal.Title>Formulario contacto</Modal.Title>
+      </Modal.Header>
+      <Modal.Body>
+        <FormFooter />
+      </Modal.Body>
+      <Modal.Footer>
+       
+      </Modal.Footer>
+  </>);
 }
 
 export default BarraNav;

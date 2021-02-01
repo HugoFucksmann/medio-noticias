@@ -17,6 +17,15 @@ import AdsHorizontal2 from '../component/adsHorizontal2';
 import AdsHorizontal from "../component/adsHorizontal";
 import AdsVertical from "../component/adsVertical";
 import AdsVertical2 from "../component/adsVertical2";
+import FormFooter from '../component/formFooter';
+import {
+  TwitterShareButton,
+  FacebookShareButton,
+  WhatsappShareButton,
+  FacebookIcon,
+  WhatsappIcon,
+  TwitterIcon,
+} from "react-share";
 
 function Principal() {
   const { path } = useRouteMatch();
@@ -60,8 +69,8 @@ function Principal() {
           </b>
         </div>
         <NotasFinal />
-        <Footer />
       </Container>
+      <Footer />
     </>
   );
 }
@@ -97,17 +106,51 @@ function Footer(){
     <footer
       style={{
         width: "100%",
-        height: "100px",
-        marginTop: "50px",
+        marginTop: "40px",
         backgroundColor: "#ebe8e8",
         boxShadow: "0px -5px 17px 0px rgba(50, 50, 50, 0.75)",
-        padding: '15px'
+        padding: "15px",
       }}
     >
       <Link>
-        <img className="mx-auto d-block" src={logo2} alt="logo2" />
+        <img
+          style={{ height: "50px", marginBottom: "20px" }}
+          className="mx-auto d-block"
+          src={logo2}
+          alt="logo2"
+        />
       </Link>
+      <SharedFooter />
     </footer>
+  );
+}
+
+const SharedFooter = () => {
+
+
+
+  return (
+    <div className="float-right" style={{ marginTop: "-50px" }}>
+      <b>Compartir</b>
+      <FacebookShareButton
+        url={window.location.href}
+        title={"https://medio-noticias.herokuapp.com/home"}
+      >
+        <FacebookIcon size={40} round={true} className="ml-3" />
+      </FacebookShareButton>
+      <TwitterShareButton
+        url={window.location.href}
+        title={"https://medio-noticias.herokuapp.com/home"}
+      >
+        <TwitterIcon size={40} round={true} className="ml-3" />
+      </TwitterShareButton>
+      <WhatsappShareButton
+        url={window.location.href}
+        title={"https://medio-noticias.herokuapp.com/home"}
+      >
+        <WhatsappIcon size={40} round={true} className="ml-3" />
+      </WhatsappShareButton>
+    </div>
   );
 }
 
