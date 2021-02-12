@@ -4,9 +4,10 @@ import Swal from "sweetalert2";
 class Auth {
   constructor() {
     this.authenticated = axios
-    .post(`${process.env.REACT_APP_URL}/login/verify`, { token: this.token })
+    .post(``, { token: this.token })
     .then(({ data }) => this.authenticated = data.verify)
     .catch((e) => console.log(e));
+    console.log(this.authenticated);
   }
   
 

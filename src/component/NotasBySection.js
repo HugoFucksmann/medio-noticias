@@ -23,19 +23,30 @@ const NotaBySection = (props) => {
                 marginBottom: "30px",
                 marginTop: "30px",
                 backgroundColor: "#f5f5f5",
-                
               }}
               className="realShadow"
             >
-              <img alt="icono" height={20} src={icono} style={{float: 'left', marginTop: '5px', marginRight: '5px'}} />
-              <h5 className="text-info"><b>{temaTitulo}</b></h5>
+              <img
+                alt="icono"
+                height={20}
+                src={icono}
+                style={{ float: "left", marginTop: "5px", marginRight: "5px" }}
+              />
+              <h5 className="text-info">
+                <b>{temaTitulo}</b>
+              </h5>
             </Alert>
           </Col>
         </Row>
 
         <Row>
           <Col sm={6}>
-            <SingleNoticia key={temas[0]._id} {...temas[0]} />
+            <Link
+              to={`/home/noticia/${temas[0]._id}`}
+              style={{ textDecoration: "none", color: "black" }}
+            >
+              <SingleNoticia key={temas[0]._id} {...temas[0]} />
+            </Link>
           </Col>
           <Col sm={6}>
             {temas.slice(1, 5).map((nota) => {
@@ -43,7 +54,6 @@ const NotaBySection = (props) => {
             })}
           </Col>
         </Row>
-
       </section>
     );
 }

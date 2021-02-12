@@ -6,6 +6,7 @@ import { imagenUrl } from '../helpers/imagenUrl';
 import {actualizarArchivo} from "../helpers/fileUpload";
 import Auth from '../helpers/auth'
 import NoticiasService from '../helpers/noticiasService'
+import PublicidadService from "../helpers/publicidadService";
 import iconEliminar from '../assets/iconos/eliminar.svg';
 import iconEditar from "../assets/iconos/editar.png";
 import defaultImage from '../assets/default-image.png'
@@ -488,6 +489,7 @@ const PublicidadForm = () => {
 const ImageModal = ({publi, id}) => {
   const [file, setFile] = useState();
   const [imagenn, setImagenn] = useState();
+  const [link, setLink] = useState('');
 
   function mostrarImagen(file) {
     setFile(file);
@@ -497,39 +499,56 @@ const ImageModal = ({publi, id}) => {
       setImagenn(reader.result);
     };
   }
-
+ 
   function handleSubmit(){
-   actualizarArchivo(file, 'publi', id)
-    .then((res) => {
-      console.log(res);
-      Swal.fire("nota cargada con exito", "", "success");
-    })
-    .catch((err) => {console.log(err); Swal.fire("error al cargar la publicidad", "", "error");});
+   actualizarArchivo(file, "publi", id)
+     .then(() =>
+       PublicidadService.cargarLink(id, link).then(() =>
+         Swal.fire("publicidad actualizada", "", "success")
+       )
+       .catch((err) => {
+         console.log(err);
+         Swal.fire("error al cargar la publicidad", "", "error");
+       })
+     )
+     .catch((err) => {
+       console.log(err);
+       Swal.fire("error al cargar la publicidad", "", "error");
+     });
   }
 
   return (
     <Col sm={3}>
       <Form.File
-      
         custom
         data-browse=""
         id="exampleFormControlFile1"
-        label={publi}
+        label={`${publi}`}
         onChange={(e) => {
           mostrarImagen(e.target.files[0]);
         }}
+      />
+      <Form.Control
+        style={{ marginTop: "10px" }}
+        value={link}
+        onChange={(e) => setLink(e.target.value)}
+        size="sm"
+        type="text"
+        placeholder="link de la publicidad"
       />
       {imagenn ? (
         <img
           className="shadow mt-3"
           style={{ height: "150px", width: "240px" }}
           src={imagenn}
+          alt="imk1"
         />
       ) : (
         <img
           className="shadow mt-3"
           style={{ height: "150px", width: "240px" }}
           src={defaultImage}
+          alt="imk2"
         />
       )}
       <Button

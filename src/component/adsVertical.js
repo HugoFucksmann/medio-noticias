@@ -5,14 +5,17 @@ import { NoticiasContext } from "../App";
 function AdsVertical2() {
   const { publi } = useContext(NoticiasContext);
   const imagen = publiUrl(publi[2].imagen);
+   const link = publiUrl(publi[2].link);
 
   return (
-    <section
-      className="adsVertical shadow"
-      style={{
-        backgroundImage: `url(${imagen})`,
-      }}
-    />
+    <a href={link} target="_blank" rel="noreferrer">
+      <section
+        className="adsVertical shadow"
+        style={{
+          backgroundImage: `url(${imagen})`,
+        }}
+      />
+    </a>
   );
 }
 
