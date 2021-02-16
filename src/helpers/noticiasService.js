@@ -2,6 +2,7 @@ import Axios from "axios";
 import Swal from "sweetalert2";
 
 class NoticiasService {
+
   get token() {
     return localStorage.getItem("token") || "";
   }
@@ -56,10 +57,17 @@ class NoticiasService {
   }
 
   async getNoticiaById(id){
-    console.log(id);
+    
     return await Axios.get(
       `${process.env.REACT_APP_URL}/noticias/${id}`
     ).catch( e => console.log(e))
+  }
+
+  async getNoticiasPaginadas(desde){
+    
+    return await Axios.get(
+      `${process.env.REACT_APP_URL}/noticias/desde/${desde}`
+    ).catch((e) => console.log(e));
   }
 }
 

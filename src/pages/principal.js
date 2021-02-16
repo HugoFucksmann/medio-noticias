@@ -112,15 +112,20 @@ function Footer(){
         padding: "15px",
       }}
     >
-      <Link>
-        <img
-          style={{ height: "50px", marginBottom: "20px" }}
-          className="mx-auto d-block"
-          src={logo2}
-          alt="logo2"
-        />
-      </Link>
-      <SharedFooter />
+      <div>
+        <Link>
+          <img
+            style={{ height: "50px", marginBottom: "20px" }}
+            className="mx-auto d-block"
+            src={logo2}
+            alt="logo2"
+          />
+        </Link>
+      </div>
+
+      <div className="footerMedia">
+        <SharedFooter />
+      </div>
     </footer>
   );
 }

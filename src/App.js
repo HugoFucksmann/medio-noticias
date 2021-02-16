@@ -24,6 +24,7 @@ function App() {
  
    
   if (data.length === 0 ) { 
+    console.log('cargando');
     return (
         <Spinner variant="info" animation="border" role="status" style={{ margin: '20% 40%', fontSize: '400%',width: '100px', height: '100px' }}>
           <span className="sr-only">Loading...</span>
@@ -33,9 +34,9 @@ function App() {
   
   const noticias = data.noticias.filter( noticias => noticias._id).reverse();
   const publi = publicidad.data.publi
-
+  const total = data.total
   return (
-    <NoticiasContext.Provider value={{ noticias, publi }}>
+    <NoticiasContext.Provider value={{ noticias, publi, total }}>
       <Router>
         <ScrollToTop />
         <Switch>

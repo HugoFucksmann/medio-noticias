@@ -3,11 +3,10 @@ import Swal from "sweetalert2";
 
 class Auth {
   constructor() {
-    this.authenticated = axios
-    .post(``, { token: this.token })
-    .then(({ data }) => this.authenticated = data.verify)
-    .catch((e) => console.log(e));
-    console.log(this.authenticated);
+    /* this.authenticated = axios
+      .post(`${process.env.REACT_APP_URL}/login/verify`, { token: this.token })
+      .then(({ data }) => (this.authenticated = data.verify))
+      .catch((e) => console.log(e)); */
   }
   
 
@@ -31,7 +30,7 @@ class Auth {
         })
         .then((resp) => {
           localStorage.setItem("token", resp.data.token);
-          this.authenticated = true;
+          //this.authenticated = true;
           props.history.push("/form");
           Swal.fire("Login correcto!", "", "success");
         })
@@ -55,10 +54,10 @@ class Auth {
     .then( resp => console.log(resp));
   }
 
-  isAuthenticated() {
+  /* isAuthenticated() {
     console.log(this.authenticated);
     return this.authenticated
-  }
+  } */
 }
 
 

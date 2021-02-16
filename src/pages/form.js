@@ -1,5 +1,5 @@
 import React, { useState, useContext, Suspense, useEffect } from 'react';
-import { Button, Card, Col, Container, FormControl, InputGroup, Row, Table, Form, Modal } from 'react-bootstrap';
+import { Button, Card, Col, Container, FormControl, InputGroup, Row, Table, Form, Modal, Pagination } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import { NoticiasContext } from '../App'
 import { imagenUrl } from '../helpers/imagenUrl';
@@ -238,14 +238,39 @@ const Formulario = () => {
 
 const TablaNotas = () => {
   const [count, setCount] = useState(0)
-  const [noticias, setNoticias] = useState(useContext(NoticiasContext).noticias);
+  const [noticias, setNoticias] = useState(useContext(NoticiasContext).noticias.slice(0,10));
   const [nota, setNota] = useState()
+  const [total, setTotal] = useState(useContext(NoticiasContext).total);
   const [modalShow, setModalShow] = useState(false);
+  const [active, setActive] = useState(1);
+  let items = [];
+  for (let number = 1; number <= Math.ceil(total / 10); number++) {
+    items.push(
+      <Pagination.Item
+        key={number}
+        active={number === active}
+        onClick={() => notasPaginadas(number)}
+      >
+        {number}
+      </Pagination.Item>
+    );
+  }
+
+
   useEffect(() => {
     (async () => {
       await NoticiasService.importantLimit().then((count) => setCount(count));
     })();
   }, [noticias]);
+
+  async function notasPaginadas(number){
+   
+    await NoticiasService.getNoticiasPaginadas(number).then(({ data }) => {
+      setNoticias(data.noticias);
+      setActive(number);
+    });
+    
+  }
   
   function eliminarNota(_id) {
     Swal.fire({
@@ -268,9 +293,9 @@ const TablaNotas = () => {
   async function setImportant(cheked, noticia){
     const newNota = { ...noticia, important: cheked };
     return await NoticiasService.actualizarNoticia(noticia._id, newNota)
-    .then( async () => setNoticias( await NoticiasService.getNoticias()))
+    .then( async () => await NoticiasService.getNoticiasPaginadas(active).then(({data}) => setNoticias(data.noticias)))
   }
-  
+
   return (
     <Suspense fallback={<h1>Loading profile...</h1>}>
       {nota && (
@@ -295,7 +320,7 @@ const TablaNotas = () => {
               </tr>
             </thead>
             <tbody>
-              {noticias.map((noticia) => {
+              {noticias.map((noticia, index) => {
                 const imagen = imagenUrl(noticia.imagen);
                 return (
                   <tr key={noticia._id}>
@@ -348,6 +373,7 @@ const TablaNotas = () => {
               })}
             </tbody>
           </Table>
+          <Pagination>{items}</Pagination>
         </Card.Body>
       </Card>
     </Suspense>
