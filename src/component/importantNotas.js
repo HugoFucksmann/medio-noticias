@@ -5,18 +5,20 @@ import { Link } from "react-router-dom";
 import { imagenUrl } from "../helpers/imagenUrl";
 
 
-function ListaNotas() {
+function ImportantNotas() {
     
    const {noticias} = useContext(NoticiasContext);
    const noticiass = noticias.filter((noticia) => noticia.important);
 
-   return (
+   return (<>
+     <br/><hr/>
+    <p className="text-center text-info"><b>Notas destacadas</b></p>
      <ul className="list-unstyled">
        {noticiass.map((noticia) => {
          return <Lii key={noticia._id} {...noticia} />;
        })}
      </ul>
-   );
+   </>);
 }
 
 
@@ -47,4 +49,4 @@ function Lii(noticia) {
 }
 
 
-export default ListaNotas;
+export default ImportantNotas;

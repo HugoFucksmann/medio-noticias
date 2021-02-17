@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
-import { publiUrl } from "../helpers/imagenUrl";
-import { NoticiasContext } from "../App";
+import { publiUrl } from "../../helpers/imagenUrl";
+import { NoticiasContext } from "../../App";
 
 function AdsVertical2() {
   const { publi } = useContext(NoticiasContext);

@@ -18,7 +18,7 @@ code {
 
 /*--------------------------------*/
 .products {
-  margin: 4rem 0;
+  margin: 3rem 0;
   display: grid;
   gap: 2rem;
 }
@@ -82,6 +82,16 @@ code {
   background-position: center;
   background-repeat: no-repeat;
   
+}
+
+.adsVertical2 {
+  height: 500px;
+  width: 100%;
+  margin: 30px auto 0px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
 }
 
 .noticiasCardImg{

@@ -6,13 +6,13 @@ import { NoticiasContext } from "../App";
 import {imagenUrl} from '../helpers/imagenUrl'
 import "./styles.css";
 
-function NotasFinal() {
-  const {noticias} = useContext(NoticiasContext);
-  
+function NotasFinal({ data }) {
+  const { noticias } = useContext(NoticiasContext);
+  const noticiass = noticias.slice(data[0], data[1]);
   return (
     <CardDeck className="mt-3">
-      {noticias.slice(0,8).map((noticia) => {
-        return <Cards key={noticia._id} {...noticia}  />;
+      {noticiass.map((noticia) => {
+        return <Cards key={noticia._id} {...noticia} />;
       })}
     </CardDeck>
   );

@@ -12,6 +12,8 @@ const NotaBySection = (props) => {
     const {noticias} = useContext(NoticiasContext);
     
     const temas = getSeccion(noticias, props.tema);
+    if(temas.length === 0) return <div />
+
     const temaTitulo = temas[0].tema
     return (
       <section>

@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import { NoticiasContext } from "../App";
 import { imagenUrl } from '../helpers/imagenUrl';
 import SingleNoticia from './singleNoticia';
-import AdsHorizontal from "../component/adsHorizontal";
+import AdsHorizontal from "./publis/ads1Horizontal";
 
 const ByTema = () => {
     const {noticias} = useContext(NoticiasContext);

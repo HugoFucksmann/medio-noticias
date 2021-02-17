@@ -10,14 +10,17 @@ import Noticias from "../component/Noticias";
 import NotaPrincipal from "../component/NotaPrincipal";
 import { useRouteMatch, Route, Link } from 'react-router-dom';
 import Noticia from './noticia';
-import ListaNotas from '../component/ListaNotas';
+import ImportantNotas from "../component/importantNotas";
 import WeatherCard from '../component/weatherCard';
 import ByTema from '../component/byTema';
-import AdsHorizontal2 from '../component/adsHorizontal2';
-import AdsHorizontal from "../component/adsHorizontal";
-import AdsVertical from "../component/adsVertical";
-import AdsVertical2 from "../component/adsVertical2";
-import FormFooter from '../component/formFooter';
+import AdsHorizontal from "../component/publis/ads1Horizontal";
+import AdsHorizontal2 from '../component/publis/ads2Horizontal';
+import Ads3Horizontal from "../component/publis/ads3Horizontal";
+import Ads4Horizontal from "../component/publis/ads4Horizontal";
+import AdsVertical from "../component/publis/ads1Vertical";
+import AdsVertical2 from "../component/publis/ads2Vertical";
+import Ads4Vertical from "../component/publis/ads4Vertical";
+import VerticalNotas from '../component/verticalNotas'
 import {
   TwitterShareButton,
   FacebookShareButton,
@@ -33,42 +36,36 @@ function Principal() {
     <>
       <BarraNav />
       <BarraTitulares />
-
       <Container fluid="lg">
         <Route path={path} component={Home} exact />
         <Route path={`${path}/noticia/:id`} component={Noticia} exact />
         <Route path={`${path}/tipo/:tema`} component={ByTema} exact />
-
+        <Ads4Horizontal />
         <Row>
           <Col sm={8}>
             <NotaBySection tema="politica" />
             <AdsHorizontal />
-            <NotaBySection tema="covid" />
-            <AdsHorizontal2 />
             <NotaBySection tema="otra cosa" />
+            <AdsHorizontal2 />
+            <NotaBySection tema="covid" />
+            <Ads3Horizontal />
+            <NotaBySection tema="covid" />
           </Col>
           <Col sm={4}>
             <WeatherCard />
             <AdsVertical />
-            <div
-              style={{ height: "500px", border: "1px solid", marginTop: 20 }}
-            >
-              <br />
-              <b className="text-danger">
-                elegir algun contenido para este bloque o colocar mas notas
-              </b>
-            </div>
+            <ImportantNotas />
+            <Ads4Vertical />
             <AdsVertical2 />
           </Col>
         </Row>
         <AdsHorizontal />
-        <div style={{ marginTop: 40 }}>
-          <b className="text-danger">
-            sugerir cantidad total de notas a mostar y cada cuanto intercalar
-            una publicidad
-          </b>
-        </div>
-        <NotasFinal />
+
+        <NotasFinal data={[15, 23]} />
+        <Ads3Horizontal />
+        <NotasFinal data={[24, 32]} />
+        <Ads4Horizontal />
+        <NotasFinal data={[33]} />
       </Container>
       <Footer />
     </>
@@ -80,20 +77,22 @@ function Home() {
     <>
       <Row>
         <Col sm={8}>
-          <NotaPrincipal data={[0, 5]} />
+          <NotaPrincipal data={[4, 8]} />
         </Col>
         <Col sm={4}>
-          <ListaNotas />
+          <VerticalNotas />
         </Col>
-        <AdsHorizontal2 />
         <Col sm={12}>
-          <div style={{ marginTop: 40, marginBottom: -40 }}>
-            <b className="text-danger">
-              sugerir cantidad total de notas a mostar y cada cuantas filas de 3
-              notas quieren una publicidad
-            </b>
-          </div>
-          <Noticias />
+          <Ads3Horizontal />
+        </Col>
+        <Col sm={12}>
+          <Noticias data={[3, 9]} />
+        </Col>
+        <Col sm={12}>
+          <Ads4Horizontal />
+        </Col>
+        <Col sm={12}>
+          <Noticias data={[9, 15]} />
         </Col>
         <AdsHorizontal />
       </Row>

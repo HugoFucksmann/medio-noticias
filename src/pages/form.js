@@ -240,7 +240,7 @@ const TablaNotas = () => {
   const [count, setCount] = useState(0)
   const [noticias, setNoticias] = useState(useContext(NoticiasContext).noticias.slice(0,10));
   const [nota, setNota] = useState()
-  const [total, setTotal] = useState(useContext(NoticiasContext).total);
+  const [total] = useState(useContext(NoticiasContext).total);
   const [modalShow, setModalShow] = useState(false);
   const [active, setActive] = useState(1);
   let items = [];
@@ -316,7 +316,7 @@ const TablaNotas = () => {
                 <th>Fecha</th>
                 <th>Titulo Nota</th>
                 <th>Eliminar editar</th>
-                <th>Fijar nota {`[${count}/3]`} </th>
+                <th>Fijar nota {`[${count}/5]`} </th>
               </tr>
             </thead>
             <tbody>
@@ -348,7 +348,7 @@ const TablaNotas = () => {
                       />
                     </td>
                     <td style={{ width: "100px" }}>
-                      {count >= 3 ? (
+                      {count >= 5 ? (
                         <Form.Check
                           disabled={!noticia.important}
                           type="checkbox"
@@ -504,6 +504,13 @@ const PublicidadForm = () => {
               <ImageModal publi={"vertical dos"} id={"601447546e96f8e5457170e3"} />
               <ImageModal publi={"horizontal uno"} id={"601447646e96f8e5457170e4"} />
               <ImageModal publi={"horizontal dos"} id={"601447796e96f8e5457170e5"} />
+              </Row>
+              <hr/>
+              <Row>
+              <ImageModal publi={"vertical tres"} id={"602c6539b31b6030d628855e"} />
+              <ImageModal publi={"vertical cuatro"} id={"602c652ab31b6030d628855d"} />
+              <ImageModal publi={"horizontal tres"} id={"602c64ffb31b6030d628855b"} />
+              <ImageModal publi={"horizontal cuatro"} id={"602c651eb31b6030d628855c"} />
             </Row>
           </Card.Body>
         </Accordion.Collapse>

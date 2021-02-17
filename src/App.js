@@ -8,10 +8,10 @@ import { useFetch } from "./helpers/useFetch";
 import Error404 from './pages/404';
 import ProtectedRoute from './helpers/protectedRoute';
 import Form from './pages/form';
-import AdsHorizontal from './component/adsHorizontal';
 
 // "#f5f5f5 fondo tarjetas
 // box-shadow:         7px 7px 5px 0px rgba(50, 50, 50, 0.75);
+
 
 const url = `${process.env.REACT_APP_URL}/noticias`;
 const urlpubli = `${process.env.REACT_APP_URL}/publicidad`;

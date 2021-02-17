@@ -3,11 +3,12 @@ import 'bootstrap/dist/css/bootstrap.min.css'
 import { Badge, Nav, Navbar, Button, Modal } from "react-bootstrap";
 import logo from "../assets/icon/logo.svg";
 import { Link } from "react-router-dom";
+import { isMobile } from "react-device-detect";
 import {getFecha, getHora} from '../helpers/getTime'
 import {useFetch} from '../helpers/useFetch'
 import FormFooter from '../component/formFooter'
 const fecha = getFecha();
-//const hora = getHora();
+
 
 const url =
   "https://api.openweathermap.org/data/2.5/weather?lat=-31.6333&lon=-60.7&appid=a1cad7375df343ae073262a6ba4db56f&lang=es&units=metric";
@@ -87,16 +88,18 @@ const Cotizacion = () => {
   return (
     <>
       <Nav
-        className="justify-content-center bg-light pt-2 pb-2 shadow"
+        className="justify-content-center bg-light pt-1 pb-1 shadow"
         activeKey="/home"
       >
-        <Nav.Item>
-          <h6 className="textoNota text-info">
-            <p>
-              <b>Cotización del dia:</b>
-            </p>
-          </h6>
-        </Nav.Item>
+        {!isMobile && (
+          <Nav.Item>
+            <h6 className="textoNota text-info">
+              <p>
+                <b>Cotización del dia:</b>
+              </p>
+            </h6>
+          </Nav.Item>
+        )}
         {data.data.slice(0, 2).map(({ casa }) => {
           return (
             <Nav.Item key={casa.nombre} className="ml-5">
@@ -133,7 +136,7 @@ const ModalForm = () => {
   return (<>
    
       <Modal.Header closeButton>
-        <Modal.Title>Formulario contacto</Modal.Title>
+        <Modal.Title>Contactenos</Modal.Title>
       </Modal.Header>
       <Modal.Body>
         <FormFooter />

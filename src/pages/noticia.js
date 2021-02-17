@@ -3,8 +3,6 @@ import { Button, Col, Row, Figure } from "react-bootstrap";
 import { useParams, Link } from "react-router-dom";
 import { imagenUrl, fileUrl } from "../helpers/imagenUrl";
 import { NoticiasContext } from "../App";
-import ListaNotas from '../component/ListaNotas'
-
 import { FacebookProvider, Comments } from "react-facebook";
 import {
   TwitterShareButton,
@@ -14,9 +12,9 @@ import {
   WhatsappIcon,
   TwitterIcon,
 } from "react-share";
-import AdsVertical2 from "../component/adsVertical2";
-import AdsVertical from "../component/adsVertical";
-import AdsHorizontal from "../component/adsHorizontal";
+import AdsVertical2 from "../component/publis/ads2Vertical";
+import AdsVertical from "../component/publis/ads1Vertical";
+import VerticalNotas from "../component/verticalNotas";
 
 function Noticia() {
   const {noticias} = useContext(NoticiasContext);
@@ -35,10 +33,9 @@ function Noticia() {
           <FacebookProvider appId="501058050598405">
             <Nota {...nota} />
           </FacebookProvider>
-          <AdsHorizontal />
         </Col>
         <Col sm={4}>
-          <ListaNotas />
+          <VerticalNotas />
           <AdsVertical2 />
           <b className="text-danger">contenido o publicidad</b>
           <AdsVertical />
@@ -78,7 +75,7 @@ function Nota(nota) {
             <p>
               <i>{nota.pieDeFoto}</i>
             </p>
-            <div className="float-right mb-3 " style={{marginTop: '-40px'}}>
+            <div className="float-right mb-3 mt-1" style={{marginTop: '-40px'}}>
               <FacebookShareButton
                 url={window.location.href}
                 title={nota.titulo}
