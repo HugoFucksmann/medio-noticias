@@ -8,7 +8,7 @@ function SingleNoticia(noticia) {
   return (
     <Card
       className="product shadow cel-txt"
-      style={{ backgroundColor: "#f5f5f5" }}
+      style={{ backgroundColor: "#f5f5f5", minHeight: '100%' }}
     >
       <Card.Img
         variant="top"

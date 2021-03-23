@@ -1,49 +1,31 @@
-import React, { } from 'react';
+import React, { useContext } from 'react';
 import { Badge, Col, Row } from "react-bootstrap";
 import { Link } from 'react-router-dom';
+import { NoticiasContext } from "../App";
 
 function BarraTitulares() {
+  const { noticias } = useContext(NoticiasContext);
+  const temas = Object.values(noticias).reduce(
+    (r, i) => (!~r.indexOf(i.tema) ? (r.push(i.tema), r) : r),
+    []
+  );
     
   return (
     <div className="container text-center">
       <Row
         style={{ fontSize: "1.3em", marginTop: "20px", marginBottom: "40px" }}
       >
-        <Col xs>
-          <Link to={`/home/tipo/deportes`}>
-            <Badge pill variant="info" className="shadow">
-              Deportes
-            </Badge>
-          </Link>
-        </Col>
-        <Col xs>
-          <Link to={`/home/tipo/regionales`}>
-            <Badge pill variant="info" className="shadow">
-              Noticias Regionales
-            </Badge>
-          </Link>
-        </Col>
-        <Col xs>
-          <Link to={`/home/tipo/provinciales`}>
-            <Badge pill variant="info" className="shadow">
-              Noticias Provinciales
-            </Badge>
-          </Link>
-        </Col>
-        <Col xs>
-          <Link to={`/home/tipo/politica`}>
-            <Badge pill variant="info" className="shadow">
-              Politica
-            </Badge>
-          </Link>
-        </Col>
-        <Col xs>
-          <Link to={`/home/tipo/cultura`}>
-            <Badge pill variant="info" className="  shadow">
-              Cultura
-            </Badge>
-          </Link>
-        </Col>
+      {temas.map((tema) => {
+        return (
+          <Col xs>
+            <Link to={`/home/tipo/${tema}`}>
+              <Badge pill variant="info" className="shadow">
+                {tema}
+              </Badge>
+            </Link>
+          </Col>
+        );
+      })}
       </Row>
     </div>
   );

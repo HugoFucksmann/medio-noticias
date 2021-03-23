@@ -54,7 +54,7 @@ function BarraNav() {
           </Button>
           <div>
             <Badge
-              className="shadow"
+              className="shadow-sm"
               pill
               variant="light"
               style={{ fontSize: "0.8em" }}
@@ -64,7 +64,7 @@ function BarraNav() {
             <br />
             {!clima.loading && (
               <Badge
-                className="shadow"
+                className="shadow-sm"
                 pill
                 variant="light"
                 style={{ fontSize: "0.7em" }}

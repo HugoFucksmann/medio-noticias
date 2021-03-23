@@ -9,7 +9,7 @@ import AdsHorizontal from "./publis/ads1Horizontal";
 const ByTema = () => {
     const {noticias} = useContext(NoticiasContext);
     const { tema } = useParams();
-    const notas = noticias.filter((nota) => nota.tema === tema).reverse();
+    const notas = noticias.filter((nota) => nota.tema === tema);
     
     return (
       <>
@@ -23,13 +23,8 @@ const ByTema = () => {
             <Col sm={4}>
               <NotaCabecera {...notas[1]} />
             </Col>
-            <AdsHorizontal />
           </Row>
-          <Row>
-            <Col sm={4}></Col>
-            <Col sm={4}></Col>
-            <Col sm={4}></Col>
-          </Row>
+          <AdsHorizontal />
         </section>
         <section className="products">
           {notas.slice(2).map((noticia) => {

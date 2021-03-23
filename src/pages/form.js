@@ -16,46 +16,46 @@ import Accordion from "react-bootstrap/Accordion";
 import iconoAccordion from "../assets/icon/iconoAccordion.png";
 
 const Formm = (props) => {
-   
-    return (
-      <>
-        <Button
-          onClick={() => Auth.logout(props)}
-          variant="outline-info"
-          style={{
-            float: "right",
-            margin: "-50px 50px 0 0",
-            paddingTop: "18px",
-          }}
-        >
-          Log Out
-        </Button>
+  
+  return (
+    <>
+      <Button
+        onClick={() => Auth.logout(props)}
+        variant="outline-info"
+        style={{
+          float: "right",
+          margin: "-50px 50px 0 0",
+          paddingTop: "18px",
+        }}
+      >
+        Log Out
+      </Button>
 
-        <Container className="mt-5">
-          <Row className="mb-2">
-            <Col md={12}>
-              <Formulario />
-            </Col>
-            <Col md={4}></Col>
-          </Row>
-          <Row>
-            <Col>
-              <PublicidadForm />
-            </Col>
-          </Row>
-          <Row className="justify-content-md-center">
-            <Col>
-              <TablaNotas />
-            </Col>
-          </Row>
-        </Container>
-      </>
-    );
+      <Container className="mt-5">
+        <Row className="mb-2">
+          <Col md={12}>
+            <Formulario />
+          </Col>
+          <Col md={4}></Col>
+        </Row>
+        <Row>
+          <Col>
+            <PublicidadForm />
+          </Col>
+        </Row>
+        <Row className="justify-content-md-center">
+          <Col>
+            <TablaNotas />
+          </Col>
+        </Row>
+      </Container>
+    </>
+  );
 
 }
 
 const Formulario = () => {
-  const [imagenn, setImagenn] = useState()
+  const [imagenn, setImagenn] = useState();
   const [titulo, setTitulo] = useState("");
   const [subtitulo, setSubtitulo] = useState("");
   const [pieDeFoto, setPieDeFoto] = useState("");
@@ -76,7 +76,7 @@ const Formulario = () => {
     );
   }
 
-  function mostrarImagen(file){
+  function mostrarImagen(file) {
     setFile(file);
     let reader = new FileReader();
     reader.readAsDataURL(file);
@@ -84,46 +84,52 @@ const Formulario = () => {
       setImagenn(reader.result);
     };
   }
-  
+
   async function handleSubmit() {
-    
     const notaDB = {
       titulo,
       subtitulo,
       pieDeFoto,
       texto,
       tema,
-      fecha
+      fecha,
     };
-    
+
     await NoticiasService.crearNoticia(notaDB)
-      .then( async (resp) => {
+      .then(async (resp) => {
         const id = resp.data.noticias._id;
-        actualizarArchivo(filee, 'noticias', id).catch(err => console.log(err))
+        actualizarArchivo(filee, "noticias", id)
+          .catch((err) => console.log(err))
+          .catch((e) => {
+            console.log(e);
+            Swal.fire("error al cargar la imagen", "", "error");
+          });
+
         if (isFile) {
           await Swal.fire({
             allowOutsideClick: false,
             title: "Archivo de audio video o img",
             input: "file",
             preConfirm: (file) => {
-              actualizarArchivo(file, 'files', id)
+              actualizarArchivo(file, "files", id)
                 .then(() => {
-                  Swal.fire("nota cargada con exito", "", "success")
+                  Swal.fire("nota cargada con exito", "", "success");
                 })
                 .catch((err) => console.log(err));
             },
           });
+         
         } else {
           Swal.fire("nota cargada con exito", "", "success");
-        }        
-        
+       
+        }
       })
       .catch((err) => {
         console.log(err.response);
         Swal.fire("error al cargar la nota", "", "error");
       });
   }
-  
+
   return (
     <Card bg="light" border="info" className="text-center shadow">
       <Card.Header as="h5">Formulario Noticias</Card.Header>
@@ -234,7 +240,7 @@ const Formulario = () => {
       </Card.Body>
     </Card>
   );
-}
+};
 
 const TablaNotas = () => {
   const [count, setCount] = useState(0)
@@ -598,13 +604,4 @@ const ImageModal = ({publi, id}) => {
 }
 
 
-
-
 export default Formm
-
-
-/*
-
-
-
-*/
